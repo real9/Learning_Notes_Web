@@ -54,5 +54,31 @@ div元素是p元素的父元素，p元素是div的子元素。
   (3). 一个` <head> `元素必须包含且只能包含一个 `<title> `元素。（title元素之间必须有标题）  
 #### 5.文档的主体`<body>...</body>`
   body 元素定义文档的主体，包含文档的所有内容（比如文本、超链接、图像、表格和列表等等）。
-
-
+## 2.4HTML中的注释
+  在HTML中我们用`<!-- ... -->`标签来表示注释。
+## 2.5MDN
+  [MDN](https://developer.mozilla.org/zh-CN/docs/Web/HTML)是学习 Web 开发的一个权威、全面、高质量的网站，文档丰富，资料全面，非常适合大家学习使用，是Web 开发学习时的百科全书。   
+  在 MDN 中查询'audio'，为网页添加一段音频文件。 [audio 标签文档的地址`](https://developer.mozilla.org/zh-CN/docs/Web/HTML/Element/audio)
+  ```html
+  <body>
+    <audio muted controls="controls">
+      <source src="https://document.youkeda.com/P3-1-HTML-CSS/1.2/nocturne.mp3" autoplay>
+      Your browser does not support the <code>audio</code> element.
+    </audio>
+  </body>
+  ```
+  [效果预览](https://ham.youkeda.com/workspaces/5dc566fb0f101ed7c2333ead/5eb2a2a529fdc7737671a7b1/index.html?time=1611843293648)     
+在 MDN 中查询'progress'，在网页中插入一个进度条。 [progress 标签文档的地址](https://developer.mozilla.org/zh-CN/docs/Web/HTML/Element/progress)  
+  ```html
+  <body>
+   <progress value="50" max="100">
+     50%
+   </progress> 
+   <p>
+     <img src="https://y.gtimg.cn/music/photo_new/T002R300x300M000002mWhlf2aBPQ7_1.jpg?max_age=2592000" \>
+   </p>
+  </body>
+  ```
+  [效果预览](https://ham.youkeda.com/workspaces/5dc566fb0f101ed7c2333ead/5eb2a2a529fdc7737671a7b1/index.html?time=1611843494911)  
+ # 3.HTML 文本标签
+  
