@@ -119,6 +119,92 @@ div元素是p元素的父元素，p元素是div的子元素。
   标签| 含义
   --|--
   `<ol>...</ol>`| 有序列表，每一项均带有数字编号。
-  `<ul>...</ul>`| 无序列表，每一项之前是一个黑点。
+  `<ul>...</ul>`| 无序列表，每一项之前是一个黑点。  
   列表中的每一项都使用`<li>...</li>`。  
+  # 4.HTML表单标签
+  ## 4.1form标签
+  属于同一个表单的表单控件要包含在同一个块状元素`<form>`里。  
+  标签的属性|内容
+  --|--
+  `action`|一个处理此表单信息的程序所在的 URL，所述表格信息将在表单提交时被发送到定义的地址
+  `method`|它的值可以是GET或POST，用来规定如何发送表单信息
+  `<form>...</form>`不能嵌套使用。
+  ## 4.2单行文本输入框
+  ```html
+  <!-- action=""则表单信息将提交到当前页面 -->
+<form action="">
+  <input type="text" />
+</form>
+  ```
+ `input`不但是一个内联元素，还是一个只有开始标签，没有结束标签的内联元素，我们可以认为它是一个“自闭”元素。
+  `input`标签属性|含义
+  --|--
+  占位文本 “placeholder”|用来提示用户需要输入什么，输入框中输入内容后，提示消失
+  输入框名字 “name”|给输入框命名，区别于其他输入框
+  输入框的值 “value”|希望在输入框中预填写用户的昵称
+  不可修改的输入框 “readonly”和“disabled”|输入框变成只读输入框！这样用户就不能自己修改预填写的内容
+  > 注意readonly和disabled的区别
+  示例：`<input type="text" placeholder="昵称" name="nick" value="小明" disabled />`  
+  ## 4.3多行文本输入框和密码输入框
+  #### 4.3.1多行文本输入框
+  当多行文本输入框中输入的内容超过一行的长度时，它会自动换行，而单行文本输入框则不会换行。
+  ```html
+  <!-- name属性表示表单元素的名称，placeholder属性表示表单元素的占位文本 -->
+<textarea
+  name="sign"
+  rows="5"
+  cols="30"
+  placeholder="请输入个性签名"
+></textarea>
+  ```
+> rows：行数（高度）； 
+> cols：文本域的可视宽度；
+  #### 4.3.2密码输入框
+  密码输入框和昵称输入框有点区别，用户输入的内容将会以 黑圆点 的形式显示。
+  ```html
+  <!-- type属性表示表单元素的类型，name属性表示表单元素的名称，placeholder属性表示表单元素的占位文本 -->
+<input type="password" name="password" placeholder="密码" />
+  ```
+  > 改变type类型，变原来的text为password。
+  ## 4.4单选框和复选框
+  #### 4.4.1单选框（以性别为例）
+  示例：
+  ```html
+  <label> <input type="radio" name="gender" value="male" />男 </label>
+<label> <input type="radio" name="gender" value="female" />女 </label>
+  ```
+  标签属性|含义
+  --|--
+  type|改变表单属性为radio
+  name|属于同一道单选题的单选按钮应该有相同的名字
+  value|表示值
+  男/女|加入在`<input>`标签后面，表示选项内容
+  `<lable>`|使得点击文字内容也能选中选项
+  另一种写法：  
+  ```html
+  <input id="male" type="radio" name="gender" value="male" />
+<label for="male">男</label>
+<input id="female" type="radio" name="gender" value="female" />
+<label for="female">女</label>
+  ```
+  #### 4.4.2复选框（以兴趣为例）
+  示例：
+  ```html
+  <label> <input type="checkbox" name="interest" value="coding" />编程 </label>
+<label> <input type="checkbox" name="interest" value="other" />其他 </label>
+  ```
+  type值改变，同一道多选题的name值应该相同。
+  ## 4.5选项菜单
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
