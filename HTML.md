@@ -194,7 +194,65 @@ div元素是p元素的父元素，p元素是div的子元素。
 <label> <input type="checkbox" name="interest" value="other" />其他 </label>
   ```
   type值改变，同一道多选题的name值应该相同。
-  ## 4.5选项菜单
+  ## 4.5选项菜单（以职业选择为例）
+  示例：
+  ```html
+  <select name="career">
+  <option value="default">请选择职业</option>
+  <option value="staff">公司职员</option>
+  <option value="freelancer">自由职业者</option>
+  <option value="student">学生</option>
+  <option value="other">其他</option>
+</select>
+  ```
+  > 这是一个单选菜单，如果用户选择了“学生”，那么提交的数据将会是：`career:“student”`  
+  
+  提交的内容是每个`<option>`标签内的value的值，所以每个值需要不相同。  
+  多选菜单则需要将`<select>`标签中添加multiple属性：`<select name = "career" multiple>`(需按住ctrl并单击)。  
+  ## 4.6按钮
+  `<button>注册</button>`   
+  > 标签内可以添加图片、文字等内容。  
+  
+  `<button type = "submit">注册</button>`  
+  > 考虑到浏览器的兼容性问题，添加submit来确保数据的提交。  
+  ## 4.7input标签小结
+  类型|作用
+  --|--
+  text|单行输入框
+  number|输入浮点数的控件
+  password|值被遮盖的单行文本字段，使用maxlength可以控制最大长度
+  checkbox|复选框，必须使用value定义提交的数据的值。
+  radio|单选按钮，必须使用value定义单选题提交时的数据的值
+  
+  示例：
+  ```html
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+<!--系统内置 start-->
+<script type="text/javascript" src="//qgt-style.oss-cn-hangzhou.aliyuncs.com/commonJSCSS/console.js"></script>
+<!--系统内置 end-->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>编程题</title>
+    <link rel="stylesheet" href="./index.css">
+  </head>
+  <body>
+    <form action="https://www.youkeda.com/">
+    <input type="text" name="name" placeholder="姓名" >
+    <input type="number" name="mobile" placeholder="手机号" />
+    <input type="password" name="password" placeholder="密码不少于6位" />
+    <input type="checkbox" name="agree" value="agree" id="agreement"/>
+    <label for="agreement">已阅读并同意使用条款以及非活跃号处理规范</label>
+    <button type="submit">立即注册</button>
+    </form>
+  </body>
+</html>
+
+```
+
+
   
   
   
