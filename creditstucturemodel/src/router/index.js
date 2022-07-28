@@ -4,11 +4,32 @@ import VueRouter from 'vue-router'
 Vue.use(VueRouter)
 
 const routes = [
-  // {
-  //   path: '/',
-  //   name: 'home',
-  //   component: HomeView
-  // },
+  {
+    path: '/ProjectList',
+    name: 'ProjectList',
+    component: () =>import('@/views/ProjectList')
+  },
+
+  {
+    path: '/EvaluationResult',
+    name: 'EvaluationResult',
+    component: () =>import('@/views/EvaluationResult')
+  },
+  {
+    path: '/StatisticsAnalysis',
+    name: 'StatisticsAnalysis',
+    component: () =>import('@/views/StatisticsAnalysis')
+  },
+  {
+    path: '/ModelManagement',
+    name: 'ModelManagement',
+    component: () =>import('@/views/ModelManagement')
+  },
+  {
+    path: '/AppendixList',
+    name: 'AppendixList',
+    component: () =>import('@/views/AppendixList')
+  },
   // {
   //   path: '/about',
   //   name: 'about',
