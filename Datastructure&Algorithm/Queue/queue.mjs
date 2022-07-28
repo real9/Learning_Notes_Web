@@ -1,4 +1,4 @@
-class Queue{
+export default class Queue{
     constructor() {
         this.count = 0;  // 队列初始大小（更倾向于是最后一个元素的下标+1）
         this.lowestCount = 0;  // 第一个元素位置
@@ -46,16 +46,17 @@ class Queue{
     }
 }
 
-const queue = new Queue();
-console.log(queue.isEmpty());
-queue.enqueue('101');
-queue.enqueue('202');
-queue.enqueue('303');
-queue.enqueue('404');
-console.log(queue.toString());
-console.log(queue.size());
-queue.dequeue();
-console.log(queue.toString());
-console.log(queue.peek());
+// const queue = new Queue();
+// console.log(queue.isEmpty());
+// queue.enqueue('101');
+// queue.enqueue('202');
+// queue.enqueue('303');
+// queue.enqueue('404');
+// console.log(queue.toString());
+// console.log(queue.size());
+// queue.dequeue();
+// console.log(queue.toString());
+// console.log(queue.peek());
+
 
 

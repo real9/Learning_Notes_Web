@@ -1,6 +1,6 @@
 // 双端队列
 // 运行同时从队列前端和后端添加or移除元素的特殊队列
-class Deque{
+export default class Deque{
     constructor() {
         this.count = 0;
         this.lowestCount = 0;
@@ -79,16 +79,16 @@ class Deque{
     }
 }
 
-const deque = new Deque();
-console.log(deque.isEmpty());
-deque.addBack('101');
-deque.addBack('202');
-console.log(deque.toString());
-deque.addFront('303');
-console.log(deque.toString());
-console.log(deque.peekFront(),'|||',deque.peekBack());
-console.log(deque.removeFront());
-console.log(deque.removeBack());
-console.log(deque.size())
-// deque.clear();
-console.log(deque)
+// const deque = new Deque();
+// console.log(deque.isEmpty());
+// deque.addBack('101');
+// deque.addBack('202');
+// console.log(deque.toString());
+// deque.addFront('303');
+// console.log(deque.toString());
+// console.log(deque.peekFront(),'|||',deque.peekBack());
+// console.log(deque.removeFront());
+// console.log(deque.removeBack());
+// console.log(deque.size())
+// // deque.clear();
+// console.log(deque)
