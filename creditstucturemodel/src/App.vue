@@ -1,7 +1,7 @@
 <template>
   <div id="app">
     <top-nav></top-nav>
-    <router-view></router-view>
+    <router-view style="margin-top: 10px"></router-view>
   </div>
 </template>
 
@@ -24,5 +24,7 @@ export default {
   text-align: center;
   /*background-color: #01031C;*/
   color: white;
+  margin-right: 5px;
+  margin-left: 5px;
 }
 </style>
