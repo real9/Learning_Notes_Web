@@ -1,6 +1,5 @@
 <template>
 <div id="StatisticsAnalysis">
-<!--  <p style="color: yellow">StatisticsAnalysis</p>-->
   <el-row>
     <el-col :span="3">
       <el-menu
@@ -52,9 +51,6 @@
         </el-row>
       </el-card>
       <el-card class="box-card box-card-left cityMap">
-        <div v-for="o in 4" :key="o" class="text item">
-          {{'列表内容 ' + o }}
-        </div>
       </el-card>
     </el-col>
     <el-col :span="7">
@@ -62,9 +58,13 @@
       <div slot="header" class="clearfix cardName">
         <span>评价排行（2022/01/01至2022/06/30）</span>
       </div>
-      <div v-for="o in 8" :key="o" class="text item">
-        {{'列表内容 ' + o }}
-      </div>
+        <div id="evaluationRankingScatterDiagram"></div>
+        <div class="legend-box">
+          <div class="legend-solid"></div>
+          <div class="legend-name">省行集团中位数</div>
+          <div class="legend-dashed"></div>
+          <div class="legend-name">杭州市中位数</div>
+        </div>
       </el-card>
       <el-card class="box-card box-card-right cityScatterDTable">
         <div slot="header" class="clearfix cardName">
@@ -134,6 +134,7 @@ export default {
   },
   mounted() {
     this.initEvaluationScoreDashboard();
+    this.initEvaluationRankingScatterDiagram();
   },
   methods:{
     initEvaluationScoreDashboard(){
@@ -152,6 +153,7 @@ export default {
             max: 100,
             splitNumber: 12,
             center: ['50%', '40%'],  // 圆心相对于容器
+            radius: '80%' ,  // 半径
             //仪表盘的数据条
             itemStyle: {
               color: 'auto',
@@ -244,24 +246,84 @@ export default {
             }
           }
         ],
-        // color: [
-        //   // 径向渐变，前三个参数分别是圆心 x, y 和半径，取值同线性渐变
-        //   {
-        //     type: 'radial',
-        //     x: 0.5,
-        //     y: 0.5,
-        //     r: 0.5,
-        //     colorStops: [{
-        //       offset: 0, color: 'red' // 0% 处的颜色
-        //     }, {
-        //       offset: 1, color: 'blue' // 100% 处的颜色
-        //     }],
-        //     global: false // 缺省为 false
-        //   }
-        // ]
       };
       myChart.setOption(option);
-    }
+    },
+    initEvaluationRankingScatterDiagram(){
+      let myChart = this.$echarts.init(document.getElementById('evaluationRankingScatterDiagram'),null, {
+        width: 350,
+        height: 300
+      })
+      let option;
+      option = {
+        xAxis: {
+          show: false,
+          type: 'category',
+          data: ['绿地柏澜晶舍', '阳光城西郊半岛', '阳光城檀映里', '万达同心湾', '璞玉公馆', '泰禾大城小院', '阳光城檀映里', '泰禾杭州院子', '泰禾大城小院'],
+        },
+        yAxis: {
+          interval: 20,
+          axisLine:{
+            show: false,
+          },
+          axisTick:{
+            show: false,
+          },
+          //分割线
+          splitLine: {
+            lineStyle: {
+              color: '#444'
+            }
+          },
+        //  刻度
+          axisLabel: {
+            color: '#ccc'
+          }
+        },
+        series: [
+          {
+            symbolSize: 10,
+            label:{
+              //标签文字
+              show: true,
+              position: 'top',
+              distance: 1,
+              formatter: '{b}',
+              color: '#fff',
+              align: 'center',
+              fontSize: 10,
+            },
+            //标记线
+            markLine:{
+              label:{
+                position: 'insideEndBottom',
+                color: 'skyblue',
+                fontSize: 12,
+              },
+              //解决线的两个端点的样式，用数组
+              symbol: ['none', 'none'],
+              data: [
+                {
+                  yAxis: 57.67,
+                  lineStyle:{
+                    type:'solid',
+                  }
+                },
+                {
+                  yAxis: 37.67,
+                  lineStyle:{
+                    type:'dashed',
+                  }
+                }
+              ],
+            },
+            data:[40, 81, 20, 69, 40, 61, 5, 89, 70],
+            type: 'scatter'
+          }
+        ],
+      };
+      myChart.setOption(option);
+    },
   },
 }
 </script>
@@ -350,5 +412,36 @@ export default {
 /*大卡片名字*/
 .cardName{
   text-align: left;
+}
+/*图例部分，原生css样式手写*/
+.legend-box {
+  display: flex;
+  margin: auto;
+  align-items: center;
+}
+
+.legend-solid {
+  height: 0;
+  width: 40px;
+  border-top: 2px solid #1794E5;
+  border-left: none;
+  border-right: none;
+  border-bottom: none;
+  margin: 0;
+  padding: 0
+}
+.legend-dashed{
+  height: 0;
+  width: 40px;
+  border-top: 2px dashed #1794E5;
+  border-left: none;
+  border-right: none;
+  border-bottom: none;
+  margin: 0;
+  padding: 0
+}
+.legend-name {
+  margin: auto;
+  font-size: 10px
 }
 </style>
