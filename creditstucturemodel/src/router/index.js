@@ -3,6 +3,13 @@ import VueRouter from 'vue-router'
 
 Vue.use(VueRouter)
 
+//防止重复进入同一个路由而报错
+//获取原型对象上的push函数
+const original = VueRouter.prototype.replace
+//修改原型对象中的push方法
+VueRouter.prototype.push = function push(location) {
+  return original.call(this, location).catch(err => err)
+}
 const routes = [
   {
     path: '/ProjectList',

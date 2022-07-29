@@ -4,7 +4,21 @@
       <p>房地产行业信贷结构优化评价模型</p>
     </el-col>
     <el-col :span="12" class="topNav_tabs">
-        <div v-for="tab in tabs" :key="tab.id" @click="gpToPage(tab.id)">{{tab.name}}</div>
+      <div :key="tabs[0].id" class="" v-bind:class="{activeTab: isActiveTab0}" @click="gpToPage(tabs[0])">
+        {{ tabs[0].name }}
+      </div>
+      <div :key="tabs[1].id" class="" v-bind:class="{activeTab: isActiveTab1}" @click="gpToPage(tabs[1])">
+        {{ tabs[1].name }}
+      </div>
+      <div :key="tabs[2].id" class="" v-bind:class="{activeTab: isActiveTab2}" @click="gpToPage(tabs[2])">
+        {{ tabs[2].name }}
+      </div>
+      <div :key="tabs[3].id" class="" v-bind:class="{activeTab: isActiveTab3}" @click="gpToPage(tabs[3])">
+        {{ tabs[3].name }}
+      </div>
+      <div :key="tabs[4].id" class="" v-bind:class="{activeTab: isActiveTab4}" @click="gpToPage(tabs[4])">
+        {{ tabs[4].name }}
+      </div>
     </el-col>
     <el-col :span="4" class="topNav_icon">
       <div class="el-icon-search"></div>
@@ -19,7 +33,11 @@ export default {
   name: "TopNav",
   data() {
     return {
-      activeTab: '',
+      isActiveTab0: false,
+      isActiveTab1: false,
+      isActiveTab2: false,
+      isActiveTab3: false,
+      isActiveTab4: false,
       tabs: [
         {
           name: '项目列表',
@@ -45,8 +63,41 @@ export default {
     }
   },
   methods: {
-    gpToPage(pathName){
-      this.$router.push('/' + pathName)
+    gpToPage(tab){
+      let index = this.tabs.indexOf(tab);
+      // v-bind:class的变量只能和data绑定
+      if(index === 0 ){
+        this.isActiveTab0 = true;
+        this.isActiveTab1 = false;
+        this.isActiveTab2 = false;
+        this.isActiveTab3 = false;
+        this.isActiveTab4 = false;
+      }else if(index === 1){
+        this.isActiveTab0 = false;
+        this.isActiveTab1 = true;
+        this.isActiveTab2 = false;
+        this.isActiveTab3 = false;
+        this.isActiveTab4 = false;
+      }else if (index === 2){
+        this.isActiveTab0 = false;
+        this.isActiveTab1 = false;
+        this.isActiveTab2 = true;
+        this.isActiveTab3 = false;
+        this.isActiveTab4 = false;
+      }else if (index === 3){
+        this.isActiveTab0 = false;
+        this.isActiveTab1 = false;
+        this.isActiveTab2 = false;
+        this.isActiveTab3 = true;
+        this.isActiveTab4 = false;
+      }else if (index === 4){
+        this.isActiveTab0 = false;
+        this.isActiveTab1 = false;
+        this.isActiveTab2 = false;
+        this.isActiveTab3 = false;
+        this.isActiveTab4 = true;
+      }
+      this.$router.push('/' + tab.id);
     }
   },
 }
@@ -87,5 +138,8 @@ export default {
   margin-right: 20px;
   cursor: pointer;
 }
-
+.activeTab {
+  background-color: rgba(255,255,255,0.18);
+  border-bottom: 5px solid #eee;
+}
 </style>
