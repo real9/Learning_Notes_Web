@@ -51,6 +51,7 @@
         </el-row>
       </el-card>
       <el-card class="box-card box-card-left cityMap">
+        <div id="cityMapChart"></div>
       </el-card>
     </el-col>
     <el-col :span="7">
@@ -79,7 +80,7 @@
 </div>
 </template>
 
-<script>
+<script >
 export default {
   name: "StatisticsAnalysis",
   data() {
@@ -135,6 +136,7 @@ export default {
   mounted() {
     this.initEvaluationScoreDashboard();
     this.initEvaluationRankingScatterDiagram();
+    this.initCityMapChart();
   },
   methods:{
     initEvaluationScoreDashboard(){
@@ -324,6 +326,138 @@ export default {
       };
       myChart.setOption(option);
     },
+    async initCityMapChart(){
+      let cityData;
+      //要异步，不然就是先渲染了但是还没数据进来
+      await this.$axios.get('https://geo.datav.aliyun.com/areas_v3/bound/330100_full.json')
+      .then( (res) => {
+        cityData = res.data;
+        // console.log(res.data);
+      });
+      //图表部分
+      let myChart = this.$echarts.init(document.getElementById('cityMapChart'),null,{
+        width: 500,
+        height: 400
+      })
+      this.$echarts.registerMap('hangzhou', cityData, {})
+      let option = {
+        backgroundColor: 'transparent',
+        //地图部分
+        geo: {
+          componentType: 'geo',
+          map: 'hangzhou',
+          zoom: 1.2,
+          label: {
+            show: true,
+            position: 'inside',
+            color: '#abc',
+            fontSize: 10,
+          },
+          itemStyle: {
+            areaColor: 'rgb(40,63,105)',
+            borderColor: 'rgb(75,127,166)',
+          },
+          emphasis:{
+            disabled: false,
+            label: {
+              color: '#abc',
+              fontSize: 10,
+            },
+            itemStyle: {
+              borderColor: 'rgb(16,90,154)',
+              borderWidth: 3,
+              areaColor: 'rgb(40,63,105)',
+            },
+          },
+          //特定区域的样式
+          regions: [{
+            //可接入数据，通过其他地方传数据进来，指定哪个区域高亮
+            //name可以为空
+            name: '富阳区',
+            //有bug，地区的一半线条只变色不加粗（原生的问题吧）
+            itemStyle: {
+              areaColor: 'rgb(40,63,105)',
+              borderColor: 'rgb(16,90,154)',
+              borderWidth: 3,
+            },
+            label: {
+              color: '#abc',
+              fontSize: 10,
+            },
+          }]
+        },
+        // 散点图
+        series: [{
+          type: 'scatter',
+          coordinateSystem: 'geo',
+          label: {  //显示文字
+            show: true,
+            formatter: '{@3}',
+            color:'rgb(36,196,235)',
+            fontSize:6,
+          },
+          itemStyle: {
+            color: 'transparent',
+            borderColor: 'rgb(36,196,235)',
+          },
+          data: [
+            {
+              name: '绿地柏澜晶舍',
+              value: [119.787185, 30.268468, 70.34, 1],
+            },
+            {
+              name: '阳光城西郊半岛',
+              value: [119.978973, 30.057302, 78.67, 2],
+            },
+            {
+              name: '阳光城檀映里',
+              value: [120.193783, 30.228839, 64.34, 3],
+            },
+            {
+              name: '万达同心湾',
+              value: [119.940638, 30.094721, 73.76, 4],
+            },
+            {
+              name: '璞玉公馆',
+              value: [120.288348, 30.322457, 65.67, 5],
+            },
+            {
+              name: '泰禾大城小院',
+              value: [119.970032, 30.145152, 72.67, 6],
+            },
+            {
+              name: '阳光城檀映里',
+              value: [119.91769, 30.055263, 40, 7],
+            },
+            {
+              name: '泰禾杭州院子',
+              value: [120.040683, 30.278311, 89.45, 8],
+            },
+            {
+              name: '泰禾大城小院',
+              value: [120.136666, 30.237311, 50, 9],
+            },
+          ],
+          emphasis: {
+            label: {
+              color: '#fff',
+              fontSize: 10,
+              position: 'inside',
+            },
+            itemStyle: {
+              borderColor: 'transparent',
+              color:'rgb(16,149,254)',
+            },
+          }
+        }]
+      };
+      myChart.setOption(option);
+      myChart.dispatchAction({
+        type:'highlight',
+        //传入选定数据的下标即可
+        dataIndex: 1,
+      })
+    },
   },
 }
 </script>
@@ -332,6 +466,7 @@ export default {
 .el-menu{
   border-right: none;
 }
+/*/deep/被弃用，vue3现在是deep()，本项目是vue2*/
 .el-card /deep/ .el-card__header {
   border-bottom: none;
 }
