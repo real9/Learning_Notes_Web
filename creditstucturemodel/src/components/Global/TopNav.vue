@@ -62,6 +62,9 @@ export default {
       ]
     }
   },
+  created() {
+    // console.log(this.$route);
+  },
   methods: {
     gpToPage(tab){
       let index = this.tabs.indexOf(tab);

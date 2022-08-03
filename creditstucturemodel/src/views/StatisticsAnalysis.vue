@@ -1,5 +1,5 @@
 <template>
-<div id="StatisticsAnalysis" @click="getClose($event)">
+<div id="StatisticsAnalysis" @click="getOtherClickToClose($event)">
   <el-row>
     <el-col :span="3">
       <el-menu
@@ -57,19 +57,19 @@
           <div class="timeBar">近三月</div>
           <div class="timeBar">近六月</div>
           <div class="timeBar">近一年</div>
-          <div class="timeBar" @click="getClick" id="datePicker">自定义</div>
+          <div class="timeBar" @click="getCustomClick" id="datePicker">自定义</div>
         </div>
 <!--        element-ui内部有个bug，版本2.15.8不会报错，其他版本会-->
         <el-date-picker
             v-show="show"
-            v-model="value1"
+            v-model="dateRangeValue"
             type="daterange"
             range-separator="至"
             start-placeholder="开始日期"
             end-placeholder="结束日期"
             size="mini"
             style="position: absolute;bottom: 0;right: 0"
-            @focus="getFocus"
+            @focus="getFocusFlag"
             @blur="getDateRange">
         </el-date-picker>
       </el-card>
@@ -112,7 +112,7 @@ export default {
   name: "StatisticsAnalysis",
   data() {
     return {
-      value1: '',
+      dateRangeValue: '',
       show: false,
       flag: false,
       currentCompoundIndex: 0,
@@ -540,24 +540,25 @@ export default {
         dataIndex: this.currentCompoundIndex,
       })
     },
+    //日期选择器失去焦点时就被掩藏，一般是选好了日期被隐藏
     getDateRange(){
       this.show = false;
       this.flag = false;
+      console.log(this.dateRangeValue);
     },
-    getClick(){
+    //自定义日期
+    getCustomClick(){
       this.show = true;
     },
-    getFocus(){
+    //判断是否focus状态，防止选日期的时候datePicker被隐藏
+    getFocusFlag(){
       this.flag = true;
     },
-    getClose(e){
-      console.log('999',e)
+    //点击其他地方，关闭日期选择器
+    getOtherClickToClose(e){
       let el = document.getElementById('datePicker')
-      console.log(el)
       if(el){
-        console.log('----')
         if(!el.contains(e.target) && !this.flag){
-          console.log('hhh')
           this.show = false;
         }
       }
@@ -762,5 +763,21 @@ export default {
 /*选中某行*/
 /deep/ .el-table__body tr.current-row>td.el-table__cell{
   background-color: rgba(255,255,255,0.2);
+}
+/*日期选择器*/
+.el-date-editor{
+  background-color: rgba(255,255,255,0.2);
+  border: 1px solid rgba(255,255,255,0.5);
+}
+/deep/ .el-range-separator{
+  color: white;
+}
+/deep/ .el-range-input{
+  color: white;
+  background-color: rgba(255,255,255,0.5);
+}
+/*placeHolder的样式*/
+/deep/ .el-range-input::-webkit-input-placeholder { /* WebKit browsers 适配谷歌 */
+  color: white;
 }
 </style>
