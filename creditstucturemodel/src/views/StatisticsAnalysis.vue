@@ -1,5 +1,5 @@
 <template>
-<div id="StatisticsAnalysis">
+<div id="StatisticsAnalysis" @click="getClose($event)">
   <el-row>
     <el-col :span="3">
       <el-menu
@@ -52,6 +52,26 @@
       </el-card>
       <el-card class="box-card box-card-left cityMap">
         <div id="cityMapChart"></div>
+        <div class="timeSelector">
+          <div class="timeBar">近一月</div>
+          <div class="timeBar">近三月</div>
+          <div class="timeBar">近六月</div>
+          <div class="timeBar">近一年</div>
+          <div class="timeBar" @click="getClick" id="datePicker">自定义</div>
+        </div>
+<!--        element-ui内部有个bug，版本2.15.8不会报错，其他版本会-->
+        <el-date-picker
+            v-show="show"
+            v-model="value1"
+            type="daterange"
+            range-separator="至"
+            start-placeholder="开始日期"
+            end-placeholder="结束日期"
+            size="mini"
+            style="position: absolute;bottom: 0;right: 0"
+            @focus="getFocus"
+            @blur="getDateRange">
+        </el-date-picker>
       </el-card>
     </el-col>
     <el-col :span="7">
@@ -71,9 +91,16 @@
         <div slot="header" class="clearfix cardName">
           <span>评价得分（2022/01/01至2022/06/30）</span>
         </div>
-        <div v-for="o in 8" :key="o" class="text item">
-          {{'列表内容 ' + o }}
-        </div>
+        <el-table :data="tableData" :show-header="false" highlight-current-row @current-change="handleCurrentChange">
+          <el-table-column width="60" >
+            <template slot-scope="scope">
+              <div class="topIndex" :style="{color:getIndexColor(scope.$index)}">{{'TOP.'+ (scope.$index + 1)}}</div>
+            </template>
+          </el-table-column>
+          <el-table-column prop="compoundName" :show-overflow-tooltip="true"></el-table-column>
+          <el-table-column prop="location" width="80"></el-table-column>
+          <el-table-column prop="score" width="60"></el-table-column>
+        </el-table>
       </el-card>
     </el-col>
   </el-row>
@@ -85,6 +112,10 @@ export default {
   name: "StatisticsAnalysis",
   data() {
     return {
+      value1: '',
+      show: false,
+      flag: false,
+      currentCompoundIndex: 0,
       cities:[
         {
           index:'3301',
@@ -130,13 +161,62 @@ export default {
           index:'3311',
           name:'丽水市'
         },
-      ]
+      ],
+      tableData:[
+        {
+          compoundName:'泰禾杭州院子',
+          location:'余杭区',
+          score:'89.45',
+        },
+        {
+          compoundName:'阳光城西郊半岛',
+          location:'富阳区',
+          score:'78.67',
+        },
+        {
+          compoundName:'万达同心湾',
+          location:'富阳区',
+          score:'73.76',
+        },
+        {
+          compoundName:'泰禾大城小院',
+          location:'富阳区',
+          score:'72.67',
+        },
+        {
+          compoundName:'绿地柏澜晶舍',
+          location:'临安区',
+          score:'70.34',
+        },
+        {
+          compoundName:'璞玉公馆',
+          location:'钱塘区',
+          score:'65.67',
+        },
+        {
+          compoundName:'阳光城檀映里',
+          location:'钱塘区',
+          score:'64.34',
+        },
+        {
+          compoundName:'泰禾大城小院',
+          location:'余杭区',
+          score:'50',
+        },
+        {
+          compoundName:'阳光城檀映里',
+          location:'西湖区',
+          score:'40',
+        },
+      ],
+      myChart:{},
     }
   },
   mounted() {
     this.initEvaluationScoreDashboard();
     this.initEvaluationRankingScatterDiagram();
     this.initCityMapChart();
+    // this.handleCurrentChange();
   },
   methods:{
     initEvaluationScoreDashboard(){
@@ -335,7 +415,9 @@ export default {
         // console.log(res.data);
       });
       //图表部分
-      let myChart = this.$echarts.init(document.getElementById('cityMapChart'),null,{
+      //首先清理已存在的dom，不然就报错，并且更改选中高亮部分的时候不会重绘
+      this.$echarts.dispose(document.getElementById('cityMapChart'));
+      this.myChart = this.$echarts.init(document.getElementById('cityMapChart'),null,{
         width: 500,
         height: 400
       })
@@ -451,13 +533,50 @@ export default {
           }
         }]
       };
-      myChart.setOption(option);
-      myChart.dispatchAction({
+      this.myChart.setOption(option);
+      this.myChart.dispatchAction({
         type:'highlight',
         //传入选定数据的下标即可
-        dataIndex: 1,
+        dataIndex: this.currentCompoundIndex,
       })
     },
+    getDateRange(){
+      this.show = false;
+      this.flag = false;
+    },
+    getClick(){
+      this.show = true;
+    },
+    getFocus(){
+      this.flag = true;
+    },
+    getClose(e){
+      console.log('999',e)
+      let el = document.getElementById('datePicker')
+      console.log(el)
+      if(el){
+        console.log('----')
+        if(!el.contains(e.target) && !this.flag){
+          console.log('hhh')
+          this.show = false;
+        }
+      }
+    },
+    //动态添加样式
+    getIndexColor(index){
+      if( index === 0){
+        return 'red'
+      }else if (index === 1){
+        return 'blue'
+      }else if (index === 2){
+        return 'rgb(158, 90, 251)'
+      }
+    },
+    handleCurrentChange(val){
+      this.currentCompoundIndex = this.tableData.indexOf(val);
+      this.initCityMapChart();
+      // console.log(this.tableData.indexOf(val))
+    }
   },
 }
 </script>
@@ -531,7 +650,7 @@ export default {
 .rankingCardGroups div{
   text-align: left;
 }
-/*排名数字的卡片*/
+/*四位数，排名数字的卡片*/
 .rankingCardGroups .rankingCard {
   width: 40px;
   height: 40px;
@@ -578,5 +697,70 @@ export default {
 .legend-name {
   margin: auto;
   font-size: 10px
+}
+.cityMap{
+  position: relative;
+}
+/*城市地图旁边的时间选择器整体*/
+.timeSelector {
+  background-color: rgba(0,0,0,0);
+  width: 200px;
+  height: 200px;
+  position: absolute;
+  right: 0;
+  bottom: 0
+}
+.timeBar {
+  font-size: 10px;
+  text-align: center;
+  margin-bottom: 10px;
+  width: 75px;
+  height: 30px;
+  line-height: 30px;
+  cursor: pointer;
+  position: relative;
+  z-index: 99;
+}
+/*梯形背景*/
+.timeBar:after {
+  content: '';
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  z-index: 0;
+  background-color: rgba(255, 255, 255, 0.1);
+  transform: perspective(10px) rotateX(-3deg);
+  transform-origin: left;
+}
+.topIndex{
+  font-family:Papyrus, Herculanum, Party LET, Curlz MT, Harrington, fantasy,sans-serif;
+  color: rgb(35,247,238);
+}
+.el-table {
+  color: white;
+  background-color: transparent;
+  border: none;
+}
+.el-table /deep/ tr {
+  background-color: transparent;
+}
+.el-table /deep/ td.el-table__cell, .el-table th.el-table__cell.is-leaf{
+  /*background-color: transparent;*/
+  border-bottom: 1px solid rgba(255,255,255,0.1);
+}
+/*最后一行的border删不掉，找了其他的来覆盖*/
+/deep/ .el-table__body-wrapper{
+  border-bottom: 2px solid rgb(1,21,50) !important;
+  z-index: 99;
+}
+/*鼠标经过，该行变色*/
+/deep/ .el-table__body tr:hover>td{
+  background-color: rgba(255,255,255,0.1) !important;
+}
+/*选中某行*/
+/deep/ .el-table__body tr.current-row>td.el-table__cell{
+  background-color: rgba(255,255,255,0.2);
 }
 </style>

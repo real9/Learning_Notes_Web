@@ -12,7 +12,7 @@ VueRouter.prototype.push = function push(location) {
 }
 const routes = [
   {
-    path: '/ProjectList',
+    path: '/',
     name: 'ProjectList',
     component: () =>import('@/views/ProjectList')
   },

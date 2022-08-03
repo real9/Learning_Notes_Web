@@ -33,7 +33,7 @@ export default {
   name: "TopNav",
   data() {
     return {
-      isActiveTab0: false,
+      isActiveTab0: true,
       isActiveTab1: false,
       isActiveTab2: false,
       isActiveTab3: false,
@@ -65,8 +65,10 @@ export default {
   methods: {
     gpToPage(tab){
       let index = this.tabs.indexOf(tab);
+      let path = tab.id;
       // v-bind:class的变量只能和data绑定
       if(index === 0 ){
+        path = '';
         this.isActiveTab0 = true;
         this.isActiveTab1 = false;
         this.isActiveTab2 = false;
@@ -97,7 +99,7 @@ export default {
         this.isActiveTab3 = false;
         this.isActiveTab4 = true;
       }
-      this.$router.push('/' + tab.id);
+      this.$router.push('/' + path);
     }
   },
 }
