@@ -3,12 +3,13 @@
   <el-row>
     <el-col :span="3">
       <el-menu
-          default-active="2"
+          :default-active="defaultActiveIndex"
           class="el-menu-vertical-demo"
           background-color="#01031C"
           text-color="#fff"
           active-text-color="#ffd04b"
-      style="max-width: 150px">
+          style="width: 150px"
+          @select="getSelectedCity">
         <el-menu-item v-for="city in cities" :index="city.index" :key="city.index">
           <span slot="title">{{city.name}}</span>
         </el-menu-item>
@@ -115,7 +116,10 @@ export default {
       dateRangeValue: '',
       show: false,
       flag: false,
+      defaultActiveIndex: '3301',
       currentCompoundIndex: 0,
+      currentDistrictName:'',
+      cityCode: '330100',
       cities:[
         {
           index:'3301',
@@ -409,7 +413,7 @@ export default {
     async initCityMapChart(){
       let cityData;
       //要异步，不然就是先渲染了但是还没数据进来
-      await this.$axios.get('https://geo.datav.aliyun.com/areas_v3/bound/330100_full.json')
+      await this.$axios.get('https://geo.datav.aliyun.com/areas_v3/bound/'+ this.cityCode +'_full.json')
       .then( (res) => {
         cityData = res.data;
         // console.log(res.data);
@@ -455,7 +459,7 @@ export default {
           regions: [{
             //可接入数据，通过其他地方传数据进来，指定哪个区域高亮
             //name可以为空
-            name: '富阳区',
+            name: this.currentDistrictName,
             //有bug，地区的一半线条只变色不加粗（原生的问题吧）
             itemStyle: {
               areaColor: 'rgb(40,63,105)',
@@ -573,10 +577,16 @@ export default {
         return 'rgb(158, 90, 251)'
       }
     },
+    //第四块的表格和第三块的地图联动
     handleCurrentChange(val){
       this.currentCompoundIndex = this.tableData.indexOf(val);
+      this.currentDistrictName = val.location;
       this.initCityMapChart();
-      // console.log(this.tableData.indexOf(val))
+    },
+    //切换选中的城市
+    getSelectedCity(index){
+      this.cityCode = index + '00';
+      this.initCityMapChart();
     }
   },
 }

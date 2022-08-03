@@ -123,28 +123,45 @@ export default {
 .topNav_title p {
   text-align: left;
   padding-left: 20px;
+  font-weight: bold;
+  background-image: -webkit-gradient(linear,0 top, 0 bottom, from(white), to(rgb(67, 177, 227)));
+  /*必需加前缀 -webkit- 才支持这个text值 */
+  -webkit-background-clip: text;
+  /*text-fill-color会覆盖color所定义的字体颜色： */
+  -webkit-text-fill-color: transparent;
 }
+
 .topNav_tabs {
   line-height: 70px;
   display: flex;
   height: 70px;
 }
+
 .topNav_tabs > div {
   text-align: center;
   cursor: pointer;
   width: 90px;
+  font-weight: bold;
+  background-image: -webkit-gradient(linear,0 top, 0 bottom, from(white), to(rgb(67, 177, 227)));
+  /*必需加前缀 -webkit- 才支持这个text值 */
+  -webkit-background-clip: text;
+  /*text-fill-color会覆盖color所定义的字体颜色： */
+  -webkit-text-fill-color: transparent;
 }
-.topNav_icon{
+
+.topNav_icon {
   font-size: 20px;
   line-height: 70px;
   text-align: right;
 }
+
 .topNav_icon > div {
   margin-right: 20px;
   cursor: pointer;
 }
+
 .activeTab {
-  background-color: rgba(255,255,255,0.18);
+  background-color: rgba(255, 255, 255, 0.18);
   border-bottom: 5px solid #eee;
 }
 </style>
