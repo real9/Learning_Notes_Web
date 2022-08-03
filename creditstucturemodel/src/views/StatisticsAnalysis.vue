@@ -802,7 +802,7 @@ export default {
 /*激活的样式*/
 /deep/ .el-menu-item.is-active {
   color: rgb(67, 177, 227);
-  background-color: rgba(255, 255, 255, 0.2) !important; /*针对不支持渐变的浏览器*/
+  background-color: rgba(255, 255, 255, 0.2); /*针对不支持渐变的浏览器*/
   background-image: radial-gradient(farthest-corner at 50% 5%, rgb(8, 47, 114), #01031C);
 }
 /*字体*/

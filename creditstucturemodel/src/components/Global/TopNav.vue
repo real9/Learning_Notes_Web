@@ -135,7 +135,6 @@ export default {
   line-height: 70px;
   display: flex;
   height: 70px;
-  /*position: relative;*/
 }
 
 .topNav_tabs > div {
@@ -160,11 +159,11 @@ export default {
   margin-right: 20px;
   cursor: pointer;
 }
-
+/*激活样式*/
 .activeTab {
   color: rgb(67, 177, 227);
   background-color: rgba(255, 255, 255, 0.2) !important; /*针对不支持渐变的浏览器*/
-  background-image: radial-gradient(farthest-corner at 50% 5%, rgb(8, 47, 114), #01031C);
+  background-image: radial-gradient(farthest-corner at 50% 5%, rgb(18, 57, 124), #01031C) !important;
   position: relative;
 }
 .activeTab span{
