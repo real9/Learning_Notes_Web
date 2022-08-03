@@ -153,6 +153,7 @@ export default {
   font-size: 20px;
   line-height: 70px;
   text-align: right;
+  color: rgb(67, 177, 227);
 }
 
 .topNav_icon > div {

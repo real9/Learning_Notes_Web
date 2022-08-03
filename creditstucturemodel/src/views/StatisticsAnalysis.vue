@@ -6,9 +6,7 @@
           :default-active="defaultActiveIndex"
           class="el-menu-vertical-demo"
           background-color="#01031C"
-          text-color="#fff"
-          active-text-color="#ffd04b"
-          style="width: 150px"
+          style="width: 125px"
           @select="getSelectedCity">
         <el-menu-item v-for="city in cities" :index="city.index" :key="city.index">
           <span slot="title">{{city.name}}</span>
@@ -117,6 +115,7 @@ export default {
       show: false,
       flag: false,
       defaultActiveIndex: '3301',
+      //地图中高亮的部分
       currentCompoundIndex: 0,
       currentDistrictName:'',
       cityCode: '330100',
@@ -789,5 +788,28 @@ export default {
 /*placeHolder的样式*/
 /deep/ .el-range-input::-webkit-input-placeholder { /* WebKit browsers 适配谷歌 */
   color: white;
+}
+/*左侧导航栏样式*/
+/*未激活的样式*/
+.el-menu-item{
+  margin-bottom: 20px;
+  font-weight: bold;
+  font-size: 16px;
+  color: rgb(26,57,86);
+  background-color: rgba(255, 255, 255, 0.1) !important; /*针对不支持渐变的浏览器*/
+  background-image: radial-gradient(farthest-corner at 50% 5%, rgb(12, 46, 83), #01031C);
+}
+/*激活的样式*/
+/deep/ .el-menu-item.is-active {
+  color: rgb(67, 177, 227);
+  background-color: rgba(255, 255, 255, 0.2) !important; /*针对不支持渐变的浏览器*/
+  background-image: radial-gradient(farthest-corner at 50% 5%, rgb(8, 47, 114), #01031C);
+}
+.el-menu-item.is-active span{
+  background-image: -webkit-gradient(linear,0 top, 0 bottom, from(white), to(rgb(67, 177, 227)));
+  /*必需加前缀 -webkit- 才支持这个text值 */
+  -webkit-background-clip: text;
+  /*text-fill-color会覆盖color所定义的字体颜色： */
+  -webkit-text-fill-color: transparent;
 }
 </style>
