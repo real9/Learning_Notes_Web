@@ -5,19 +5,19 @@
     </el-col>
     <el-col :span="12" class="topNav_tabs">
       <div :key="tabs[0].id" class="" v-bind:class="{activeTab: isActiveTab0}" @click="gpToPage(tabs[0])">
-        {{ tabs[0].name }}
+        <span>{{ tabs[0].name }}</span>
       </div>
       <div :key="tabs[1].id" class="" v-bind:class="{activeTab: isActiveTab1}" @click="gpToPage(tabs[1])">
-        {{ tabs[1].name }}
+        <span>{{ tabs[1].name }}</span>
       </div>
       <div :key="tabs[2].id" class="" v-bind:class="{activeTab: isActiveTab2}" @click="gpToPage(tabs[2])">
-        {{ tabs[2].name }}
+        <span>{{ tabs[2].name }}</span>
       </div>
       <div :key="tabs[3].id" class="" v-bind:class="{activeTab: isActiveTab3}" @click="gpToPage(tabs[3])">
-        {{ tabs[3].name }}
+        <span>{{ tabs[3].name }}</span>
       </div>
       <div :key="tabs[4].id" class="" v-bind:class="{activeTab: isActiveTab4}" @click="gpToPage(tabs[4])">
-        {{ tabs[4].name }}
+        <span>{{ tabs[4].name }}</span>
       </div>
     </el-col>
     <el-col :span="4" class="topNav_icon">
@@ -33,7 +33,7 @@ export default {
   name: "TopNav",
   data() {
     return {
-      isActiveTab0: true,
+      isActiveTab0: false,
       isActiveTab1: false,
       isActiveTab2: false,
       isActiveTab3: false,
@@ -115,7 +115,7 @@ export default {
 #topNav {
   font-size: 16px;
   height: 70px;
-  border-bottom: 2px solid #eee;
+  border-bottom: 2px solid rgb(15,95,154);
 }
 .topNav_title{
   font-size: 20px;
@@ -135,18 +135,18 @@ export default {
   line-height: 70px;
   display: flex;
   height: 70px;
+  /*position: relative;*/
 }
 
 .topNav_tabs > div {
   text-align: center;
   cursor: pointer;
+  border-bottom: 2px solid rgb(15,95,154);
   width: 90px;
   font-weight: bold;
-  background-image: -webkit-gradient(linear,0 top, 0 bottom, from(white), to(rgb(67, 177, 227)));
-  /*必需加前缀 -webkit- 才支持这个text值 */
-  -webkit-background-clip: text;
-  /*text-fill-color会覆盖color所定义的字体颜色： */
-  -webkit-text-fill-color: transparent;
+  color: rgb(26,57,86);
+  background-color: rgba(255, 255, 255, 0.1) !important; /*针对不支持渐变的浏览器*/
+  background-image: radial-gradient(farthest-corner at 50% 5%, rgb(12, 46, 83), #01031C);
 }
 
 .topNav_icon {
@@ -162,7 +162,29 @@ export default {
 }
 
 .activeTab {
-  background-color: rgba(255, 255, 255, 0.18);
-  border-bottom: 5px solid #eee;
+  color: rgb(67, 177, 227);
+  background-color: rgba(255, 255, 255, 0.2) !important; /*针对不支持渐变的浏览器*/
+  background-image: radial-gradient(farthest-corner at 50% 5%, rgb(8, 47, 114), #01031C);
+  position: relative;
+}
+.activeTab span{
+  background-image: -webkit-gradient(linear,0 top, 0 bottom, from(white), to(rgb(67, 177, 227)));
+  /*必需加前缀 -webkit- 才支持这个text值 */
+  -webkit-background-clip: text;
+  /*text-fill-color会覆盖color所定义的字体颜色： */
+  -webkit-text-fill-color: transparent;
+}
+.activeTab:after{
+  content: '';
+  position: absolute;
+  bottom: -2px;
+  left: 34px;
+  z-index: 99;
+  width: 22px;
+  height: 10px;
+  border: 2px solid rgb(15, 95, 154);
+  border-bottom: 2px solid #01031C;
+  transform: perspective(8px) rotateX(15deg);
+  transform-origin: bottom;
 }
 </style>

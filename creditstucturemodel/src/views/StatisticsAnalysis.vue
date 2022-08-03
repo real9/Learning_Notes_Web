@@ -805,6 +805,7 @@ export default {
   background-color: rgba(255, 255, 255, 0.2) !important; /*针对不支持渐变的浏览器*/
   background-image: radial-gradient(farthest-corner at 50% 5%, rgb(8, 47, 114), #01031C);
 }
+/*字体*/
 .el-menu-item.is-active span{
   background-image: -webkit-gradient(linear,0 top, 0 bottom, from(white), to(rgb(67, 177, 227)));
   /*必需加前缀 -webkit- 才支持这个text值 */
