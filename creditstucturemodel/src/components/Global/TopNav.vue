@@ -1,5 +1,5 @@
 <template>
-  <el-row id="topNav">
+  <el-row id="topNav" >
     <el-col :span="8" class="topNav_title">
       <p>房地产行业信贷结构优化评价模型</p>
     </el-col>
@@ -148,6 +148,10 @@ export default {
   font-size: 16px;
   height: 70px;
   border-bottom: 2px solid rgb(15,95,154);
+  position: sticky;
+  top: 0;
+  background-color: #01031C;
+  z-index: 99;
 }
 .topNav_title{
   font-size: 20px;

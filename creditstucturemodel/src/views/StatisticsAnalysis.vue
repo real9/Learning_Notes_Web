@@ -37,7 +37,7 @@
           </el-col>
           <el-col :span="8">
 <!--            仪表盘-->
-            <div id="evaluationScoreDashboard" ></div>
+            <div id="evaluationScoreDashboard" style="margin: auto"></div>
           </el-col>
           <el-col :span="8" class="rankingCardGroups">
             <el-row>
@@ -122,7 +122,7 @@ export default {
       //对于第一个card的内容，求取到数据后全部赋值为第一组数据
       //实际开发中，小区分数应该默认是0
       compoundScore: 89.45,
-      compoundInformation:'',
+      compoundInformation:'默认内容的设置，对于第一个card的内容，求取到数据后全部赋值为第一组数据',
       compoundName:'泰禾杭州院子',
       districtRankingNum:[0,0,0,0],
       groupRankingNum:[0,0,0,0],
