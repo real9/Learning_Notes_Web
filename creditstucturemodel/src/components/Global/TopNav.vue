@@ -62,8 +62,40 @@ export default {
       ]
     }
   },
-  created() {
-    // console.log(this.$route);
+  watch: {
+    $route(val) {
+      if(val.name === 'ProjectList' ){
+        this.isActiveTab0 = true;
+        this.isActiveTab1 = false;
+        this.isActiveTab2 = false;
+        this.isActiveTab3 = false;
+        this.isActiveTab4 = false;
+      }else if(val.name === 'EvaluationResult'){
+        this.isActiveTab0 = false;
+        this.isActiveTab1 = true;
+        this.isActiveTab2 = false;
+        this.isActiveTab3 = false;
+        this.isActiveTab4 = false;
+      }else if (val.name === 'StatisticsAnalysis'){
+        this.isActiveTab0 = false;
+        this.isActiveTab1 = false;
+        this.isActiveTab2 = true;
+        this.isActiveTab3 = false;
+        this.isActiveTab4 = false;
+      }else if (val.name === 'ModelManagement'){
+        this.isActiveTab0 = false;
+        this.isActiveTab1 = false;
+        this.isActiveTab2 = false;
+        this.isActiveTab3 = true;
+        this.isActiveTab4 = false;
+      }else if (val.name === 'AppendixList'){
+        this.isActiveTab0 = false;
+        this.isActiveTab1 = false;
+        this.isActiveTab2 = false;
+        this.isActiveTab3 = false;
+        this.isActiveTab4 = true;
+      }
+    }
   },
   methods: {
     gpToPage(tab){
