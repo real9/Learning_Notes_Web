@@ -402,6 +402,8 @@ export default {
         },
         series: [
           {
+            colorBy: 'data',
+            color:['rgb(38,223,249)','rgb(55,95,253)','rgb(78,187,229)','rgb(150,78,247)'],
             symbolSize: 10,
             label:{
               //标签文字
