@@ -16,12 +16,20 @@
     <el-col :span="14" >
       <el-card class="box-card box-card-left cityDetail">
         <div slot="header" class="clearfix">
-          <span>Compound Name小区名称</span>
+          <span
+              :style="{color: currentCompoundIndex > 2? 'rgb(35,247,238)'
+              : (currentCompoundIndex > 1 ? 'rgb(158, 90, 251)'
+              : (currentCompoundIndex > 0 ? 'blue'
+              : (currentCompoundIndex === 0 ? 'red' : '')))}"
+              class="topIndex">
+            TOP.{{ currentCompoundIndex + 1 }}
+          </span>
+          <span>{{compoundName}}</span>
         </div>
         <el-row>
           <el-col :span="8">
             <div class="compoundInfo">
-              小区介绍
+              <div>{{compoundInformation}}</div>
 <!--              两个拐角-->
               <div class="topLeft"></div>
               <div class="bottomRight"></div>
@@ -34,17 +42,17 @@
           <el-col :span="8" class="rankingCardGroups">
             <el-row>
               <div>所在区域内排名</div>
-              <el-col :span="6" class="rankingCard">0</el-col>
-              <el-col :span="6" class="rankingCard">0</el-col>
-              <el-col :span="6" class="rankingCard">0</el-col>
-              <el-col :span="6" class="rankingCard">1</el-col>
+              <el-col :span="6" class="rankingCard">{{districtRankingNum[0]}}</el-col>
+              <el-col :span="6" class="rankingCard">{{districtRankingNum[1]}}</el-col>
+              <el-col :span="6" class="rankingCard">{{districtRankingNum[2]}}</el-col>
+              <el-col :span="6" class="rankingCard">{{districtRankingNum[3]}}</el-col>
             </el-row>
             <el-row class="rankingCardGroups">
               <div>所在集团内排名</div>
-              <el-col :span="6" class="rankingCard">0</el-col>
-              <el-col :span="6" class="rankingCard">0</el-col>
-              <el-col :span="6" class="rankingCard">1</el-col>
-              <el-col :span="6" class="rankingCard">3</el-col>
+              <el-col :span="6" class="rankingCard">{{groupRankingNum[0]}}</el-col>
+              <el-col :span="6" class="rankingCard">{{groupRankingNum[1]}}</el-col>
+              <el-col :span="6" class="rankingCard">{{groupRankingNum[2]}}</el-col>
+              <el-col :span="6" class="rankingCard">{{groupRankingNum[3]}}</el-col>
             </el-row>
           </el-col>
         </el-row>
@@ -111,6 +119,13 @@ export default {
   name: "StatisticsAnalysis",
   data() {
     return {
+      //对于第一个card的内容，求取到数据后全部赋值为第一组数据
+      //实际开发中，小区分数应该默认是0
+      compoundScore: 89.45,
+      compoundInformation:'',
+      compoundName:'泰禾杭州院子',
+      districtRankingNum:[0,0,0,0],
+      groupRankingNum:[0,0,0,0],
       dateRangeValue: '',
       show: false,
       flag: false,
@@ -170,46 +185,64 @@ export default {
           compoundName:'泰禾杭州院子',
           location:'余杭区',
           score:'89.45',
+          rank1: 1234,
+          rank2: 1235,
         },
         {
           compoundName:'阳光城西郊半岛',
           location:'富阳区',
           score:'78.67',
+          rank1: 1,
+          rank2: 12,
         },
         {
           compoundName:'万达同心湾',
           location:'富阳区',
           score:'73.76',
+          rank1: 123,
+          rank2: 456,
         },
         {
           compoundName:'泰禾大城小院',
           location:'富阳区',
           score:'72.67',
+          rank1: 6789,
+          rank2: 8848,
         },
         {
           compoundName:'绿地柏澜晶舍',
           location:'临安区',
           score:'70.34',
+          rank1: 8888,
+          rank2: 2022,
         },
         {
           compoundName:'璞玉公馆',
           location:'钱塘区',
           score:'65.67',
+          rank1: 2021,
+          rank2: 2012,
         },
         {
           compoundName:'阳光城檀映里',
           location:'钱塘区',
           score:'64.34',
+          rank1: 2333,
+          rank2: 1949,
         },
         {
           compoundName:'泰禾大城小院',
           location:'余杭区',
           score:'50',
+          rank1: 1945,
+          rank2: 1919,
         },
         {
           compoundName:'阳光城檀映里',
           location:'西湖区',
           score:'40',
+          rank1: 1956,
+          rank2: 19,
         },
       ],
       myChart:{},
@@ -219,7 +252,6 @@ export default {
     this.initEvaluationScoreDashboard();
     this.initEvaluationRankingScatterDiagram();
     this.initCityMapChart();
-    // this.handleCurrentChange();
   },
   methods:{
     initEvaluationScoreDashboard(){
@@ -227,6 +259,9 @@ export default {
         width: 230,
         height: 230
       })
+      //最好的做法时myChart是全局变量，每次判断dom是否被创建，创建了就要清理旧的
+      //不做其他处理的话，只会warning
+      let that = this;
       let option;
       option = {
         series: [
@@ -313,7 +348,7 @@ export default {
             },
             data: [
               {
-                value: 94.5
+                value: that.compoundScore
               }
             ],
             color:{
@@ -581,6 +616,28 @@ export default {
       this.currentCompoundIndex = this.tableData.indexOf(val);
       this.currentDistrictName = val.location;
       this.initCityMapChart();
+      //仪表盘联动
+      this.compoundScore = val.score;
+      this.initEvaluationScoreDashboard();
+    //  小区介绍联动
+      this.compoundInformation = '';
+      for(let i = 0; i < 10; i ++){
+        this.compoundInformation += val.compoundName ;
+      }
+      this.compoundName = val.compoundName;
+    //  排名联动
+      this.districtRankingNum = [0,0,0,0];
+      this.groupRankingNum = [0,0,0,0];
+      let i = 0
+      let rank1 = val.rank1;
+      let rank2 = val.rank2;
+      while (rank1 > 0 || rank2 > 0){
+        this.districtRankingNum[3 - i] = rank1 % 10;
+        rank1 = Math.floor(rank1 / 10);
+        this.groupRankingNum[3 - i] = rank2 % 10;
+        rank2 = Math.floor(rank2 / 10);
+        i += 1;
+      }
     },
     //切换选中的城市
     getSelectedCity(index){
@@ -624,13 +681,28 @@ export default {
   margin-left: 3px;
   margin-bottom: 10px;
 }
+/*第一个卡片的标题部分*/
+.cityDetail .clearfix{
+  width: 180px;
+  height: 34px;
+  line-height: 34px;
+  margin: auto;
+  color: rgb(138,195,222);
+  background-color: rgba(255, 255, 255, 0.2); /*针对不支持渐变的浏览器*/
+  background-image: radial-gradient(circle, rgb(8, 47, 114), rgb(10,36,69));
+}
 /*小区介绍*/
 .compoundInfo {
   position: relative;
   width: 100%;
   height: 100px;
   background-image: linear-gradient(rgb(3,32,71), rgb(8,47,104));
-
+}
+.compoundInfo div {
+  color: rgb(67, 177, 227);
+  font-size: 14px;
+  /*统一padding，但是两个拐角的padding要unset*/
+  padding: 10px 10px;
 }
 /*两个拐角*/
 .compoundInfo .topLeft{
@@ -641,6 +713,7 @@ export default {
   height: 10px;
   border-top: 5px solid #1794E5;
   border-left: 5px solid #1794E5;
+  padding: unset;
 }
 .compoundInfo .bottomRight{
   position: absolute;
@@ -650,6 +723,7 @@ export default {
   height: 10px;
   border-bottom: 5px solid #1794E5;
   border-right: 5px solid #1794E5;
+  padding: unset;
 }
 /*排名的数字卡片组*/
 .rankingCardGroups{
