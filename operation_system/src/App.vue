@@ -1,17 +1,16 @@
 <template>
   <div id="app">
-
-
+    <top-nav></top-nav>
   </div>
 </template>
 
 <script>
 
-
+import topNav from './components/TopNav'
 export default {
   name: 'App',
   components: {
-
+    topNav,
   }
 }
 </script>
@@ -23,6 +22,6 @@ export default {
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
   color: #2c3e50;
-  margin-top: 60px;
+  background-color: white;
 }
 </style>
