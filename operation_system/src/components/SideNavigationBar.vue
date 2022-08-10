@@ -9,7 +9,7 @@ export default {
   name: "SideNavigationBar",
   data() {
     return {
-      links: '#three'
+      links: '#one'
     }
   }
 }

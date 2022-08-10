@@ -1,10 +1,13 @@
 <template>
-  <div>
+  <div id="one">
     <el-row>
       <el-col class="title"><i class="el-icon-notebook-2"></i> 服务器#1</el-col>
     </el-row>
     <el-row class="chart">
       <el-col :span="6">
+        <el-row>
+          <el-col style="text-align: left">当前CPU占有率</el-col>
+        </el-row>
         <dash-board-chart></dash-board-chart>
       </el-col>
       <el-col :span="6">
@@ -20,7 +23,10 @@
         <water-ball></water-ball>
       </el-col>
       <el-col :span="6">
-        <stacked-line-chart></stacked-line-chart>
+        <el-row>
+          <el-col style="text-align: left">24h网络使用情况</el-col>
+        </el-row>
+        <line-chart></line-chart>
       </el-col>
     </el-row>
   </div>
@@ -29,13 +35,13 @@
 <script>
 import dashBoardChart from './ChartComponents/DashBoardChart'
 import waterBall from './ChartComponents/WaterBall'
-import stackedLineChart from './ChartComponents/StackedLineChart'
+import lineChart from './ChartComponents/StackedLineChart'
 export default {
   name: "ServicePanel",
   components:{
     dashBoardChart,
     waterBall,
-    stackedLineChart,
+    lineChart,
   }
 }
 </script>

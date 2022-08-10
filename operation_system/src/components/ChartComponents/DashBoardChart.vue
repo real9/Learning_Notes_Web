@@ -1,7 +1,6 @@
 <template>
 <div>
   <el-row>
-    <el-col style="text-align: left">当前CPU占有率</el-col>
     <div :id="id"></div>
   </el-row>
 </div>
