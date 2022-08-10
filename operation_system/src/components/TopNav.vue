@@ -20,6 +20,8 @@ export default {
   top: 0;
   z-index: 99;
   color: black;
+  background-color: white;
   font-weight: bold;
+  padding-left: 20px;
 }
 </style>
