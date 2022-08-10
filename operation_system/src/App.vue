@@ -5,7 +5,7 @@
       <el-col :span="20" >
 <!--        <div style="border: 1px solid black;margin: 20px;background-color: white">hhh</div>-->
         <alert-event-table class="alertEventTable"></alert-event-table>
-        <service-panel></service-panel>
+        <service-panel class="servicePanel"></service-panel>
       </el-col>
       <el-col :span="4"><side-navigation-bar></side-navigation-bar></el-col>
     </el-row>
@@ -42,5 +42,10 @@ export default {
   margin-top: 10px;
   padding: 20px;
 }
-
+.servicePanel{
+  background-color: white;
+  margin-left: 10px;
+  margin-top: 10px;
+  padding: 20px;
+}
 </style>

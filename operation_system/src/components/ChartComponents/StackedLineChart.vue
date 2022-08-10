@@ -1,5 +1,5 @@
 <template>
-
+  <div>linechart</div>
 </template>
 
 <script>
