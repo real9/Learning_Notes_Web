@@ -8,9 +8,15 @@
         <dash-board-chart></dash-board-chart>
       </el-col>
       <el-col :span="6">
+        <el-row>
+          <el-col style="text-align: left">当前磁盘使用率%</el-col>
+        </el-row>
         <water-ball></water-ball>
       </el-col>
       <el-col :span="6">
+        <el-row>
+          <el-col style="text-align: left">当前内存占有率%</el-col>
+        </el-row>
         <water-ball></water-ball>
       </el-col>
       <el-col :span="6">
