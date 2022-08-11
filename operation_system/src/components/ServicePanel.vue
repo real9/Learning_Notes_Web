@@ -13,15 +13,15 @@
         </el-col>
         <el-col :span="6">
           <el-row>
-            <el-col style="text-align: left">当前磁盘使用率%</el-col>
+            <el-col style="text-align: left" >当前磁盘使用率%</el-col>
           </el-row>
-          <water-ball></water-ball>
+          <water-ball :usage-rate="item.diskUsage" :usage-num="item.actualDisk"></water-ball>
         </el-col>
         <el-col :span="6">
           <el-row>
             <el-col style="text-align: left">当前内存占有率%</el-col>
           </el-row>
-          <water-ball></water-ball>
+          <water-ball :usage-rate="item.memoryOccupancy" :usage-num="item.actualMemory"></water-ball>
         </el-col>
         <el-col :span="6">
           <el-row>
@@ -53,10 +53,10 @@ export default {
           id: '1',
           cpuOccupancy: 55,
           balanceNum: 11,
-          diskUsage: 0,
-          actualDisk: 0,
-          memoryOccupancy: 0,
-          actualMemory: 0,
+          diskUsage: 12,
+          actualDisk: 1200,
+          memoryOccupancy: 21,
+          actualMemory: 2100,
           networkFlowData: [
             [],
             []],
@@ -65,10 +65,10 @@ export default {
           id: '2',
           cpuOccupancy: 66,
           balanceNum: 22,
-          diskUsage: 0,
-          actualDisk: 0,
-          memoryOccupancy: 0,
-          actualMemory: 0,
+          diskUsage: 34,
+          actualDisk: 3400,
+          memoryOccupancy: 32,
+          actualMemory: 3200,
           networkFlowData: [
             [],
             []],
@@ -77,10 +77,10 @@ export default {
           id: '3',
           cpuOccupancy: 77,
           balanceNum: 33,
-          diskUsage: 0,
-          actualDisk: 0,
-          memoryOccupancy: 0,
-          actualMemory: 0,
+          diskUsage: 56,
+          actualDisk: 5600,
+          memoryOccupancy: 43,
+          actualMemory: 4300,
           networkFlowData: [
             [],
             []],
@@ -89,10 +89,10 @@ export default {
           id: '4',
           cpuOccupancy: 88,
           balanceNum: 44,
-          diskUsage: 0,
-          actualDisk: 0,
-          memoryOccupancy: 0,
-          actualMemory: 0,
+          diskUsage: 78,
+          actualDisk: 7800,
+          memoryOccupancy: 54,
+          actualMemory: 5400,
           networkFlowData: [
             [],
             []],
@@ -101,10 +101,10 @@ export default {
           id: '5',
           cpuOccupancy: 44,
           balanceNum: 21,
-          diskUsage: 0,
-          actualDisk: 0,
-          memoryOccupancy: 0,
-          actualMemory: 0,
+          diskUsage: 99,
+          actualDisk: 9900,
+          memoryOccupancy: 65,
+          actualMemory: 6500,
           networkFlowData: [
             [],
             []],

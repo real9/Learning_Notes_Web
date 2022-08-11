@@ -3,8 +3,8 @@
       <el-col>
         <div class="outerBall">
           <div class="content">
-            <p class="number">56</p>
-            <p class="percentage">888/9999GB</p>
+            <p class="number">{{usageRate}}</p>
+            <p class="percentage">{{usageNum}}/9999GB</p>
           </div>
           <div class="innerWater">
           </div>
@@ -15,7 +15,17 @@
 
 <script>
 export default {
-  name: "WaterBall"
+  name: "WaterBall",
+  props:{
+    usageRate: {
+      type: Number,
+      default: 0,
+    },
+    usageNum: {
+      type: Number,
+      default: 0,
+    }
+  }
 }
 </script>
 
