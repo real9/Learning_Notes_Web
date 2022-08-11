@@ -27,7 +27,7 @@
           <el-row>
             <el-col style="text-align: left">24h网络使用情况</el-col>
           </el-row>
-          <line-chart></line-chart>
+          <line-chart :up-data="item.networkFlowData[0]" :down-data="item.networkFlowData[1]"></line-chart>
         </el-col>
       </el-row>
     </div>
@@ -58,8 +58,8 @@ export default {
           memoryOccupancy: 21,
           actualMemory: 2100,
           networkFlowData: [
-            [],
-            []],
+            [150, 232, 201, 154, 190, 330, 410, 200, 400, 200, 200, 200],
+            [320, 332, 301, 334, 390, 330, 320, 200, 400, 300, 700, 100]],
         },
         {
           id: '2',
@@ -70,8 +70,8 @@ export default {
           memoryOccupancy: 32,
           actualMemory: 3200,
           networkFlowData: [
-            [],
-            []],
+            [150, 230, 224, 218, 135, 147, 260, 150, 230, 224, 218, 135],
+            [260, 150, 230, 224, 218, 135, 260, 150, 230, 224, 218, 135]],
         },
         {
           id: '3',
@@ -82,8 +82,8 @@ export default {
           memoryOccupancy: 43,
           actualMemory: 4300,
           networkFlowData: [
-            [],
-            []],
+            [120, 132, 101, 134, 90, 230, 210, 120, 132, 101, 134, 90],
+            [220, 182, 191, 234, 290, 330, 310, 220, 182, 191, 234, 290]],
         },
         {
           id: '4',
@@ -94,8 +94,8 @@ export default {
           memoryOccupancy: 54,
           actualMemory: 5400,
           networkFlowData: [
-            [],
-            []],
+            [820, 932, 901, 934, 1290, 1330, 1320, 820, 932, 901, 934, 1290],
+            [1330, 1320, 820, 932, 901, 934, 1290, 820, 932,  1290, 1330, 999]],
         },
         {
           id: '5',
@@ -106,8 +106,8 @@ export default {
           memoryOccupancy: 65,
           actualMemory: 6500,
           networkFlowData: [
-            [],
-            []],
+            [150, 230, 224, 218, 135, 147, 230, 224, 218, 135, 147, 260],
+            [224, 218, 135, 147, 224, 218, 135, 147, 150, 230, 218, 135]],
         },
       ]
     }
