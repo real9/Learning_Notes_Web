@@ -3,11 +3,10 @@
       <el-col>
         <div class="outerBall">
           <div class="content">
-            <p class="number">{{usageRate}}</p>
-            <p class="percentage">{{usageNum}}/9999GB</p>
+            <p class="number">{{ usageRate }}</p>
+            <p class="percentage">{{ usageNum }}/9999GB</p>
           </div>
-          <div class="innerWater">
-          </div>
+          <div class="innerWater" :style="{'--rate': rate}"></div>
         </div>
       </el-col>
     </el-row>
@@ -24,6 +23,11 @@ export default {
     usageNum: {
       type: Number,
       default: 0,
+    }
+  },
+  computed:{
+    rate() {
+      return 290 - this.usageRate * 2.9 + '%';
     }
   }
 }
@@ -73,8 +77,8 @@ export default {
   position: absolute;
   top: 0;
   left: 50%;
-  width: 150%;
-  height: 150%;
+  width: var(--rate);
+  height: var(--rate);
   border-radius: 40%;
   border-color: white;
   background-color: white;
@@ -93,8 +97,8 @@ export default {
   position: absolute;
   top: 0;
   left: 50%;
-  width: 150%;
-  height: 150%;
+  width: var(--rate);
+  height: var(--rate);
   border-radius: 42%;
   background-color: rgba(240, 228, 228, 0.4);
   animation: lightWave 6s linear infinite;
