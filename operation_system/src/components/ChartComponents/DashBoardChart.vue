@@ -10,7 +10,16 @@
 const uid = () => new Date().getTime();
 export default {
   name: "DashBoardChart",
-  props: {},
+  props: {
+    cpuOccupancy:{
+      type: Number,
+      default: 0,
+    },
+    balanceNum:{
+      type: Number,
+      default: 0,
+    }
+  },
   data() {
     return {
       id: null,
@@ -29,7 +38,7 @@ export default {
         height: 250,
       });
       let option;
-      // let that = this;
+      let that = this;
       option = {
         series: [
           {
@@ -85,7 +94,7 @@ export default {
               valueAnimation: true,
               offsetCenter: [0, '70%'],
               formatter: function (value) {
-                return '{value|' + value + '%}{unit|\n比目标值偏高%}';
+                return '{value|' + value + '%}{unit|\n比目标值偏高'+that.balanceNum+'%}';
               },
               rich: {
                 value:{
@@ -102,7 +111,7 @@ export default {
             },
             data: [
               {
-                value: 70
+                value: that.cpuOccupancy
               }
             ]
           }
