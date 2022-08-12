@@ -112,20 +112,11 @@ export default {
         },
       ],
       headerStyle: {'background':' #EBEEF5'},
-      height: '',
     }
-  },
-  watch: {
-    // height() {
-    //   this.height = this.$refs.table1.$el.clientHeight;
-    //   console.log('高度：',this.height)
-    // }
   },
   mounted() {
     this.$nextTick(() =>{
-      //你的代码部分
-      this.height = this.$refs.table1;
-      console.log('hhh',this.$refs.table1.clientHeight)
+      this.$store.commit('updateTableHeight', this.$refs.table1.clientHeight)
     })
   },
   created() {
@@ -164,7 +155,7 @@ export default {
       for(let i = startNum; i < endNum; i ++){
         this.tableData.push(this.alertEventData[i]);
       }
-      console.log(startNum,endNum);
+      // console.log(startNum,endNum);
     },
     //页面尺寸
     handleSizeChange(val) {
@@ -174,9 +165,8 @@ export default {
       this.getTableData();
       console.log(`每页 ${val} 条`);
       this.$nextTick(() =>{
-        //你的代码部分
-        this.height = this.$refs.table1.$el.clientHeight;
-        console.log('hhh',this.height)
+        this.$store.commit('updateTableHeight', this.$refs.table1.clientHeight)
+        // console.log('hhh',this.$refs.table1.clientHeight)
       })
     },
     //换页
@@ -192,9 +182,8 @@ export default {
       console.log(startNum,endNum);
       console.log(`当前页: ${val}`);
       this.$nextTick(() =>{
-        //你的代码部分
-        this.height = this.$refs.table1.$el.clientHeight;
-        console.log('hhh',this.height)
+        this.$store.commit('updateTableHeight', this.$refs.table1.clientHeight)
+        // console.log('hhh',this.$refs.table1.clientHeight)
       })
     }
   }

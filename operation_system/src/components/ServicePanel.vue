@@ -110,33 +110,14 @@ export default {
             [224, 218, 135, 147, 224, 218, 135, 147, 150, 230, 218, 135]],
         },
       ],
-      // height: '',
     }
   },
   mounted() {
-    // this.handleScroll();
-    // window.onscroll = () => {
-    //   console.log(window.scrollY)
-    // }
     this.$nextTick(() =>{
-      //你的代码部分
-      // this.height = this.$refs.panel;
-      console.log('mmmm',this.$refs.s0[0].clientHeight)
+      this.$store.commit('updatePanelHeight', this.$refs.s0[0].clientHeight)
     })
   },
   methods: {
-    // getScroll(e) {
-    //   console.log(e)
-    // },
-    // handleScroll () {
-      // let scrollbarElement = this.$refs.scrollbar.wrap
-      // scrollbarElement.onscroll = () => {
-        // this.xAxisScrollTop = scrollbarElement.scrollTop
-        // this.xAxisScrollTop = 0 - this.xAxisScrollTop
-      //   console.log(scrollbarElement.scrollTop)
-      // }
-      // console.log(window.scrollY);
-    // },
   },
 }
 </script>

@@ -25,7 +25,7 @@ export default {
     alertEventTable,
     servicePanel,
     sideNavigationBar,
-  }
+  },
 }
 </script>
 
