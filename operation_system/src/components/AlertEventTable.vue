@@ -1,9 +1,9 @@
 <template>
-  <div>
-    <el-row>
+  <div ref="table1">
+    <el-row >
       <el-col :span="4" class="title"><i class="el-icon-bell"></i> 报警事件</el-col>
       <el-col>
-        <el-table :data="tableData" :header-cell-style="headerStyle" class="alertTable">
+        <el-table :data="tableData" :header-cell-style="headerStyle" class="alertTable" >
           <el-table-column label="报警事件" prop="event"></el-table-column>
           <el-table-column label="报警时间" prop="time">
             <template slot-scope="scope">{{getDateFormat(scope.row.time)}}</template>
@@ -55,8 +55,8 @@ export default {
           time: 1660115767247,
           state: '持续',
           notificationMethod: '站内消息',
-          notificationObject: '',
-          timeSequence: '',
+          notificationObject: '盖聂',
+          timeSequence: '10min',
           level: '立即解决',
           type: 'danger',
         },
@@ -65,8 +65,8 @@ export default {
           time: 1650459600000,
           state: '关闭',
           notificationMethod: '站内消息',
-          notificationObject: '',
-          timeSequence: '',
+          notificationObject: '卫庄',
+          timeSequence: '20min',
           level: '稍后解决',
           type: 'warning',
         },
@@ -75,8 +75,8 @@ export default {
           time: 1650459600000,
           state: '关闭',
           notificationMethod: '站内消息',
-          notificationObject: '',
-          timeSequence: '',
+          notificationObject: '荆天明',
+          timeSequence: '30min',
           level: '持续关注',
           type: '',
         },
@@ -85,8 +85,8 @@ export default {
           time: 1650459600000,
           state: '持续',
           notificationMethod: '站内消息',
-          notificationObject: '',
-          timeSequence: '',
+          notificationObject: '高月',
+          timeSequence: '40min',
           level: '立即解决',
           type: 'danger',
         },
@@ -95,26 +95,38 @@ export default {
           time: 1650459600000,
           state: '关闭',
           notificationMethod: '站内消息',
-          notificationObject: '',
-          timeSequence: '',
+          notificationObject: '项少羽',
+          timeSequence: '50min',
           level: '持续关注',
           type: '',
         },
         {
           event:'CPU预警',
           time: 1650459600000,
-          state: '',
+          state: '关闭',
           notificationMethod: '站内消息',
-          notificationObject: '',
-          timeSequence: '',
+          notificationObject: '韩非',
+          timeSequence: '1h',
           level: '稍后解决',
           type: 'warning',
         },
       ],
       headerStyle: {'background':' #EBEEF5'},
+      height: '',
     }
   },
+  watch: {
+    // height() {
+    //   this.height = this.$refs.table1.$el.clientHeight;
+    //   console.log('高度：',this.height)
+    // }
+  },
   mounted() {
+    this.$nextTick(() =>{
+      //你的代码部分
+      this.height = this.$refs.table1;
+      console.log('hhh',this.$refs.table1.clientHeight)
+    })
   },
   created() {
     this.getTableData();
@@ -161,6 +173,11 @@ export default {
       this.pageInfo.pageSize = val;
       this.getTableData();
       console.log(`每页 ${val} 条`);
+      this.$nextTick(() =>{
+        //你的代码部分
+        this.height = this.$refs.table1.$el.clientHeight;
+        console.log('hhh',this.height)
+      })
     },
     //换页
     handleCurrentChange(val) {
@@ -174,6 +191,11 @@ export default {
       }
       console.log(startNum,endNum);
       console.log(`当前页: ${val}`);
+      this.$nextTick(() =>{
+        //你的代码部分
+        this.height = this.$refs.table1.$el.clientHeight;
+        console.log('hhh',this.height)
+      })
     }
   }
 }

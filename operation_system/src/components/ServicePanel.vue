@@ -1,6 +1,6 @@
 <template>
-  <div>
-    <div :id="index" class="servicePanel" v-for="(item, index) in servers" :key="index">
+  <div >
+    <div :id="index" class="servicePanel" v-for="(item, index) in servers" :key="index" :ref="'s'+index">
       <el-row>
         <el-col class="title"><i class="el-icon-notebook-2"></i> 服务器#{{ index + 1 }}</el-col>
       </el-row>
@@ -109,9 +109,35 @@ export default {
             [150, 230, 224, 218, 135, 147, 230, 224, 218, 135, 147, 260],
             [224, 218, 135, 147, 224, 218, 135, 147, 150, 230, 218, 135]],
         },
-      ]
+      ],
+      // height: '',
     }
-  }
+  },
+  mounted() {
+    // this.handleScroll();
+    // window.onscroll = () => {
+    //   console.log(window.scrollY)
+    // }
+    this.$nextTick(() =>{
+      //你的代码部分
+      // this.height = this.$refs.panel;
+      console.log('mmmm',this.$refs.s0[0].clientHeight)
+    })
+  },
+  methods: {
+    // getScroll(e) {
+    //   console.log(e)
+    // },
+    // handleScroll () {
+      // let scrollbarElement = this.$refs.scrollbar.wrap
+      // scrollbarElement.onscroll = () => {
+        // this.xAxisScrollTop = scrollbarElement.scrollTop
+        // this.xAxisScrollTop = 0 - this.xAxisScrollTop
+      //   console.log(scrollbarElement.scrollTop)
+      // }
+      // console.log(window.scrollY);
+    // },
+  },
 }
 </script>
 

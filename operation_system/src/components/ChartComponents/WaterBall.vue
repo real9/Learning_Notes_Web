@@ -52,6 +52,7 @@ export default {
   line-height: 16px;
   margin-top: 10px;
 }
+
 .outerBall{
   margin-top: 20px;
   position: relative;
