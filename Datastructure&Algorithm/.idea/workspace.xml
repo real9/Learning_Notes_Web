@@ -1,7 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="299e0749-8337-48ca-ae48-a901b964a4fb" name="Default Changelist" comment="击鼓传花" />
+    <list default="true" id="299e0749-8337-48ca-ae48-a901b964a4fb" name="Default Changelist" comment="击鼓传花">
+      <change afterPath="$PROJECT_DIR$/代码随想录/数组/704二分查找.js" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -32,12 +34,16 @@
     <property name="settings.editor.selected.configurable" value="preferences.pluginManager" />
     <property name="vue.rearranger.settings.migration" value="true" />
   </component>
-  <component name="RunManager">
+  <component name="RunManager" selected="Node.js.704二分查找.js">
+    <configuration name="704二分查找.js" type="NodeJSConfigurationType" temporary="true" nameIsGenerated="true" path-to-js-file="$PROJECT_DIR$/代码随想录/数组/704二分查找.js" working-dir="$PROJECT_DIR$/代码随想录/数组">
+      <method v="2" />
+    </configuration>
     <configuration name="queue.mjs" type="NodeJSConfigurationType" temporary="true" nameIsGenerated="true" path-to-js-file="$PROJECT_DIR$/Queue/queue.mjs" working-dir="$PROJECT_DIR$/Queue">
       <method v="2" />
     </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="Node.js.704二分查找.js" />
         <item itemvalue="Node.js.queue.mjs" />
       </list>
     </recent_temporary>
@@ -54,6 +60,7 @@
       <workItem from="1658377372265" duration="85000" />
       <workItem from="1658377461178" duration="62000" />
       <workItem from="1658993764654" duration="127000" />
+      <workItem from="1660383932220" duration="801000" />
     </task>
     <task id="LOCAL-00001" summary="栈，队列初始化">
       <created>1658300586362</created>
