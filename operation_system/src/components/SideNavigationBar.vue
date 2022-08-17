@@ -83,15 +83,15 @@ export default {
       e.target.className = 'active';
       //根据排他思想，运用姐妹节点
       //需要链表的思想
-      let pre = e.target.nextElementSibling;
+      let pre = e.target.previousElementSibling;
       while (pre){
         pre.className = '';
-        pre = pre.nextElementSibling;
+        pre = pre.previousElementSibling;
       }
-      let  suf = e.target.previousElementSibling;
+      let suf = e.target.nextElementSibling;
       while (suf){
         suf.className = '';
-        suf = suf.previousElementSibling;
+        suf = suf.nextElementSibling;
       }
     }
   }
