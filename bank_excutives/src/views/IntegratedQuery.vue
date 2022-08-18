@@ -80,7 +80,7 @@ a{
 .main{
   background-color: white;
   margin: 10px 30px;
-  padding: 30px 10px;
+  padding: 30px 20px;
 }
 .main .headGroup{
   display: flex;
@@ -101,6 +101,7 @@ a{
   width: 8em;
   margin-right: 10px;
   line-height: 2em;
+  border: 1px solid transparent;
 }
 .main .headGroup .headButtons .headButtonItem:hover{
   background-color: #D3002C;
@@ -115,6 +116,7 @@ a{
   line-height: 2em;
   background-color: #D3002C;
   color: white;
+  border: 1px solid #D3002C;
   border-radius: 3px;
   cursor: pointer;
 }
