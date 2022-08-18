@@ -10,21 +10,21 @@
         <el-form :model="candidateQueryForm" ref="candidateQueryForm" label-position="right" label-width="100px" size="small">
           <el-row>
             <el-col :span="8">
-              <el-form-item label="姓名">
+              <el-form-item label="姓名" prop="name">
                 <el-input v-model="candidateQueryForm.name" placeholder="请输入"></el-input>
               </el-form-item>
             </el-col>
             <el-col :span="8">
-              <el-form-item label="性别">
-                <el-radio-group size="small" v-model="candidateQueryForm.sex">
-                  <el-radio-button label="全部">全部</el-radio-button>
+              <el-form-item label="性别" prop="sex">
+                <el-radio-group size="small" v-model="candidateQueryForm.sex" class="radioButtonGroup">
+                  <el-radio-button label="全部" class="radioBtn">全部</el-radio-button>
                   <el-radio-button label="男">男</el-radio-button>
                   <el-radio-button label="女">女</el-radio-button>
                 </el-radio-group>
               </el-form-item>
             </el-col>
             <el-col :span="8">
-              <el-form-item label="政治面貌">
+              <el-form-item label="政治面貌" prop="politicalStatus">
                 <el-select v-model="candidateQueryForm.politicalStatus" placeholder="请选择">
                   <el-option v-for="item in politicalStatusCategories"
                              :key="item.index"
@@ -37,7 +37,7 @@
           </el-row>
           <el-row>
             <el-col :span="8">
-              <el-form-item label="学历">
+              <el-form-item label="学历" prop="academicDegree">
                 <el-select v-model="candidateQueryForm.academicDegree" placeholder="请选择">
                   <el-option v-for="item in academicDegreeCategories"
                              :key="item.index"
@@ -48,12 +48,12 @@
               </el-form-item>
             </el-col>
             <el-col :span="8">
-              <el-form-item label="籍贯">
+              <el-form-item label="籍贯" prop="nativePlace">
                 <el-input v-model="candidateQueryForm.nativePlace" placeholder="请输入"></el-input>
               </el-form-item>
             </el-col>
             <el-col :span="8">
-              <el-form-item label="出生日期">
+              <el-form-item label="出生日期" prop="birth">
                 <el-date-picker
                     v-model="candidateQueryForm.birth"
                     type="date"
@@ -65,7 +65,7 @@
           </el-row>
           <el-row>
             <el-col :span="8">
-              <el-form-item label="专业领域">
+              <el-form-item label="专业领域" prop="professionalField">
                 <el-select v-model="candidateQueryForm.professionalField" placeholder="请选择">
                   <el-option v-for="item in professionalFieldCategories"
                              :key="item.index"
@@ -76,12 +76,12 @@
               </el-form-item>
             </el-col>
             <el-col :span="8">
-              <el-form-item label="所属地域">
+              <el-form-item label="所属地域" prop="belongingRegion">
                 <el-input v-model="candidateQueryForm.belongingRegion" placeholder="请输入"></el-input>
               </el-form-item>
             </el-col>
             <el-col :span="8">
-              <el-form-item label="拟担任职位">
+              <el-form-item label="拟担任职位" prop="proposedPosition">
                 <el-select v-model="candidateQueryForm.proposedPosition" placeholder="请选择">
                   <el-option v-for="item in proposedPositionCategories"
                              :key="item.index"
@@ -94,7 +94,7 @@
           </el-row>
           <el-row>
             <el-col :span="8">
-              <el-form-item label="所属机构">
+              <el-form-item label="所属机构" prop="affiliatedOrganization">
                 <el-select v-model="candidateQueryForm.affiliatedOrganization" placeholder="请选择">
                   <el-option v-for="item in affiliatedOrganizationCategories"
                              :key="item.index"
@@ -105,7 +105,7 @@
               </el-form-item>
             </el-col>
             <el-col :span="8">
-              <el-form-item label="现任职级">
+              <el-form-item label="现任职级" prop="currentRank">
                 <el-select v-model="candidateQueryForm.currentRank" placeholder="请选择">
                   <el-option v-for="item in currentRankCategories"
                              :key="item.index"
@@ -116,7 +116,7 @@
               </el-form-item>
             </el-col>
             <el-col :span="8">
-              <el-form-item label="出库状态">
+              <el-form-item label="出库状态" prop="outboundStatus">
                 <el-select v-model="candidateQueryForm.outboundStatus" placeholder="请选择">
                   <el-option v-for="item in outboundStatusCategories"
                              :key="item.index"
@@ -128,12 +128,10 @@
             </el-col>
           </el-row>
           <el-row>
-<!--            <el-col :span="8" :offset="16">-->
               <el-form-item style="display: flex; justify-content: flex-end; width: 85vw">
-                <el-button type="primary" size="small" class="queryButton">查询</el-button>
-                <el-button size="small" class="resetButton">重置</el-button>
+                <el-button type="primary" size="small" class="queryButton" @click="handleQueryForm">查询</el-button>
+                <el-button size="small" class="resetButton" @click="resetForm('candidateQueryForm')">重置</el-button>
               </el-form-item>
-<!--            </el-col>-->
           </el-row>
         </el-form>
       </el-col>
@@ -193,7 +191,6 @@
       </el-col>
       <el-col :span="14">
         <div class="chartCard">
-<!--          <div class="chartTitle">menu1|menu2</div>-->
           <bar-chart style="width: 100%"></bar-chart>
         </div>
       </el-col>
@@ -458,6 +455,12 @@ export default {
     handleSelect(key){
       console.log(key);
     },
+    handleQueryForm(){
+      console.log(this.candidateQueryForm);
+    },
+    resetForm(formName){
+      this.$refs[formName].resetFields();
+    },
     handleCheck(row){
       console.log(row);
     },
@@ -500,9 +503,11 @@ form{
   margin-top: 1em;
   border-bottom: solid 1px #e6e6e6;
 }
+/*表单项*/
 .el-form-item--mini.el-form-item, .el-form-item--small.el-form-item{
   width: 25vw;
 }
+/*输入框*/
 /deep/ .el-input--small .el-input__inner{
   width: 16vw;
 }
