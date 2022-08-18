@@ -57,6 +57,7 @@
                 <el-date-picker
                     v-model="candidateQueryForm.birth"
                     type="date"
+                    popper-class="test"
                     placeholder="选择日期">
                 </el-date-picker>
               </el-form-item>
@@ -505,19 +506,57 @@ form{
 /deep/ .el-input--small .el-input__inner{
   width: 16vw;
 }
+/*按钮组*/
+/deep/ .el-radio-button__orig-radio:checked+.el-radio-button__inner{
+  background-color: #D3002C;
+  border-color: #D3002C;
+  width: 6vw !important;
+  box-shadow: -1px 0 0 0 #D3002C;
+}
+/deep/ .el-radio-button__orig-radio:checked+.el-radio-button__inner:hover{
+  color: white;
+  background-color: rgba(211, 0, 44, 0.8);
+}
+/deep/ .el-radio-button--small .el-radio-button__inner{
+  width: 5vw;
+}
+/deep/ .el-radio-button__inner:hover{
+  color: #D3002C;
+}
 .el-button--primary{
   background-color: #D3002C;
   border-color: #D3002C;
 }
+/*表单里面的两个按钮*/
 .queryButton:focus, .queryButton:hover{
   background-color: rgba(211, 0, 44, 0.8) !important;
   border-color: rgba(211, 0, 44, 0.8) !important;
+  color: white !important;
 }
 .resetButton:focus, .resetButton:hover{
   background-color: #EECAD2CC;
   border-color: #D3002C;
   color: #D3002C;
 }
+/*简历导出，图表导出两个按钮*/
+.el-button:focus, .el-button:hover{
+  background-color: #EECAD2CC;
+  border-color: #D3002C;
+  color: #D3002C;
+}
+/*输入框获取焦点后边框变色*/
+/deep/.el-input__inner:focus{
+  border-color: #D3002C;
+}
+/*选择框获取焦点时*/
+/deep/ .el-select .el-input.is-focus .el-input__inner{
+  border:1px solid #D3002C;
+}
+/*选择框选中选项的高亮*/
+.el-select-dropdown__item.selected{
+  color: #D3002C;
+}
+/*日期选择器的长度改变*/
 .el-date-editor.el-input, .el-date-editor.el-input__inner{
   width: inherit;
 }
@@ -541,10 +580,4 @@ form{
   border-radius: 3px;
   height: 500px;
 }
-/*.chartCard .chartTitle{*/
-/*  text-align: left;*/
-/*  margin-top: 1em;*/
-/*  margin-left: 1em;*/
-/*  margin-bottom: 0;*/
-/*}*/
 </style>
