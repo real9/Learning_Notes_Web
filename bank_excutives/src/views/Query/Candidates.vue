@@ -240,90 +240,8 @@ export default {
         currentRank: '',
         outboundStatus: '',
       },
-      politicalStatusCategories:[
-        {
-          index: '0',
-          label: '中共党员',
-        },
-        {
-          index: '1',
-          label: '中共预备党员',
-        },
-        {
-          index: '2',
-          label: '共青团员',
-        },
-        {
-          index: '3',
-          label: '民革党员',
-        },
-        {
-          index: '4',
-          label: '民盟盟员',
-        },
-        {
-          index: '5',
-          label: '民建会员',
-        },
-        {
-          index: '6',
-          label: '民进会员',
-        },
-        {
-          index: '7',
-          label: '农工党党员',
-        },
-        {
-          index: '8',
-          label: '致公党党员',
-        },
-        {
-          index: '9',
-          label: '九三学社社员',
-        },
-        {
-          index: '10',
-          label: '台盟盟员',
-        },
-        {
-          index: '11',
-          label: '无党派人士',
-        },
-        {
-          index: '12',
-          label: '群众',
-        },
-      ],
-      academicDegreeCategories:[
-        {
-          index: '0',
-          label: '小学',
-        },
-        {
-          index: '1',
-          label: '初中',
-        },
-        {
-          index: '2',
-          label: '高中',
-        },
-        {
-          index: '3',
-          label: '大专',
-        },
-        {
-          index: '4',
-          label: '本科',
-        },
-        {
-          index: '5',
-          label: '硕士',
-        },
-        {
-          index: '6',
-          label: '博士',
-        },
-      ],
+      politicalStatusCategories:[],
+      academicDegreeCategories:[],
       professionalFieldCategories:[
         {
           index: '0',
@@ -483,8 +401,25 @@ export default {
       // }
       // console.log(startNum,endNum);
       console.log(`当前页: ${val}`);
+    },
+    //获取“政治面貌”选项列表
+    getPoliticalStatusCategories() {
+      this.$store.dispatch('Candidates/getPoliticalStatusCategories')
+      .then( (res) => {
+        this.politicalStatusCategories = res.data;
+      })
+    },
+    getAcademicDegreeCategories() {
+      this.$store.dispatch('Candidates/getAcademicDegreeCategories')
+      .then( (res) => {
+        this.academicDegreeCategories = res.data;
+      })
     }
-  }
+  },
+  created() {
+    this.getPoliticalStatusCategories();
+    this.getAcademicDegreeCategories();
+  },
 }
 </script>
 
