@@ -19,7 +19,15 @@ const cities = ['北京', '天津', '河北', '山西', '内蒙古', '宁夏', '
         '山东', '江苏', '上海', '浙江', '安徽', '福建', '江西', '河南', '湖南', '湖北', '四川', '贵州', '云南', '重庆', '西藏',
         '广东', '广西', '海南', '香港', '澳门', '台湾']; // 34
 module.exports = () => {
-    const data = { qualifiedCandidates: [] };
+    const data = {
+        qualifiedCandidates: [],
+        politicalStatusCategories: [],
+        academicDegreeCategories: [],
+        professionalField: [],
+        proposedPosition: [],
+        currentRank: [],
+        affiliatedOrganization: []
+    };
     for (let i = 0; i < 100; i ++){
         let rn1 = Math.floor(Math.random()*40);
         let rn2 = Math.floor(Math.random()*30);
@@ -52,6 +60,7 @@ module.exports = () => {
             numberOfMatchingPosts: rn8,
             currentPosition: '职位' + rn3 % 2,
             ageStructure: '年龄段' + rn1 % 10,
+            //type是合格人选类型
             type: rn1 % 4,
         });
         data.qualifiedCandidates.push({
@@ -73,6 +82,91 @@ module.exports = () => {
             currentPosition: '职位' + rn4 % 2,
             ageStructure: '年龄段' + rn5 % 10,
             type: rn5 % 4,
+        })
+    }
+    data.politicalStatusCategories = [
+        {
+            index: "0",
+            label: "中共党员"
+        },
+        {
+            index: "1",
+            label: "中共预备党员"
+        },
+        {
+            index: "2",
+            label: "共青团员"
+        },
+        {
+            index: "3",
+            label: "民革党员"
+        },
+        {
+            index: "4",
+            label: "民盟盟员"
+        },
+        {
+            index: "5",
+            label: "民建会员"
+        },
+        {
+            index: "6",
+            label: "民进会员"
+        },
+        {
+            index: "7",
+            label: "农工党党员"
+        },
+        {
+            index: "8",
+            label: "致公党党员"
+        },
+        {
+            index: "9",
+            label: "九三学社社员"
+        },
+        {
+            index: "10",
+            label: "台盟盟员"
+        },
+        {
+            index: "11",
+            label: "无党派人士"
+        },
+        {
+            index: "12",
+            label: "群众"
+        }
+    ];
+    data.academicDegreeCategories = [
+        {index: "0", label: "小学"},
+        {index: "1", label: "初中"},
+        {index: "2", label: "高中"},
+        {index: "3", label: "大专"},
+        {index: "4", label: "本科"},
+        {index: "5", label: "硕士"},
+        {index: "6", label: "博士"}
+    ];
+    for(let i = 0; i < 8; i ++){
+        data.professionalField.push({
+            index: i,
+            label: '科' + i,
+        })
+    }
+    for (let i = 0; i < 10; i++){
+        data.proposedPosition.push({
+            index: i,
+            label: '职位' + i,
+        })
+        data.currentRank.push({
+            index: i,
+            label: "现任职级" + i,
+        })
+    }
+    for (let i = 0; i < 30; i ++){
+        data.affiliatedOrganization.push({
+            index: i,
+            label: bankName[i],
         })
     }
     return data;

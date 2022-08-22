@@ -175,7 +175,7 @@
       </el-col>
       <el-col>
         <el-menu :default-active="activeQueryModeIndex" class="el-menu-demo" mode="horizontal" @select="handleSelect" active-text-color="#D3002C">
-          <el-menu-item v-for="item in queryMode" :index="item.index" :key="item.index">{{ item.label }}</el-menu-item>
+          <el-menu-item v-for="item in chartQueryMode" :index="item.index" :key="item.index">{{ item.label }}</el-menu-item>
         </el-menu>
       </el-col>
       <el-col style="width: 85vw;display: flex; justify-content: flex-end">
@@ -207,22 +207,22 @@ export default {
   },
   data() {
     return{
-      activeIndex: '1',
+      activeIndex: '0',
       candidatesCategoryMenu:[
         {
-          index: '1',
+          index: '0',
           text:'大中型银行高管合格人选',
         },
         {
-          index: '2',
+          index: '1',
           text:'外资银行高管人员合格人选',
         },
         {
-          index: '3',
+          index: '2',
           text:'独立董事合格人选',
         },
         {
-          index: '4',
+          index: '3',
           text:'外部监事合格人选',
         },
       ],
@@ -242,62 +242,10 @@ export default {
       },
       politicalStatusCategories:[],
       academicDegreeCategories:[],
-      professionalFieldCategories:[
-        {
-          index: '0',
-          label: '理科',
-        },
-        {
-          index: '1',
-          label: '工科',
-        },
-        {
-          index: '2',
-          label: '文科',
-        },
-      ],
-      proposedPositionCategories:[
-        {
-          index: '0',
-          label: '职位0',
-        },
-        {
-          index: '1',
-          label: '职位1',
-        },
-        {
-          index: '2',
-          label: '职位2',
-        },
-      ],
-      affiliatedOrganizationCategories:[
-        {
-          index: '0',
-          label: '机构0',
-        },
-        {
-          index: '1',
-          label: '机构1',
-        },
-        {
-          index: '2',
-          label: '机构2',
-        },
-      ],
-      currentRankCategories:[
-        {
-          index: '0',
-          label: '现任职级0',
-        },
-        {
-          index: '1',
-          label: '现任职级1',
-        },
-        {
-          index: '2',
-          label: '现任职级2',
-        },
-      ],
+      professionalFieldCategories:[],
+      proposedPositionCategories:[],
+      affiliatedOrganizationCategories:[],
+      currentRankCategories:[],
       outboundStatusCategories:[
         {
           index: '0',
@@ -317,15 +265,15 @@ export default {
         color: '#303133',
     },
       queryDataByForm: [
-        {
-          name:'张三',
-          sex: '',
-          nationality: '',
-          professionalField: '',
-          currentPosition: '',
-          affiliatedOrganization: '',
-          numberOfMatchingPosts: 3,
-        }
+        // {
+        //   name:'张三',
+        //   sex: '',
+        //   nationality: '',
+        //   professionalField: '',
+        //   currentPosition: '',
+        //   affiliatedOrganization: '',
+        //   numberOfMatchingPosts: 3,
+        // }
       ],
       pageInfo:{
         currentPage: 1,
@@ -333,7 +281,7 @@ export default {
         pageSize: 5,
       },
       activeQueryModeIndex: 'affiliatedOrganizationCategories',
-      queryMode: [
+      chartQueryMode: [
         {
           index: 'affiliatedOrganizationCategories',
           label: '按机构',
@@ -385,22 +333,14 @@ export default {
     //页面尺寸
     handleSizeChange(val) {
       //回到第一页
-      // this.pageInfo.currentPage = 1;
-      // this.pageInfo.pageSize = val;
-      console.log(`每页 ${val} 条`);
+      this.pageInfo.currentPage = 1;
+      this.pageInfo.pageSize = val;
+      this.getCandidatesData();
     },
     //换页
     handleCurrentChange(val) {
-      // this.tableData = [];
-      // this.pageInfo.currentPage = val;
-      // // let len = this.alertEventData.length;
-      // let startNum = (val - 1) * this.pageInfo.pageSize;
-      // let endNum = len < val * this.pageInfo.pageSize ? len : val * this.pageInfo.pageSize;
-      // for(let i = startNum; i < endNum; i ++){
-      //   this.tableData.push(this.alertEventData[i]);
-      // }
-      // console.log(startNum,endNum);
-      console.log(`当前页: ${val}`);
+      this.pageInfo.currentPage = val;
+      this.getCandidatesData();
     },
     //获取“政治面貌”选项列表
     getPoliticalStatusCategories() {
@@ -409,16 +349,57 @@ export default {
         this.politicalStatusCategories = res.data;
       })
     },
+    //学历
     getAcademicDegreeCategories() {
       this.$store.dispatch('Candidates/getAcademicDegreeCategories')
       .then( (res) => {
         this.academicDegreeCategories = res.data;
       })
-    }
+    },
+    //专业领域
+    getProfessionalFieldCategories() {
+      this.$store.dispatch('Candidates/getProfessionalFieldCategories')
+          .then( (res) => {
+            this.professionalFieldCategories = res.data;
+          })
+    },
+    //拟任职位
+    getProposedPositionCategories(){
+      this.$store.dispatch('Candidates/getProposedPositionCategories')
+          .then( (res) => {
+            this.proposedPositionCategories = res.data;
+          })
+    },
+    //所属机构
+    getAffiliatedOrganizationCategories(){
+      this.$store.dispatch('Candidates/getAffiliatedOrganizationCategories')
+          .then( (res) => {
+            this.affiliatedOrganizationCategories = res.data;
+          })
+    },
+    //现任职级
+    getCurrentRankCategories(){
+      this.$store.dispatch('Candidates/getCurrentRankCategories')
+          .then( (res) => {
+            this.currentRankCategories = res.data;
+          })
+    },
+    getCandidatesData(){
+      this.$store.dispatch('Candidates/getCandidatesData', this.pageInfo)
+          .then( (res) => {
+            this.queryDataByForm = res.data;
+            this.pageInfo.total = parseInt(res.headers["x-total-count"]);
+          })
+    },
   },
   created() {
     this.getPoliticalStatusCategories();
     this.getAcademicDegreeCategories();
+    this.getProfessionalFieldCategories();
+    this.getProposedPositionCategories();
+    this.getAffiliatedOrganizationCategories();
+    this.getCurrentRankCategories();
+    this.getCandidatesData();
   },
 }
 </script>
@@ -504,6 +485,7 @@ form{
   margin-top: 1em;
   margin-bottom: 1em;
 }
+/*分页*/
 .el-pagination{
   margin-bottom: 2em;
 }
@@ -513,6 +495,16 @@ form{
   border-color: black;
   width: 28px;
 }
+/deep/ .el-pager li:hover{
+  color: #D3002C;
+}
+/deep/ .el-pagination button:hover{
+  color: #D3002C;
+}
+/deep/ .el-pagination__sizes .el-input .el-input__inner:hover{
+  border-color: #D3002C;
+}
+/*charts*/
 .chartCard{
   margin-top: 1em;
   margin-left: 2em;
