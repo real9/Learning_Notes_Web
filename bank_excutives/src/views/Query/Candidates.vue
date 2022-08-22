@@ -17,7 +17,7 @@
             <el-col :span="8">
               <el-form-item label="性别" prop="sex">
                 <el-radio-group size="small" v-model="candidateQueryForm.sex" class="radioButtonGroup">
-                  <el-radio-button label="全部" class="radioBtn">全部</el-radio-button>
+                  <el-radio-button :label="null" class="radioBtn">全部</el-radio-button>
                   <el-radio-button label="男">男</el-radio-button>
                   <el-radio-button label="女">女</el-radio-button>
                 </el-radio-group>
@@ -29,7 +29,7 @@
                   <el-option v-for="item in politicalStatusCategories"
                              :key="item.index"
                              :label="item.label"
-                             :value="item.index">
+                             :value="item.label">
                   </el-option>
                 </el-select>
               </el-form-item>
@@ -42,7 +42,7 @@
                   <el-option v-for="item in academicDegreeCategories"
                              :key="item.index"
                              :label="item.label"
-                             :value="item.index">
+                             :value="item.label">
                   </el-option>
                 </el-select>
               </el-form-item>
@@ -58,7 +58,9 @@
                     v-model="candidateQueryForm.birth"
                     type="date"
                     popper-class="test"
-                    placeholder="选择日期">
+                    placeholder="选择日期"
+                    format="yyyy 年 MM 月 dd 日"
+                    value-format="yyyy-MM-dd">
                 </el-date-picker>
               </el-form-item>
             </el-col>
@@ -70,7 +72,7 @@
                   <el-option v-for="item in professionalFieldCategories"
                              :key="item.index"
                              :label="item.label"
-                             :value="item.index">
+                             :value="item.label">
                   </el-option>
                 </el-select>
               </el-form-item>
@@ -86,7 +88,7 @@
                   <el-option v-for="item in proposedPositionCategories"
                              :key="item.index"
                              :label="item.label"
-                             :value="item.index">
+                             :value="item.label">
                   </el-option>
                 </el-select>
               </el-form-item>
@@ -99,7 +101,7 @@
                   <el-option v-for="item in affiliatedOrganizationCategories"
                              :key="item.index"
                              :label="item.label"
-                             :value="item.index">
+                             :value="item.label">
                   </el-option>
                 </el-select>
               </el-form-item>
@@ -110,7 +112,7 @@
                   <el-option v-for="item in currentRankCategories"
                              :key="item.index"
                              :label="item.label"
-                             :value="item.index">
+                             :value="item.label">
                   </el-option>
                 </el-select>
               </el-form-item>
@@ -121,7 +123,7 @@
                   <el-option v-for="item in outboundStatusCategories"
                              :key="item.index"
                              :label="item.label"
-                             :value="item.index">
+                             :value="item.label">
                   </el-option>
                 </el-select>
               </el-form-item>
@@ -129,6 +131,9 @@
           </el-row>
           <el-row>
               <el-form-item style="display: flex; justify-content: flex-end; width: 85vw">
+                <el-tooltip class="item" effect="dark" content="若无数据，可点击“重置”按钮" placement="left">
+                  <i class="el-icon-warning-outline" style="margin-right: 10px"></i>
+                </el-tooltip>
                 <el-button type="primary" size="small" class="queryButton" @click="handleQueryForm">查询</el-button>
                 <el-button size="small" class="resetButton" @click="resetForm('candidateQueryForm')">重置</el-button>
               </el-form-item>
@@ -207,6 +212,7 @@ export default {
   },
   data() {
     return{
+      //合格人选类别
       activeIndex: '0',
       candidatesCategoryMenu:[
         {
@@ -226,20 +232,22 @@ export default {
           text:'外部监事合格人选',
         },
       ],
+      //查询表单
       candidateQueryForm:{
-        name: '',
-        sex: '全部',
-        politicalStatus: '',
-        academicDegree: '',
-        nativePlace: '',
-        birth: '',
-        professionalField: '',
-        belongingRegion: '',
-        proposedPosition: '',
-        affiliatedOrganization: '',
-        currentRank: '',
-        outboundStatus: '',
+        name: null,
+        sex: null,
+        politicalStatus: null,
+        academicDegree: null,
+        nativePlace: null,
+        birth: null,
+        professionalField: null,
+        belongingRegion: null,
+        proposedPosition: null,
+        affiliatedOrganization: null,
+        currentRank: null,
+        outboundStatus: null,
       },
+      //选择器下拉菜单内容
       politicalStatusCategories:[],
       academicDegreeCategories:[],
       professionalFieldCategories:[],
@@ -260,26 +268,20 @@ export default {
           label: '状态2',
         },
       ],
+      //样式
       header_cell_style:{
         'background-color': '#F4F4F5',
         color: '#303133',
     },
-      queryDataByForm: [
-        // {
-        //   name:'张三',
-        //   sex: '',
-        //   nationality: '',
-        //   professionalField: '',
-        //   currentPosition: '',
-        //   affiliatedOrganization: '',
-        //   numberOfMatchingPosts: 3,
-        // }
-      ],
+      //表格数据
+      queryDataByForm: [],
+      //分页
       pageInfo:{
         currentPage: 1,
         total: 0,
         pageSize: 5,
       },
+      //按xx查询渲染表格和chart
       activeQueryModeIndex: 'affiliatedOrganizationCategories',
       chartQueryMode: [
         {
@@ -314,18 +316,24 @@ export default {
           index: 'region',
           label: '按地域',
         },
-      ]
+      ],
+      //请求参数
+      queryParams: {},
     }
   },
   methods: {
     handleSelect(key){
+      this.activeIndex = key;
+      this.getCandidatesData();
       console.log(key);
     },
     handleQueryForm(){
+      this.getCandidatesData();
       console.log(this.candidateQueryForm);
     },
     resetForm(formName){
       this.$refs[formName].resetFields();
+      this.getCandidatesData();
     },
     handleCheck(row){
       console.log(row);
@@ -385,7 +393,12 @@ export default {
           })
     },
     getCandidatesData(){
-      this.$store.dispatch('Candidates/getCandidatesData', this.pageInfo)
+      this.queryParams = {
+        ...this.pageInfo,
+        ...this.candidateQueryForm,
+        type: this.activeIndex
+      };
+      this.$store.dispatch('Candidates/getCandidatesData', this.queryParams)
           .then( (res) => {
             this.queryDataByForm = res.data;
             this.pageInfo.total = parseInt(res.headers["x-total-count"]);
@@ -447,6 +460,10 @@ form{
 .el-button--primary{
   background-color: #D3002C;
   border-color: #D3002C;
+}
+/deep/ .el-button--text,.el-button--text:hover{
+  border: unset;
+  background: transparent!important;
 }
 /*表单里面的两个按钮*/
 .queryButton:focus, .queryButton:hover{

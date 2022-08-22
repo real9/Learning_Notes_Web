@@ -11,9 +11,22 @@ const actions = {
                 params: {
                     _page: data.currentPage,
                     _limit: data.pageSize,
-                    type: 0,
+                    type: data.type,
                     _sort: 'numberOfMatchingPosts',
-                    _order: 'desc'
+                    _order: 'desc',
+                    //姓名是模糊搜索
+                    name_like: data.name,
+                    sex: data.sex,
+                    politicalStatus: data.politicalStatus,
+                    academicDegree: data.academicDegree,
+                    nativePlace: data.nativePlace,
+                    birth: data.birth,
+                    professionalField: data.professionalField,
+                    belongingRegion: data.belongingRegion,
+                    proposedPosition: data.proposedPosition,
+                    affiliatedOrganization: data.affiliatedOrganization,
+                    currentRank: data.currentRank,
+                    outboundStatus: data.outboundStatus,
                 }
             })
                 .then((response) => {
