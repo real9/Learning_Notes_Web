@@ -3,6 +3,7 @@ import axios from 'axios'
 // Vue.prototype.$axios = axios
 
 const actions = {
+    //候选人（页面上半部分）
     getCandidatesData( _, data ){
         return new Promise((resolve, reject) => {
             axios({
@@ -40,7 +41,7 @@ const actions = {
     getPoliticalStatusCategories() {
         return new Promise((resolve, reject) => {
             axios({
-                url: 'http://localhost:3000/politicalStatusCategories',
+                url: 'http://localhost:3000/politicalStatus',
                 method: 'get'
             })
                 .then((response) => {
@@ -54,7 +55,7 @@ const actions = {
     getAcademicDegreeCategories(){
         return new Promise((resolve, reject) => {
             axios({
-                url: 'http://localhost:3000/academicDegreeCategories',
+                url: 'http://localhost:3000/academicDegree',
                 method: 'get'
             })
                 .then((response) => {
@@ -120,7 +121,135 @@ const actions = {
                     reject(error)
                 })
         })
+    },
+
+//    页面下半部分
+    getChartQueryModeTableData(_, data) {
+        let res = [];
+        if (data.division === 'affiliatedOrganization'){
+            for (let i = 0; i < 30; i++) {
+                axios({
+                    url: `http://localhost:3000/${data.division}/${i}/qualifiedCandidates?type=${data.type}`,
+                    method: 'get'
+                })
+                    .then((response) => {
+                        if (response.data.length !== 0){
+                            res.push({
+                                item: response.data[0].affiliatedOrganization,
+                                num: response.data.length
+                            })
+                        }
+                    })
+            }
+        } else if(data.division === 'politicalStatus'){
+            for (let i = 0; i < 13; i++) {
+                axios({
+                    url: `http://localhost:3000/${data.division}/${i}/qualifiedCandidates?type=${data.type}`,
+                    method: 'get'
+                })
+                    .then((response) => {
+                        if (response.data.length !== 0){
+                            res.push({
+                                item: response.data[0].politicalStatus,
+                                num: response.data.length
+                            })
+                        }
+                    })
+            }
+        } else if (data.division === 'currentPosition'){
+            for (let i = 0; i < 2; i++) {
+                axios({
+                    url: `http://localhost:3000/${data.division}/${i}/qualifiedCandidates?type=${data.type}`,
+                    method: 'get'
+                })
+                    .then((response) => {
+                        if (response.data.length !== 0){
+                            res.push({
+                                item: response.data[0].currentPosition,
+                                num: response.data.length
+                            })
+                        }
+                    })
+            }
+        } else if (data.division === 'belongingRegion'){
+            for (let i = 0; i < 34; i++) {
+                axios({
+                    url: `http://localhost:3000/${data.division}/${i}/qualifiedCandidates?type=${data.type}`,
+                    method: 'get'
+                })
+                    .then((response) => {
+                        if (response.data.length !== 0){
+                            res.push({
+                                item: response.data[0].belongingRegion,
+                                num: response.data.length
+                            })
+                        }
+                    })
+            }
+        } else if( data.division ==='proposedPosition'){
+            for (let i = 0; i < 10; i++) {
+                axios({
+                    url: `http://localhost:3000/${data.division}/${i}/qualifiedCandidates?type=${data.type}`,
+                    method: 'get'
+                })
+                    .then((response) => {
+                        if (response.data.length !== 0){
+                            res.push({
+                                item: response.data[0].proposedPosition,
+                                num: response.data.length
+                            })
+                        }
+                    })
+            }
+        }else if( data.division ==='currentRank'){
+            for (let i = 0; i < 10; i++) {
+                axios({
+                    url: `http://localhost:3000/${data.division}/${i}/qualifiedCandidates?type=${data.type}`,
+                    method: 'get'
+                })
+                    .then((response) => {
+                        if (response.data.length !== 0){
+                            res.push({
+                                item: response.data[0].currentRank,
+                                num: response.data.length
+                            })
+                        }
+                    })
+            }
+        }else if( data.division ==='professionalField'){
+            for (let i = 0; i < 8; i++) {
+                axios({
+                    url: `http://localhost:3000/${data.division}/${i}/qualifiedCandidates?type=${data.type}`,
+                    method: 'get'
+                })
+                    .then((response) => {
+                        if (response.data.length !== 0){
+                            res.push({
+                                item: response.data[0].professionalField,
+                                num: response.data.length
+                            })
+                        }
+                    })
+            }
+        }else if( data.division ==='ageStructure'){
+            for (let i = 0; i < 10; i++) {
+                axios({
+                    url: `http://localhost:3000/${data.division}/${i}/qualifiedCandidates?type=${data.type}`,
+                    method: 'get'
+                })
+                    .then((response) => {
+                        if (response.data.length !== 0){
+                            res.push({
+                                item: response.data[0].ageStructure,
+                                num: response.data.length
+                            })
+                        }
+                    })
+            }
+        }
+        return res;
     }
+
 }
 
 export default {

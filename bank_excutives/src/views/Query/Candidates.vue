@@ -2,7 +2,7 @@
   <div>
     <el-row>
       <el-col>
-        <el-menu :default-active="activeIndex" class="el-menu-demo" mode="horizontal" @select="handleSelect" active-text-color="#D3002C">
+        <el-menu :default-active="activeIndex" class="el-menu-demo" mode="horizontal" @select="handleCandidatesCategoryMenuSelect" active-text-color="#D3002C">
           <el-menu-item v-for="item in candidatesCategoryMenu" :index="item.index" :key="item.index">{{ item.text }}</el-menu-item>
         </el-menu>
       </el-col>
@@ -179,7 +179,7 @@
         </el-pagination>
       </el-col>
       <el-col>
-        <el-menu :default-active="activeQueryModeIndex" class="el-menu-demo" mode="horizontal" @select="handleSelect" active-text-color="#D3002C">
+        <el-menu :default-active="activeQueryModeIndex" class="el-menu-demo" mode="horizontal" @select="handleChartQueryModeSelect" active-text-color="#D3002C">
           <el-menu-item v-for="item in chartQueryMode" :index="item.index" :key="item.index">{{ item.label }}</el-menu-item>
         </el-menu>
       </el-col>
@@ -187,11 +187,12 @@
         <el-button size="small" style="margin-top: 1em">图表导出</el-button>
       </el-col>
       <el-col :span="10">
-        <el-table :header-cell-style="header_cell_style">
-          <el-table-column prop="" label="序号"></el-table-column>
-          <el-table-column prop="" label="机构"></el-table-column>
-          <el-table-column prop="" label="人数"></el-table-column>
-          <el-table-column prop="" label="占比"></el-table-column>
+        <el-table :header-cell-style="header_cell_style" :summary-method="getSummaries"
+                  show-summary :data="chartQueryModeTableData">
+          <el-table-column label="序号" type="index"></el-table-column>
+          <el-table-column prop="item" :label="chartQueryModeName"></el-table-column>
+          <el-table-column prop="num" label="人数" sortable></el-table-column>
+          <el-table-column prop="percentage" label="占比"></el-table-column>
         </el-table>
       </el-col>
       <el-col :span="14">
@@ -282,22 +283,22 @@ export default {
         pageSize: 5,
       },
       //按xx查询渲染表格和chart
-      activeQueryModeIndex: 'affiliatedOrganizationCategories',
+      activeQueryModeIndex: 'affiliatedOrganization',
       chartQueryMode: [
         {
-          index: 'affiliatedOrganizationCategories',
+          index: 'affiliatedOrganization',
           label: '按机构',
         },
         {
-          index: 'politicalStatusCategories',
+          index: 'politicalStatus',
           label: '按政治面貌',
         },
         {
-          index: 'proposedPositionCategories',
+          index: 'proposedPosition',
           label: '按拟任职位',
         },
         {
-          index: 'currentRankCategories',
+          index: 'currentRank',
           label: '按现任职级',
         },
         {
@@ -305,36 +306,56 @@ export default {
           label: '按历任职位',
         },
         {
-          index: 'professionalFieldCategories',
+          index: 'professionalField',
           label: '按专业领域',
         },
         {
-          index: 'age',
+          index: 'ageStructure',
           label: '按年龄结构',
         },
         {
-          index: 'region',
+          index: 'belongingRegion',
           label: '按地域',
         },
       ],
+      //第二个表格
+      chartQueryModeName: '机构',
+      chartQueryModeTableData:[],
       //请求参数
       queryParams: {},
+    //  第二个表格的请求参数
+      modeParams: {},
     }
   },
   methods: {
-    handleSelect(key){
+    //第一个菜单选择，合格人选的类别
+    handleCandidatesCategoryMenuSelect(key){
       this.activeIndex = key;
       this.getCandidatesData();
       console.log(key);
     },
+    //第二个菜单选择，按xx划分
+    handleChartQueryModeSelect(key){
+      this.activeQueryModeIndex = key;
+      //处理表头名称
+      this.chartQueryMode.forEach((item) => {
+        if(item.index === key){
+          this.chartQueryModeName = item.label.slice(1);
+        }
+      })
+      this.getChartQueryModeTableData();
+    },
+    //查询
     handleQueryForm(){
       this.getCandidatesData();
       console.log(this.candidateQueryForm);
     },
+    //重置
     resetForm(formName){
       this.$refs[formName].resetFields();
       this.getCandidatesData();
     },
+    //“查看"按钮
     handleCheck(row){
       console.log(row);
     },
@@ -404,15 +425,58 @@ export default {
             this.pageInfo.total = parseInt(res.headers["x-total-count"]);
           })
     },
+    //总计
+    getSummaries(param){
+      const { columns } = param;
+      const sums = [];
+      columns.forEach((column, index) => {
+        if (index === 0) {
+          sums[index] = '总计';
+          return;
+        } else if (index === 1) {
+          sums[index] = this.chartQueryModeTableData.length;
+        } else if (index === 2) {
+          sums[index] = this.pageInfo.total;
+        }
+        //   const values = data.map(item => Number(item[column.property]));
+        //   if (!values.every(value => isNaN(value))) {
+        //     sums[index] = values.reduce((prev, curr) => {
+        //       const value = Number(curr);
+        //       if (!isNaN(value)) {
+        //         return prev + curr;
+        //       } else {
+        //         return prev;
+        //       }
+        //     }, 0);
+        //   } else {
+        //     sums[index] = '';
+        //   }
+        // });
+      })
+      return sums;
+    },
+    getChartQueryModeTableData(){
+      this.modeParams.type = this.activeIndex;
+      this.modeParams.division = this.activeQueryModeIndex;
+      this.$store.dispatch('Candidates/getChartQueryModeTableData', this.modeParams)
+          .then((res) => {
+            this.chartQueryModeTableData = res;
+            console.log(res);
+          })
+    },
   },
   created() {
+    //选择器下拉菜单数据
     this.getPoliticalStatusCategories();
     this.getAcademicDegreeCategories();
     this.getProfessionalFieldCategories();
     this.getProposedPositionCategories();
     this.getAffiliatedOrganizationCategories();
     this.getCurrentRankCategories();
+    //第一个表格数据
     this.getCandidatesData();
+  //  第二个表格数据
+    this.getChartQueryModeTableData();
   },
 }
 </script>
@@ -528,5 +592,9 @@ form{
   border: solid 1px #e6e6e6;
   border-radius: 3px;
   height: 500px;
+}
+/*表格底行*/
+/deep/ .el-table__footer-wrapper tbody td.el-table__cell{
+  background-color: #F4F4F5;
 }
 </style>

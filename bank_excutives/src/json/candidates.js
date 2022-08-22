@@ -13,7 +13,7 @@ const bankName = ['中国工商银行', '招商银行', '中国农业银行', '�
     '中国银行香港分行', '北京银行', '北京农村商业银行', '天津银行', '上海银行', '上海农村商业银行', '南京银行', '宁波银行',
     '杭州市商业银行', '深圳平安银行', '深圳农村商业银行']; // 30
 const gender = ['男','女'];
-const politicalStatus = ['中共党员', '中共预备党员', '共青团员', '民革党员', '民盟盟员', '民建会员', '民进会员', '农工党党员',
+const politicalStatuses = ['中共党员', '中共预备党员', '共青团员', '民革党员', '民盟盟员', '民建会员', '民进会员', '农工党党员',
     '致公党党员', '九三学社社员', '台盟盟员', '无党派人士', '群众']; // 13
 const cities = ['北京', '天津', '河北', '山西', '内蒙古', '宁夏', '青海', '陕西', '甘肃', '新疆', '辽宁', '吉林', '黑龙江',
         '山东', '江苏', '上海', '浙江', '安徽', '福建', '江西', '河南', '湖南', '湖北', '四川', '贵州', '云南', '重庆', '西藏',
@@ -21,12 +21,15 @@ const cities = ['北京', '天津', '河北', '山西', '内蒙古', '宁夏', '
 module.exports = () => {
     const data = {
         qualifiedCandidates: [],
-        politicalStatusCategories: [],
-        academicDegreeCategories: [],
+        politicalStatus: [],
+        academicDegree: [],
         professionalField: [],
         proposedPosition: [],
         currentRank: [],
-        affiliatedOrganization: []
+        affiliatedOrganization: [],
+        currentPosition: [],
+        belongingRegion: [],
+        ageStructure: [],
     };
     for (let i = 0; i < 100; i ++){
         let rn1 = Math.floor(Math.random()*40);
@@ -46,20 +49,28 @@ module.exports = () => {
             id: i + 100,
             name: familyName[rn1] + midName[rn2] + lastName[rn3],
             sex: gender[rn1 % 2],
-            politicalStatus: politicalStatus[rn8],
+            politicalStatus: politicalStatuses[rn8],
+            politicalStatusId: rn8,
             academicDegree: '本科',
             nativePlace: cities[rn9],
             birth: '1977-09-10',
             professionalField: '科' + rn1 % 8,
+            professionalFieldId: rn1%8,
             belongingRegion: cities[rn9],
+            belongingRegionId: rn9,
             proposedPosition: '职位' + rn2 % 10,
+            proposedPositionId: rn2 % 10,
             affiliatedOrganization: bankName[rn4],
+            affiliatedOrganizationId: rn4,
             currentRank: '现任职级' + rn9 % 10,
+            currentRankId: rn9%10,
             outboundStatus: '状态2',
             nationality: '中国',
             numberOfMatchingPosts: rn8,
             currentPosition: '职位' + rn3 % 2,
+            currentPositionId: rn3%2,
             ageStructure: '年龄段' + rn1 % 10,
+            ageStructureId: rn1%10,
             //type是合格人选类型
             type: rn1 % 4,
         });
@@ -67,24 +78,32 @@ module.exports = () => {
             id: i + 200,
             name: familyName[rn5] + lastName[rn6],
             sex: gender[rn5 % 2],
-            politicalStatus: politicalStatus[rn8],
+            politicalStatus: politicalStatuses[rn8],
+            politicalStatusId: rn8,
             academicDegree: '硕士',
             nativePlace: cities[rn10],
             birth: '1991-08-01',
             professionalField: '科' + rn5 % 8,
+            professionalFieldId: rn5%8,
             belongingRegion: cities[rn10],
+            belongingRegionId: rn10,
             proposedPosition: '职位' + rn6 % 10,
+            proposedPositionId: rn6 % 10,
             affiliatedOrganization: bankName[rn7],
+            affiliatedOrganizationId: rn7,
             currentRank: '现任职级' + rn10 % 10,
+            currentRankId: rn10%10,
             outboundStatus: '状态0',
             nationality: '中国',
             numberOfMatchingPosts: rn8,
             currentPosition: '职位' + rn4 % 2,
+            currentPositionId: rn4%2,
             ageStructure: '年龄段' + rn5 % 10,
+            ageStructureId: rn5%10,
             type: rn5 % 4,
         })
     }
-    data.politicalStatusCategories = [
+    data.politicalStatus = [
         {
             index: "0",
             label: "中共党员"
@@ -138,7 +157,7 @@ module.exports = () => {
             label: "群众"
         }
     ];
-    data.academicDegreeCategories = [
+    data.academicDegree = [
         {index: "0", label: "小学"},
         {index: "1", label: "初中"},
         {index: "2", label: "高中"},
@@ -162,11 +181,27 @@ module.exports = () => {
             index: i,
             label: "现任职级" + i,
         })
+        data.ageStructure.push({
+            index: i,
+            label: "年龄段" + i,
+        })
     }
     for (let i = 0; i < 30; i ++){
         data.affiliatedOrganization.push({
             index: i,
             label: bankName[i],
+        })
+    }
+    for (let i = 0; i < 2; i ++){
+        data.currentPosition.push({
+            index: i,
+            label: '职级' + i,
+        })
+    }
+    for (let i = 0; i < 34; i ++){
+        data.belongingRegion.push({
+            index: i,
+            label: cities[i],
         })
     }
     return data;
