@@ -141,7 +141,7 @@
         </el-form>
       </el-col>
       <el-col style="width: 85vw;display: flex; justify-content: flex-end">
-        <el-button size="small" style="margin-top: 1em">简历导出</el-button>
+        <el-button size="small" style="margin-top: 1em; margin-bottom: 1em">简历导出</el-button>
       </el-col>
       <el-col>
         <el-table :header-cell-style="header_cell_style" :data="queryDataByForm">
@@ -184,7 +184,7 @@
         </el-menu>
       </el-col>
       <el-col style="width: 85vw;display: flex; justify-content: flex-end">
-        <el-button size="small" style="margin-top: 1em;margin-bottom: 1em">图表导出</el-button>
+        <el-button size="small" style="margin-top: 1em;margin-bottom: 1em" @click="dialogVisible = true" >图表导出</el-button>
       </el-col>
       <el-col :span="10">
         <el-scrollbar style="height: 500px">
@@ -192,6 +192,7 @@
                     :summary-method="getSummaries"
                     show-summary
                     :data="chartQueryModeTableData"
+                    id="queryTable"
                     >
             <el-table-column label="序号" type="index"></el-table-column>
             <el-table-column prop="item" :label="chartQueryModeName"></el-table-column>
@@ -207,16 +208,30 @@
       <el-col :span="14">
         <div class="chartCard">
           <el-scrollbar style="height: 500px">
-            <bar-chart style="width: 100%" :chart-data="chartData" :chart-height="chartHeight"></bar-chart>
+            <bar-chart style="width: 100%" :chart-data="chartData" :chart-height="chartHeight" :menu-name="menuName"></bar-chart>
           </el-scrollbar>
         </div>
       </el-col>
     </el-row>
+    <el-dialog
+        title="打印提示"
+        :visible.sync="dialogVisible"
+        width="30%"
+        >
+      <span>点击对应的打印按钮，图片会下载</span>
+      <span slot="footer" class="dialog-footer">
+    <el-button @click="getPdf('#queryTable')" size="small">打印table</el-button>
+    <el-button type="primary" @click="getPdf('#barChart')" size="small">打印chart</el-button>
+  </span>
+    </el-dialog>
+
   </div>
 </template>
 
 <script>
 import BarChart from '../../components/BarChart';
+// import getPdf from '../../utils/printHtml';
+
 export default {
   name: "QualifiedCandidates",
   components: {
@@ -224,6 +239,8 @@ export default {
   },
   data() {
     return{
+      //dialog可见
+      dialogVisible: false,
       //合格人选类别
       activeIndex: '0',
       candidatesCategoryMenu:[
@@ -339,6 +356,16 @@ export default {
     //  chart数据
       chartData: [[],[]],
       chartHeight: '500px',
+      secondIndex: 0
+    //  chart的标题
+    //   topMenuName: '大中型银行高管合格人选',
+    //   secondMenuName: '按机构',
+    }
+  },
+  computed: {
+    menuName: function () {
+      return this.candidatesCategoryMenu[parseInt(this.activeIndex)].text + '|'
+          + this.chartQueryMode[this.secondIndex].label;
     }
   },
   methods: {
@@ -346,15 +373,16 @@ export default {
     handleCandidatesCategoryMenuSelect(key){
       this.activeIndex = key;
       this.getCandidatesData();
-      console.log(key);
+      this.getChartQueryModeTableData()
     },
     //第二个菜单选择，按xx划分
     handleChartQueryModeSelect(key){
       this.activeQueryModeIndex = key;
       //处理表头名称
-      this.chartQueryMode.forEach((item) => {
+      this.chartQueryMode.forEach((item, index) => {
         if(item.index === key){
           this.chartQueryModeName = item.label.slice(1);
+          this.secondIndex = index;
         }
       })
       this.getChartQueryModeTableData();
@@ -458,6 +486,7 @@ export default {
       // console.log(this.chartData);
       return sums;
     },
+    //第二个表格数据
     getChartQueryModeTableData(){
       this.chartData = [[],[]];
       this.modeParams.type = this.activeIndex;
@@ -465,14 +494,11 @@ export default {
       this.$store.dispatch('Candidates/getChartQueryModeTableData', this.modeParams)
           .then((res) => {
             this.chartQueryModeTableData = res;
-            // console.log('res:',typeof res);
-            // console.dir(this.chartQueryModeTableData.length)
             for(let i = 0; i < res.length; i ++){
               this.chartData[0].push(this.chartQueryModeTableData[i].item);
               this.chartData[1].push(this.chartQueryModeTableData[i].num);
             }
             this.chartHeight = this.chartData[0].length * 50 > 600 ? this.chartData[0].length * 50 + 'px' : '600px';
-            // console.log(this.chartData.length)
           })
     },
   },
@@ -488,7 +514,6 @@ export default {
     this.getCandidatesData();
   //  第二个表格数据
     this.getChartQueryModeTableData();
-
   },
 }
 </script>
@@ -577,6 +602,7 @@ form{
 /*分页*/
 .el-pagination{
   margin-bottom: 2em;
+  margin-top: 1em;
 }
 /deep/ .el-pager li.active{
   color: white;

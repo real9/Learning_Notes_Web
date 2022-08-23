@@ -15,6 +15,10 @@ export default {
     chartHeight: {
       type: String,
       default: '800px'
+    },
+    menuName:{
+      type: String,
+      default: '大中型银行高管合格人选|按机构',
     }
   },
   data() {
@@ -51,7 +55,7 @@ export default {
       let option;
       option = {
         title: {
-          text: 'menu1|menu2',
+          text: this.menuName,
           textStyle: {
             fontSize: 16,
           },
