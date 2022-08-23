@@ -77,6 +77,7 @@ export default {
         },
         yAxis: {
           type: 'category',
+          inverse: true,
           axisTick: {
             show: false,
           },
@@ -84,6 +85,7 @@ export default {
         },
         series: {
           type: 'bar',
+          realtimeSort: true,
           label: {
             show: true,
             color: '#fff',
