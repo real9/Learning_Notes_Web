@@ -196,7 +196,11 @@
             <el-table-column label="序号" type="index"></el-table-column>
             <el-table-column prop="item" :label="chartQueryModeName"></el-table-column>
             <el-table-column prop="num" label="人数" sortable></el-table-column>
-            <el-table-column prop="percentage" label="占比"></el-table-column>
+            <el-table-column prop="percentage" label="占比%">
+              <template slot-scope="scope">
+                {{Math.round(scope.row.num / pageInfo.total * 10000 ) / 100}}
+              </template>
+            </el-table-column>
           </el-table>
         </el-scrollbar>
       </el-col>
