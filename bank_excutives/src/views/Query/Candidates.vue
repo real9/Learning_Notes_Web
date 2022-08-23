@@ -184,20 +184,27 @@
         </el-menu>
       </el-col>
       <el-col style="width: 85vw;display: flex; justify-content: flex-end">
-        <el-button size="small" style="margin-top: 1em">图表导出</el-button>
+        <el-button size="small" style="margin-top: 1em;margin-bottom: 1em">图表导出</el-button>
       </el-col>
       <el-col :span="10">
-        <el-table :header-cell-style="header_cell_style" :summary-method="getSummaries"
-                  show-summary :data="chartQueryModeTableData">
-          <el-table-column label="序号" type="index"></el-table-column>
-          <el-table-column prop="item" :label="chartQueryModeName"></el-table-column>
-          <el-table-column prop="num" label="人数" sortable></el-table-column>
-          <el-table-column prop="percentage" label="占比"></el-table-column>
-        </el-table>
+        <el-scrollbar style="height: 500px">
+          <el-table :header-cell-style="header_cell_style"
+                    :summary-method="getSummaries"
+                    show-summary
+                    :data="chartQueryModeTableData"
+                    >
+            <el-table-column label="序号" type="index"></el-table-column>
+            <el-table-column prop="item" :label="chartQueryModeName"></el-table-column>
+            <el-table-column prop="num" label="人数" sortable></el-table-column>
+            <el-table-column prop="percentage" label="占比"></el-table-column>
+          </el-table>
+        </el-scrollbar>
       </el-col>
       <el-col :span="14">
         <div class="chartCard">
-          <bar-chart style="width: 100%"></bar-chart>
+          <el-scrollbar style="height: 500px">
+            <bar-chart style="width: 100%" :chart-data="chartData" :chart-height="chartHeight"></bar-chart>
+          </el-scrollbar>
         </div>
       </el-col>
     </el-row>
@@ -325,6 +332,9 @@ export default {
       queryParams: {},
     //  第二个表格的请求参数
       modeParams: {},
+    //  chart数据
+      chartData: [[],[]],
+      chartHeight: '500px',
     }
   },
   methods: {
@@ -435,33 +445,30 @@ export default {
           return;
         } else if (index === 1) {
           sums[index] = this.chartQueryModeTableData.length;
+          // this.chartData[0].push(column.item);
+          // this.chartData[1].push(column.num);
         } else if (index === 2) {
           sums[index] = this.pageInfo.total;
         }
-        //   const values = data.map(item => Number(item[column.property]));
-        //   if (!values.every(value => isNaN(value))) {
-        //     sums[index] = values.reduce((prev, curr) => {
-        //       const value = Number(curr);
-        //       if (!isNaN(value)) {
-        //         return prev + curr;
-        //       } else {
-        //         return prev;
-        //       }
-        //     }, 0);
-        //   } else {
-        //     sums[index] = '';
-        //   }
-        // });
       })
+      // console.log(this.chartData);
       return sums;
     },
     getChartQueryModeTableData(){
+      this.chartData = [[],[]];
       this.modeParams.type = this.activeIndex;
       this.modeParams.division = this.activeQueryModeIndex;
       this.$store.dispatch('Candidates/getChartQueryModeTableData', this.modeParams)
           .then((res) => {
             this.chartQueryModeTableData = res;
-            console.log(res);
+            // console.log('res:',typeof res);
+            // console.dir(this.chartQueryModeTableData.length)
+            for(let i = 0; i < res.length; i ++){
+              this.chartData[0].push(this.chartQueryModeTableData[i].item);
+              this.chartData[1].push(this.chartQueryModeTableData[i].num);
+            }
+            this.chartHeight = this.chartData[0].length * 50 > 600 ? this.chartData[0].length * 50 + 'px' : '600px';
+            // console.log(this.chartData.length)
           })
     },
   },
@@ -477,6 +484,7 @@ export default {
     this.getCandidatesData();
   //  第二个表格数据
     this.getChartQueryModeTableData();
+
   },
 }
 </script>
@@ -562,10 +570,6 @@ form{
 .el-date-editor.el-input, .el-date-editor.el-input__inner{
   width: inherit;
 }
-.el-table{
-  margin-top: 1em;
-  margin-bottom: 1em;
-}
 /*分页*/
 .el-pagination{
   margin-bottom: 2em;
@@ -587,7 +591,7 @@ form{
 }
 /*charts*/
 .chartCard{
-  margin-top: 1em;
+  /*margin-top: 1em;*/
   margin-left: 2em;
   border: solid 1px #e6e6e6;
   border-radius: 3px;
@@ -596,5 +600,9 @@ form{
 /*表格底行*/
 /deep/ .el-table__footer-wrapper tbody td.el-table__cell{
   background-color: #F4F4F5;
+}
+/*隐藏水平滚动条*/
+/deep/ .el-scrollbar__wrap {
+  overflow-x: hidden;
 }
 </style>

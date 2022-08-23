@@ -1,5 +1,5 @@
 <template>
-<div id="barChart">
+<div id="barChart" :style="{width: '50vw', height: chartHeight}">
 
 </div>
 </template>
@@ -7,15 +7,47 @@
 <script>
 export default {
   name: "BarChart",
+  props:{
+    chartData: {
+      type: Array,
+      default: null,
+    },
+    chartHeight: {
+      type: String,
+      default: '800px'
+    }
+  },
+  data() {
+    return {
+      myChart: {},
+    }
+  },
   mounted() {
-    this.initBarChart();
+    // this.$nextTick(()=> {
+    //   this.initBarChart();
+    // })
+    setTimeout(() => {
+      this.initBarChart();
+    }, 2000);
+    let that = this;
+    window.onresize = () => {
+      that.myChart.resize();
+    };
+  },
+  watch:{
+    chartData: {
+      handler: function () {
+        setTimeout(() => {
+          this.initBarChart();
+          this.myChart.resize();
+        }, 1000);
+      }
+    }
   },
   methods: {
     initBarChart() {
-      let myChart = this.$echarts.init(document.getElementById('barChart'), null, {
-        width: 600,
-        height: 500
-      });
+      this.$echarts.dispose(document.getElementById('barChart'));
+      this.myChart = this.$echarts.init(document.getElementById('barChart'), null, );
       let option;
       option = {
         title: {
@@ -48,7 +80,7 @@ export default {
           axisTick: {
             show: false,
           },
-          data: ['Brazil', 'Indonesia', 'USA', 'India', 'China', 'World']
+          data: this.chartData[0]
         },
         series: {
           type: 'bar',
@@ -56,7 +88,7 @@ export default {
             show: true,
             color: '#fff',
           },
-          data: [28, 20, 20, 19, 13, 8]
+          data: this.chartData[1]
         },
         grid: {
           left: '3%',
@@ -66,7 +98,7 @@ export default {
         },
         color: ['rgb(244,137,115)'],
       };
-      myChart.setOption(option);
+      this.myChart.setOption(option);
     }
   }
 }

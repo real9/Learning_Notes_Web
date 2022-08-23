@@ -124,26 +124,26 @@ const actions = {
     },
 
 //    页面下半部分
-    getChartQueryModeTableData(_, data) {
+    async getChartQueryModeTableData(_, data) {
         let res = [];
         if (data.division === 'affiliatedOrganization'){
             for (let i = 0; i < 30; i++) {
-                axios({
+                await axios({
                     url: `http://localhost:3000/${data.division}/${i}/qualifiedCandidates?type=${data.type}`,
                     method: 'get'
                 })
                     .then((response) => {
                         if (response.data.length !== 0){
-                            res.push({
+                            res[res.length] = {
                                 item: response.data[0].affiliatedOrganization,
                                 num: response.data.length
-                            })
+                            }
                         }
                     })
             }
         } else if(data.division === 'politicalStatus'){
             for (let i = 0; i < 13; i++) {
-                axios({
+                await axios({
                     url: `http://localhost:3000/${data.division}/${i}/qualifiedCandidates?type=${data.type}`,
                     method: 'get'
                 })
@@ -158,7 +158,7 @@ const actions = {
             }
         } else if (data.division === 'currentPosition'){
             for (let i = 0; i < 2; i++) {
-                axios({
+                await axios({
                     url: `http://localhost:3000/${data.division}/${i}/qualifiedCandidates?type=${data.type}`,
                     method: 'get'
                 })
@@ -173,7 +173,7 @@ const actions = {
             }
         } else if (data.division === 'belongingRegion'){
             for (let i = 0; i < 34; i++) {
-                axios({
+                await axios({
                     url: `http://localhost:3000/${data.division}/${i}/qualifiedCandidates?type=${data.type}`,
                     method: 'get'
                 })
@@ -188,7 +188,7 @@ const actions = {
             }
         } else if( data.division ==='proposedPosition'){
             for (let i = 0; i < 10; i++) {
-                axios({
+                await axios({
                     url: `http://localhost:3000/${data.division}/${i}/qualifiedCandidates?type=${data.type}`,
                     method: 'get'
                 })
@@ -203,7 +203,7 @@ const actions = {
             }
         }else if( data.division ==='currentRank'){
             for (let i = 0; i < 10; i++) {
-                axios({
+                await axios({
                     url: `http://localhost:3000/${data.division}/${i}/qualifiedCandidates?type=${data.type}`,
                     method: 'get'
                 })
@@ -218,7 +218,7 @@ const actions = {
             }
         }else if( data.division ==='professionalField'){
             for (let i = 0; i < 8; i++) {
-                axios({
+                await axios({
                     url: `http://localhost:3000/${data.division}/${i}/qualifiedCandidates?type=${data.type}`,
                     method: 'get'
                 })
@@ -233,7 +233,7 @@ const actions = {
             }
         }else if( data.division ==='ageStructure'){
             for (let i = 0; i < 10; i++) {
-                axios({
+                await axios({
                     url: `http://localhost:3000/${data.division}/${i}/qualifiedCandidates?type=${data.type}`,
                     method: 'get'
                 })
