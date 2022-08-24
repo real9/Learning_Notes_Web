@@ -141,7 +141,7 @@
         </el-form>
       </el-col>
       <el-col style="width: 85vw;display: flex; justify-content: flex-end">
-        <el-button size="small" style="margin-top: 1em; margin-bottom: 1em">简历导出</el-button>
+        <el-button size="small" style="margin-top: 1em; margin-bottom: 1em" @click="getResumes">简历导出</el-button>
       </el-col>
       <el-col>
         <el-table :header-cell-style="header_cell_style" :data="queryDataByForm">
@@ -390,6 +390,14 @@ export default {
     resetForm(formName){
       this.$refs[formName].resetFields();
       this.getCandidatesData();
+    },
+    //“导出简历”按钮
+    getResumes(){
+      this.$confirm('简历导出建议由后端返回文件', "提示", {
+        confirmButtonText: "确定",
+        cancelButtonText: "取消",
+        type: "warning",
+      })
     },
     //“查看"按钮
     getDetailInformation(row){
