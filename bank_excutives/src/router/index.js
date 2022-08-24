@@ -35,9 +35,14 @@ const routes = [
         path: 'talentDemand',
         name: 'talentDemand',
         component: () => import(/* webpackChunkName: "about" */ '../views/Query/TalentDemand')
-      }
+      },
     ]
-  }
+  },
+  {
+    path: '/query/newPage',
+    name: 'newPage',
+    component: () => import(/* webpackChunkName: "about" */ '../views/Query/NewPage')
+  },
 ]
 
 const router = new VueRouter({

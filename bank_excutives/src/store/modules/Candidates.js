@@ -248,8 +248,21 @@ const actions = {
             }
         }
         return res;
+    },
+    getDetailInformation( _, data ){
+        return new Promise((resolve, reject) => {
+            axios({
+                url: `http://localhost:3000/qualifiedCandidates/${data}`,
+                method: 'get'
+            })
+                .then((response) => {
+                    resolve(response)
+                })
+                .catch((error) => {
+                    reject(error)
+                })
+        })
     }
-
 }
 
 export default {

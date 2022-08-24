@@ -162,7 +162,7 @@
                   size="mini"
                   type="text"
                   style="color: #D3002C"
-                  @click="handleCheck(scope.row)">查看</el-button>
+                  @click="getDetailInformation(scope.row)">查看</el-button>
             </template>
           </el-table-column>
         </el-table>
@@ -216,21 +216,18 @@
     <el-dialog
         title="打印提示"
         :visible.sync="dialogVisible"
-        width="30%"
-        >
+        width="30%">
       <span>点击对应的打印按钮，图片会下载</span>
       <span slot="footer" class="dialog-footer">
     <el-button @click="getPdf('#queryTable')" size="small">打印table</el-button>
     <el-button type="primary" @click="getPdf('#barChart')" size="small">打印chart</el-button>
   </span>
     </el-dialog>
-
   </div>
 </template>
 
 <script>
 import BarChart from '../../components/BarChart';
-// import getPdf from '../../utils/printHtml';
 
 export default {
   name: "QualifiedCandidates",
@@ -357,9 +354,6 @@ export default {
       chartData: [[],[]],
       chartHeight: '500px',
       secondIndex: 0
-    //  chart的标题
-    //   topMenuName: '大中型银行高管合格人选',
-    //   secondMenuName: '按机构',
     }
   },
   computed: {
@@ -398,8 +392,13 @@ export default {
       this.getCandidatesData();
     },
     //“查看"按钮
-    handleCheck(row){
-      console.log(row);
+    getDetailInformation(row){
+      let candidateId = row.id;
+      const { href } = this.$router.resolve({
+        path: "/query/newPage",
+        query: { candidateId },
+      });
+      window.open(href, "_blank");
     },
     //页面尺寸
     handleSizeChange(val) {
