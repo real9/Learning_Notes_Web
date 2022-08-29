@@ -55,8 +55,8 @@ export default {
           balanceNum: 11,
           diskUsage: 12,
           actualDisk: 1200,
-          memoryOccupancy: 21,
-          actualMemory: 2100,
+          memoryOccupancy: 61,
+          actualMemory: 6100,
           networkFlowData: [
             [150, 232, 201, 154, 190, 330, 410, 200, 400, 200, 200, 200],
             [320, 332, 301, 334, 390, 330, 320, 200, 400, 300, 700, 100]],

@@ -48,7 +48,7 @@ module.exports = () => {
         data.qualifiedCandidates.push({
             id: i + 100,
             name: familyName[rn1] + midName[rn2] + lastName[rn3],
-            sex: gender[rn1 % 2],
+            sex: gender[rn3 % 2],
             politicalStatus: politicalStatuses[rn8],
             politicalStatusId: rn8,
             academicDegree: '本科',
@@ -77,7 +77,7 @@ module.exports = () => {
         data.qualifiedCandidates.push({
             id: i + 200,
             name: familyName[rn5] + lastName[rn6],
-            sex: gender[rn5 % 2],
+            sex: gender[rn6 % 2],
             politicalStatus: politicalStatuses[rn8],
             politicalStatusId: rn8,
             academicDegree: '硕士',
