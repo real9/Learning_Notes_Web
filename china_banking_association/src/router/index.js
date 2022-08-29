@@ -15,7 +15,19 @@ const routes = [
   {
     path: '/talentEntry',
     name: 'talentEntry',
-    component: () => import(/* webpackChunkName: "about" */ '../views/TalentEntry')
+    component: () => import(/* webpackChunkName: "about" */ '../views/TalentEntry'),
+    children:[
+      {
+        path: 'talentInfo',
+        name: 'talentInfo',
+        component: () => import(/* webpackChunkName: "about" */ '../components/Talent/TalentInfo'),
+      },
+      {
+        path: 'progressQuery',
+        name: 'progressQuery',
+        component: () => import(/* webpackChunkName: "about" */ '../components/Talent/ProgressQuery'),
+      },
+    ]
   }
 ]
 
