@@ -1,0 +1,31 @@
+/*日历面板部分，需要使用全局样式*/
+.el-date-table td.available:hover{
+    color: #D3002C;
+}
+.el-date-table td.today span{
+    color: #D3002C;
+}
+.el-date-picker__prev-btn:hover{
+    color: #D3002C;
+}
+.el-date-picker__next-btn:hover{
+    color: #D3002C;
+}
+.el-date-picker__header-label:hover{
+    color: #D3002C;
+}
+.el-year-table td .cell:hover, .el-year-table td.current:not(.disabled) .cell{
+    color: #D3002C;
+}
+.el-year-table td.today .cell{
+    color: #D3002C;
+}
+.el-month-table td .cell:hover{
+    color: #D3002C;
+}
+.el-month-table td.today .cell{
+    color: #D3002C;
+}
+.el-date-table td.current:not(.disabled) span{
+    background-color: #D3002C;
+}

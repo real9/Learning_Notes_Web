@@ -25,7 +25,7 @@ export default {
   font-size: 14px;
 }
 .view{
-  margin-right: 20vw;
-  margin-left: 20vw;
+  margin-right: 10vw;
+  margin-left: 10vw;
 }
 </style>
