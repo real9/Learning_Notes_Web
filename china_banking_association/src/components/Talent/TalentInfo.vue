@@ -1,13 +1,40 @@
 <template>
 <el-row>
   <el-col :span="18" class="main">
-    <p>照片</p>
-    <p>类别</p>
-<!--      <el-form-item label="照片" prop=""></el-form-item>-->
-<!--      <el-form-item label="类别" prop=""></el-form-item>-->
-      <hr/>
-      <el-form ref="form" :model="talentForm" size="small" label-position="top" :inline="true">
-      <p>基本信息</p>
+    <el-row>
+      <el-col class="uploadBox">
+        <el-upload
+            class="avatar-uploader"
+            action="https://jsonplaceholder.typicode.com/posts/"
+            :show-file-list="false"
+            :on-success="handleAvatarSuccess"
+            :before-upload="beforeAvatarUpload"
+            :auto-upload="false">
+          <img v-if="imageUrl" :src="imageUrl" class="avatar">
+          <i v-else class="el-icon-plus avatar-uploader-icon"></i>
+        </el-upload>
+        <div class="upLoadText">
+          <el-button  size="large" type="text">上传照片</el-button>
+          <div>只支持上传jpg/png文件，且不超过600kb</div>
+        </div>
+
+      </el-col>
+      <el-col style="text-align: left">
+        <h3 >人才维护</h3>
+        <p>人才类型</p>
+        <el-select v-model="talentType" placeholder="请选择" size="small">
+          <el-option
+              label="1"
+              value="1">
+          </el-option>
+        </el-select>
+      </el-col>
+    </el-row>
+
+    <hr/>
+    <el-form ref="form" :model="talentForm" size="small" label-position="top" :inline="true">
+      <h4>基本信息</h4>
+      <div class="headLine"></div>
       <el-row>
         <el-row>
           <el-col :span="12">
@@ -88,7 +115,7 @@
             <!--                @change="handleChange"></el-cascader>-->
             <el-cascader
                 v-model="talentForm.basicInfo.nativePlace"
-                ></el-cascader>
+            ></el-cascader>
           </el-form-item>
         </el-col>
         <el-col :span="12">
@@ -172,10 +199,11 @@
         </el-col>
       </el-row>
 
-      <p>教育经历</p>
+      <h4>教育经历</h4>
+      <div class="headLine"></div>
       <el-row>
         <el-col>
-          <el-form-item label="学校名称" prop="" >
+          <el-form-item label="学校名称" prop="">
             <el-input v-model="talentForm.educationExperience[0].schoolName" class="wholeLine"></el-input>
           </el-form-item>
         </el-col>
@@ -203,7 +231,7 @@
             </el-date-picker>
           </el-form-item>
         </el-col>
-<!--        <el-col class="line" :span="2">-</el-col>-->
+        <!--        <el-col class="line" :span="2">-</el-col>-->
         <el-col :span="12">
           <el-form-item label="结束时间" prop="">
             <el-date-picker
@@ -221,7 +249,8 @@
         </el-col>
       </el-row>
 
-      <p>工作履历</p>
+      <h4>工作履历</h4>
+      <div class="headLine"></div>
       <el-row>
         <el-col>
           <el-form-item label="公司名称" prop="" class="wholeLine">
@@ -260,16 +289,17 @@
                 show-word-limit
                 placeholder="请输入内容"
                 v-model="talentForm.trackRecord[0].jobResponsibility"
-                >
+            >
             </el-input>
           </el-form-item>
         </el-col>
       </el-row>
 
-      <p>资格证书</p>
+      <h4>资格证书</h4>
+      <div class="headLine"></div>
       <el-row>
         <el-col>
-          <el-form-item label="证书名称" prop="" >
+          <el-form-item label="证书名称" prop="">
             <el-input v-model="talentForm.certificates[0].certificateName" class="wholeLine"></el-input>
           </el-form-item>
         </el-col>
@@ -292,10 +322,11 @@
         </el-col>
       </el-row>
 
-      <p>履职评价</p>
+      <h4>履职评价</h4>
+      <div class="headLine"></div>
       <el-row>
         <el-col>
-          <el-form-item label="参加董事会情况" prop="" >
+          <el-form-item label="参加董事会情况" prop="">
             <el-input
                 type="textarea"
                 autosize
@@ -311,7 +342,8 @@
           <el-form-item label="任职机构年度履职评价" prop=""></el-form-item>
         </el-col>
 
-        <p>奖惩信息</p>
+        <h4>奖惩信息</h4>
+        <div class="headLine"></div>
         <el-col :span="12">
           <el-form-item label="奖惩类型" prop="">
             <el-select v-model="talentForm.rewardOrPunishment.type" placeholder="请选择">
@@ -337,7 +369,7 @@
           </el-form-item>
         </el-col>
         <el-col>
-          <el-form-item label="奖惩原因" prop="" >
+          <el-form-item label="奖惩原因" prop="">
             <el-input
                 type="textarea"
                 autosize
@@ -363,6 +395,8 @@ export default {
   name: "TalentInfo",
   data(){
     return{
+      imageUrl: '',
+      talentType: '',
       talentForm:{
         basicInfo:{
           name: '',
@@ -428,6 +462,23 @@ export default {
         }
       },
     }
+  },
+  methods: {
+    handleAvatarSuccess(res, file) {
+      this.imageUrl = URL.createObjectURL(file.raw);
+    },
+    beforeAvatarUpload(file) {
+      const isJPG = (file.type === 'image/jpeg' || file.type === 'image/png');
+      const isLt2M = file.size / 1024 < 600;
+
+      if (!isJPG) {
+        this.$message.error('上传头像图片只能是 JPG/PNG 格式!');
+      }
+      if (!isLt2M) {
+        this.$message.error('上传头像图片大小不能超过 600KB!');
+      }
+      return isJPG && isLt2M;
+    },
   }
 }
 </script>
@@ -443,6 +494,16 @@ hr{
   border: none;
   border-bottom: 1px solid #e6e6e6;
   margin-right: 2em;
+  margin-top: 1em;
+}
+h4{
+  margin-bottom: unset;
+}
+.headLine{
+  border-top: 2px solid #D3002C;
+  width: 2em;
+  margin-bottom: 1.33em;
+  margin-top: 0.33em;
 }
 /*表单项*/
 .el-form-item--mini.el-form-item, .el-form-item--small.el-form-item{
@@ -459,8 +520,8 @@ hr{
 /deep/ .el-textarea .el-input__count{
   background: none;
   position: absolute;
-  bottom: 0em;
-  right: -24em;
+  bottom: 0;
+  right: -17vw;
 }
 /deep/ .el-textarea__inner:focus{
   border-color: #AD002B;
@@ -498,5 +559,16 @@ hr{
 form{
   text-align: left;
   padding-right: 10vw;
+}
+/*照片上传*/
+/*部分在全局样式中*/
+.uploadBox{
+  display: flex;
+  align-items: flex-end;
+}
+.uploadBox .upLoadText{
+  text-align: left;
+  margin-left: 1em;
+  margin-bottom: 1em;
 }
 </style>
