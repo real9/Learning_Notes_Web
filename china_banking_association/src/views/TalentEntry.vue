@@ -85,7 +85,7 @@ export default {
   border: none;
   border-left: transparent 2px solid;
 }
-.left .leftMenu:last-child{
+.left .leftMenu .menuItem:last-child{
   margin-bottom: 0;
 }
 .left .leftMenu .menuItem:hover{

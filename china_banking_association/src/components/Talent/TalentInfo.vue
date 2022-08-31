@@ -647,10 +647,14 @@ form{
   text-align: left;
   padding-left: 1em;
   line-height: 2em;
+  margin-bottom: 1em;
   color: #303133;
   display: block;
   text-decoration: unset;
   border-left: 2px solid transparent;
+}
+.board .rightNavBar a:last-child{
+  margin-bottom: 0!important;
 }
 .board .rightNavBar a:link {
   text-decoration: none;
