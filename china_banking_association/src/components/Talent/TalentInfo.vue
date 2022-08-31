@@ -1,7 +1,7 @@
 <template>
-<el-row>
+<div>
   <el-col :span="18" class="main">
-    <el-row>
+    <el-row ref="top">
       <el-col class="uploadBox">
         <el-upload
             class="avatar-uploader"
@@ -33,9 +33,10 @@
 
     <hr/>
     <el-form ref="form" :model="talentForm" size="small" label-position="top" :inline="true">
-      <h4>基本信息</h4>
-      <div class="headLine"></div>
-      <el-row>
+
+      <el-row ref="basicInformation">
+        <h4 id="basicInformation">基本信息</h4>
+        <div class="headLine"></div>
         <el-row>
           <el-col :span="12">
             <el-form-item label="姓名" prop="">
@@ -199,9 +200,10 @@
         </el-col>
       </el-row>
 
-      <h4>教育经历</h4>
-      <div class="headLine"></div>
-      <el-row>
+
+      <el-row ref="educationExperience">
+        <h4 id="educationExperience">教育经历</h4>
+        <div class="headLine"></div>
         <el-col>
           <el-form-item label="学校名称" prop="">
             <el-input v-model="talentForm.educationExperience[0].schoolName" class="wholeLine"></el-input>
@@ -249,9 +251,10 @@
         </el-col>
       </el-row>
 
-      <h4>工作履历</h4>
-      <div class="headLine"></div>
-      <el-row>
+
+      <el-row ref="jobExperience">
+        <h4 id="jobExperience">工作履历</h4>
+        <div class="headLine"></div>
         <el-col>
           <el-form-item label="公司名称" prop="" class="wholeLine">
             <el-input v-model="talentForm.trackRecord[0].companyName"></el-input>
@@ -295,9 +298,10 @@
         </el-col>
       </el-row>
 
-      <h4>资格证书</h4>
-      <div class="headLine"></div>
-      <el-row>
+
+      <el-row ref="certification">
+        <h4 id="certification">资格证书</h4>
+        <div class="headLine"></div>
         <el-col>
           <el-form-item label="证书名称" prop="">
             <el-input v-model="talentForm.certificates[0].certificateName" class="wholeLine"></el-input>
@@ -322,9 +326,10 @@
         </el-col>
       </el-row>
 
-      <h4>履职评价</h4>
-      <div class="headLine"></div>
-      <el-row>
+
+      <el-row ref="evaluation">
+        <h4 id="evaluation">履职评价</h4>
+        <div class="headLine"></div>
         <el-col>
           <el-form-item label="参加董事会情况" prop="">
             <el-input
@@ -341,8 +346,9 @@
         <el-col>
           <el-form-item label="任职机构年度履职评价" prop=""></el-form-item>
         </el-col>
-
-        <h4>奖惩信息</h4>
+      </el-row>
+      <el-row ref="rewardOrPunishmentInformation">
+        <h4 id="rewardOrPunishmentInformation">奖惩信息</h4>
         <div class="headLine"></div>
         <el-col :span="12">
           <el-form-item label="奖惩类型" prop="">
@@ -386,8 +392,19 @@
     </el-form>
 
   </el-col>
-  <el-col :span="6"></el-col>
-</el-row>
+  <el-col :span="4">
+    <div class="board">
+      <div class="rightNavBar" ref="rightNavBar">
+        <a href="#basicInformation" @click="getLink($event)" class="active">基本信息</a>
+        <a href="#educationExperience" @click="getLink($event)">教育经历</a>
+        <a href="#jobExperience" @click="getLink($event)">工作履历</a>
+        <a href="#certification" @click="getLink($event)">资格证书</a>
+        <a href="#evaluation" @click="getLink($event)">履职评价</a>
+        <a href="#rewardOrPunishmentInformation" @click="getLink($event)">奖惩信息</a>
+      </div>
+    </div>
+  </el-col>
+</div>
 </template>
 
 <script>
@@ -463,6 +480,33 @@ export default {
       },
     }
   },
+  mounted() {
+    let heights = [];
+    this.$nextTick(() => {
+      heights.push(this.$refs.top.$el.clientHeight);
+      heights.push(this.$refs.basicInformation.$el.clientHeight + heights[0]);
+      heights.push(this.$refs.educationExperience.$el.clientHeight + heights[1]);
+      heights.push(this.$refs.jobExperience.$el.clientHeight + heights[2]);
+      heights.push(this.$refs.certification.$el.clientHeight + heights[3]);
+      heights.push(this.$refs.evaluation.$el.clientHeight + heights[4]);
+      heights.push(this.$refs.rewardOrPunishmentInformation.$el.clientHeight + heights[5]);
+    })
+    window.onscroll = () => {
+      let y = window.scrollY;
+      for(let i = 0; i < this.$refs.rightNavBar.children.length; i ++){
+        this.$refs.rightNavBar.children[i].className = '';
+      }
+      if (y <= heights[0]){
+        this.$refs.rightNavBar.children[0].className = 'active';
+      }else {
+        for(let i = 1; i < heights.length; i ++){
+          if(y > heights[i-1] && y < heights[i]){
+            this.$refs.rightNavBar.children[i-1].className = 'active';
+          }
+        }
+      }
+    }
+  },
   methods: {
     handleAvatarSuccess(res, file) {
       this.imageUrl = URL.createObjectURL(file.raw);
@@ -479,6 +523,21 @@ export default {
       }
       return isJPG && isLt2M;
     },
+    getLink(e) {
+      e.target.className = 'active';
+      //根据排他思想，运用姐妹节点
+      //需要链表的思想
+      let pre = e.target.previousElementSibling;
+      while (pre){
+        pre.className = '';
+        pre = pre.previousElementSibling;
+      }
+      let suf = e.target.nextElementSibling;
+      while (suf){
+        suf.className = '';
+        suf = suf.nextElementSibling;
+      }
+    }
   }
 }
 </script>
@@ -570,5 +629,47 @@ form{
   text-align: left;
   margin-left: 1em;
   margin-bottom: 1em;
+}
+.board{
+  background-color: white;
+  padding-left: 1em;
+  padding-top: 2em;
+  padding-bottom: 2em;
+  position: fixed;
+  width: 10vw;
+}
+.board .rightNavBar{
+  border-left: solid 1px #e6e6e6;
+  padding-top: 0.5em;
+  padding-bottom: 0.5em;
+}
+.board .rightNavBar a{
+  text-align: left;
+  padding-left: 1em;
+  line-height: 2em;
+  color: #303133;
+  display: block;
+  text-decoration: unset;
+  border-left: 2px solid transparent;
+}
+.board .rightNavBar a:link {
+  text-decoration: none;
+  border-left: 2px solid transparent;
+}
+.board .rightNavBar a:visited {
+  text-decoration: none;
+  border-left: 2px solid transparent;
+}
+.board .rightNavBar a:hover {
+  color: #D3002C;
+  text-decoration: none;
+  border-left: 2px solid #D3002C;
+  transition: border-left .3s,color .3s;
+}
+.board .rightNavBar .active{
+  border-left: 2px solid #D3002C!important;
+  color: #D3002C;
+  text-decoration: none;
+  transition: border-left .3s,color .3s;
 }
 </style>
