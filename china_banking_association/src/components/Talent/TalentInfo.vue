@@ -5,11 +5,12 @@
       <el-col class="uploadBox">
         <el-upload
             class="avatar-uploader"
-            action="https://jsonplaceholder.typicode.com/posts/"
+            action=""
+            :http-request="httpRequestOfImage"
             :show-file-list="false"
             :on-success="handleAvatarSuccess"
             :before-upload="beforeAvatarUpload"
-            :auto-upload="false">
+            >
           <img v-if="imageUrl" :src="imageUrl" class="avatar">
           <i v-else class="el-icon-plus avatar-uploader-icon"></i>
         </el-upload>
@@ -393,14 +394,21 @@
 
   </el-col>
   <el-col :span="4">
-    <div class="board">
-      <div class="rightNavBar" ref="rightNavBar">
-        <a href="#basicInformation" @click="getLink($event)" class="active">基本信息</a>
-        <a href="#educationExperience" @click="getLink($event)">教育经历</a>
-        <a href="#jobExperience" @click="getLink($event)">工作履历</a>
-        <a href="#certification" @click="getLink($event)">资格证书</a>
-        <a href="#evaluation" @click="getLink($event)">履职评价</a>
-        <a href="#rewardOrPunishmentInformation" @click="getLink($event)">奖惩信息</a>
+    <div class="rightBar">
+      <div class="board">
+        <div class="rightNavBar" ref="rightNavBar">
+          <a href="#basicInformation" @click="getLink($event)" class="active">基本信息</a>
+          <a href="#educationExperience" @click="getLink($event)">教育经历</a>
+          <a href="#jobExperience" @click="getLink($event)">工作履历</a>
+          <a href="#certification" @click="getLink($event)">资格证书</a>
+          <a href="#evaluation" @click="getLink($event)">履职评价</a>
+          <a href="#rewardOrPunishmentInformation" @click="getLink($event)">奖惩信息</a>
+        </div>
+      </div>
+      <div class="btnGroup">
+        <el-button type="primary" class="submit btn">提交</el-button>
+        <el-button class="save btn">保存</el-button>
+        <el-button class="cancel btn">取消</el-button>
       </div>
     </div>
   </el-col>
@@ -508,6 +516,13 @@ export default {
     }
   },
   methods: {
+    httpRequestOfImage(param){
+      let fileObj = param.file; // 相当于input里取得的files
+      let formData = new FormData(); // FormData 对象
+      formData.append("file", fileObj); // 文件对象
+      console.log(fileObj);
+      this.imageUrl = 'https://www.docker.com/wp-content/uploads/2022/03/vertical-logo-monochromatic.png';
+    },
     handleAvatarSuccess(res, file) {
       this.imageUrl = URL.createObjectURL(file.raw);
     },
@@ -630,20 +645,27 @@ form{
   margin-left: 1em;
   margin-bottom: 1em;
 }
-.board{
+.rightBar{
+  background-color: transparent;
+  position: fixed;
+}
+.rightBar .btnGroup{
+  margin-top: 1em;
+}
+.rightBar .board{
   background-color: white;
-  padding-left: 1em;
+  /*padding-left: 1em;*/
   padding-top: 2em;
   padding-bottom: 2em;
-  position: fixed;
   width: 10vw;
 }
-.board .rightNavBar{
+.rightBar .board .rightNavBar{
   border-left: solid 1px #e6e6e6;
+  margin-left: 1em;
   padding-top: 0.5em;
   padding-bottom: 0.5em;
 }
-.board .rightNavBar a{
+.rightBar .board .rightNavBar a{
   text-align: left;
   padding-left: 1em;
   line-height: 2em;
@@ -653,27 +675,62 @@ form{
   text-decoration: unset;
   border-left: 2px solid transparent;
 }
-.board .rightNavBar a:last-child{
+.rightBar .board .rightNavBar a:last-child{
   margin-bottom: 0!important;
 }
-.board .rightNavBar a:link {
+.rightBar .board .rightNavBar a:link {
   text-decoration: none;
   border-left: 2px solid transparent;
 }
-.board .rightNavBar a:visited {
+.rightBar .board .rightNavBar a:visited {
   text-decoration: none;
   border-left: 2px solid transparent;
 }
-.board .rightNavBar a:hover {
+.rightBar .board .rightNavBar a:hover {
   color: #D3002C;
   text-decoration: none;
   border-left: 2px solid #D3002C;
   transition: border-left .3s,color .3s;
 }
-.board .rightNavBar .active{
+.rightBar .board .rightNavBar .active{
   border-left: 2px solid #D3002C!important;
   color: #D3002C;
   text-decoration: none;
   transition: border-left .3s,color .3s;
+}
+
+.rightBar .btnGroup .btn{
+  width: 10vw;
+  display: block;
+  margin-bottom: 1em;
+  margin-left: 0;
+}
+.rightBar .btnGroup .submit{
+  background-color: #AD002B;
+  border-color: #AD002B;
+}
+.rightBar .btnGroup .submit:hover{
+  background-color: #D3002C;
+  border-color: #D3002C;
+  transition: border-color .3s,background-color .3s;
+}
+.rightBar .btnGroup .save{
+  color: #AD002B;
+  border-color: #AD002B;
+  background-color: transparent;
+}
+.rightBar .btnGroup .save:hover{
+  color: #D3002C;
+  border-color: #D3002C;
+  transition: border-color .3s,color .3s;
+}
+.rightBar .btnGroup .cancel{
+  background-color: transparent;
+  border-color: #8c939d;
+}
+.rightBar .btnGroup .cancel:hover{
+  color: #D3002C;
+  border-color: #D3002C;
+  transition: border-color .3s,color .3s;
 }
 </style>
