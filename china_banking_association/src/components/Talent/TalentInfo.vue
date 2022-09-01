@@ -25,8 +25,10 @@
         <p>人才类型</p>
         <el-select v-model="talentType" placeholder="请选择" size="small">
           <el-option
-              label="1"
-              value="1">
+              v-for="item in candidateTypes"
+              :label="item.label"
+              :key="item.index"
+              :value="item.index">
           </el-option>
         </el-select>
       </el-col>
@@ -67,8 +69,10 @@
           <el-form-item label="政治面貌" prop="" style="display: inline; white-space:nowrap">
             <el-select v-model="talentForm.basicInfo.politicalStatus" placeholder="请选择">
               <el-option
-                  label="1"
-                  value="1">
+                  v-for="item in politicalStatus"
+                  :label="item.label"
+                  :key="item.index"
+                  :value="item.index">
               </el-option>
             </el-select>
           </el-form-item>
@@ -78,8 +82,10 @@
           <el-form-item label="证件类型" prop="">
             <el-select v-model="talentForm.basicInfo.idCardType" placeholder="请选择">
               <el-option
-                  label="1"
-                  value="1">
+                  v-for="item in idType"
+                  :label="item.label"
+                  :key="item.index"
+                  :value="item.index">
               </el-option>
             </el-select>
           </el-form-item>
@@ -93,8 +99,10 @@
           <el-form-item label="国籍" prop="">
             <el-select v-model="talentForm.basicInfo.nationality" placeholder="请选择">
               <el-option
-                  label="1"
-                  value="1">
+                  v-for="item in nationality"
+                  :label="item.label"
+                  :key="item.index"
+                  :value="item.index">
               </el-option>
             </el-select>
           </el-form-item>
@@ -103,8 +111,10 @@
           <el-form-item label="民族" prop="">
             <el-select v-model="talentForm.basicInfo.ethnicGroup" placeholder="请选择">
               <el-option
-                  label="1"
-                  value="1">
+                  v-for="item in ethnicGroup"
+                  :label="item.label"
+                  :key="item.index"
+                  :value="item.index">
               </el-option>
             </el-select>
           </el-form-item>
@@ -124,8 +134,10 @@
           <el-form-item label="婚姻状况" prop="">
             <el-select v-model="talentForm.basicInfo.maritalStatus" placeholder="请选择">
               <el-option
-                  label="1"
-                  value="1">
+                  v-for="item in maritalStatus"
+                  :label="item.label"
+                  :key="item.index"
+                  :value="item.index">
               </el-option>
             </el-select>
           </el-form-item>
@@ -168,8 +180,10 @@
           <el-form-item label="学历" prop="">
             <el-select v-model="talentForm.basicInfo.academicDegree" placeholder="请选择">
               <el-option
-                  label="1"
-                  value="1">
+                  v-for="item in academicDegree"
+                  :label="item.label"
+                  :key="item.index"
+                  :value="item.index">
               </el-option>
             </el-select>
           </el-form-item>
@@ -178,8 +192,10 @@
           <el-form-item label="学位" prop="">
             <el-select v-model="talentForm.basicInfo.diploma" placeholder="请选择">
               <el-option
-                  label="1"
-                  value="1">
+                  v-for="item in diploma"
+                  :label="item.label"
+                  :key="item.index"
+                  :value="item.index">
               </el-option>
             </el-select>
           </el-form-item>
@@ -348,6 +364,7 @@
           <el-form-item label="任职机构年度履职评价" prop=""></el-form-item>
         </el-col>
       </el-row>
+
       <el-row ref="rewardOrPunishmentInformation">
         <h4 id="rewardOrPunishmentInformation">奖惩信息</h4>
         <div class="headLine"></div>
@@ -355,8 +372,10 @@
           <el-form-item label="奖惩类型" prop="">
             <el-select v-model="talentForm.rewardOrPunishment.type" placeholder="请选择">
               <el-option
-                  label="1"
-                  value="1">
+                  v-for="item in rewardOrPunishment"
+                  :label="item.label"
+                  :key="item.index"
+                  :value="item.index">
               </el-option>
             </el-select>
           </el-form-item>
@@ -416,8 +435,12 @@
 </template>
 
 <script>
+import {mapState} from 'vuex'
 export default {
   name: "TalentInfo",
+  computed: {
+    ...mapState(['candidateTypes', 'politicalStatus', 'idType', 'nationality', 'ethnicGroup', 'maritalStatus', 'academicDegree', 'diploma', 'rewardOrPunishment'])
+  },
   data(){
     return{
       imageUrl: '',
