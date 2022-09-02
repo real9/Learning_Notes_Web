@@ -35,19 +35,19 @@
     </el-row>
 
     <hr/>
-    <el-form ref="form" :model="talentForm" label-position="top" :inline="true">
+    <el-form ref="form" :model="talentForm" label-position="top" :inline="true" :rules="rules">
 
       <el-row ref="basicInformation">
         <h4 id="basicInformation">基本信息</h4>
         <div class="headLine"></div>
         <el-row>
           <el-col :span="12">
-            <el-form-item label="姓名" prop="">
+            <el-form-item label="姓名" prop="name">
               <el-input v-model="talentForm.basicInfo.name"></el-input>
             </el-form-item>
           </el-col>
           <el-col :span="12">
-            <el-form-item label="性别" prop="">
+            <el-form-item label="性别" prop="sex">
               <el-radio-group v-model="talentForm.basicInfo.sex">
                 <el-radio label="male">先生</el-radio>
                 <el-radio label="female">女士</el-radio>
@@ -57,7 +57,7 @@
         </el-row>
 
         <el-col :span="12">
-          <el-form-item label="出生日期" prop="" style="display: inline; white-space:nowrap">
+          <el-form-item label="出生日期" prop="birth" style="display: inline; white-space:nowrap">
             <el-date-picker
                 v-model="talentForm.basicInfo.birth"
                 type="date"
@@ -66,7 +66,7 @@
           </el-form-item>
         </el-col>
         <el-col :span="12">
-          <el-form-item label="政治面貌" prop="" style="display: inline; white-space:nowrap">
+          <el-form-item label="政治面貌" prop="politicalStatus" style="display: inline; white-space:nowrap">
             <el-select v-model="talentForm.basicInfo.politicalStatus" placeholder="请选择">
               <el-option
                   v-for="item in politicalStatus"
@@ -79,7 +79,7 @@
         </el-col>
 
         <el-col :span="12">
-          <el-form-item label="证件类型" prop="">
+          <el-form-item label="证件类型" prop="idCardType">
             <el-select v-model="talentForm.basicInfo.idCardType" placeholder="请选择">
               <el-option
                   v-for="item in idType"
@@ -91,12 +91,12 @@
           </el-form-item>
         </el-col>
         <el-col :span="12">
-          <el-form-item label="证件号码" prop="">
+          <el-form-item label="证件号码" prop="idCardNum">
             <el-input v-model="talentForm.basicInfo.idCardNum"></el-input>
           </el-form-item>
         </el-col>
         <el-col :span="12">
-          <el-form-item label="国籍" prop="">
+          <el-form-item label="国籍" prop="nationality">
             <el-select v-model="talentForm.basicInfo.nationality" placeholder="请选择">
               <el-option
                   v-for="item in nationality"
@@ -108,7 +108,7 @@
           </el-form-item>
         </el-col>
         <el-col :span="12">
-          <el-form-item label="民族" prop="">
+          <el-form-item label="民族" prop="ethnicGroup">
             <el-select v-model="talentForm.basicInfo.ethnicGroup" placeholder="请选择">
               <el-option
                   v-for="item in ethnicGroup"
@@ -120,7 +120,7 @@
           </el-form-item>
         </el-col>
         <el-col :span="12">
-          <el-form-item label="籍贯" prop="">
+          <el-form-item label="籍贯" prop="nativePlace">
 <!--                        <el-cascader-->
 <!--                            v-model="talentForm.basicInfo.nativePlace"-->
 <!--                            :options="nativePlace"-->
@@ -134,7 +134,7 @@
           </el-form-item>
         </el-col>
         <el-col :span="12">
-          <el-form-item label="婚姻状况" prop="">
+          <el-form-item label="婚姻状况" prop="maritalStatus">
             <el-select v-model="talentForm.basicInfo.maritalStatus" placeholder="请选择">
               <el-option
                   v-for="item in maritalStatus"
@@ -147,42 +147,43 @@
         </el-col>
         <div>
           <el-col :span="12">
-            <el-form-item label="联系方式" prop="">
+            <el-form-item label="联系方式" prop="telephoneNum">
               <el-input v-model="talentForm.basicInfo.telephoneNum"></el-input>
             </el-form-item>
           </el-col>
           <el-col :span="12">
-            <el-form-item label="参加工作时间" prop="">
+            <el-form-item label="参加工作时间" prop="joinWorkTime">
               <el-date-picker
                   v-model="talentForm.basicInfo.joinWorkTime"
                   type="date"
+                  value-format="yyyy-MM-dd"
                   placeholder="选择日期">
               </el-date-picker>
             </el-form-item>
           </el-col>
         </div>
         <el-col :span="12">
-          <el-form-item label="现任单位" prop="">
+          <el-form-item label="现任单位" prop="currentUnit">
             <el-input v-model="talentForm.basicInfo.currentUnit"></el-input>
           </el-form-item>
         </el-col>
         <el-col :span="12">
-          <el-form-item label="所在部门" prop="">
+          <el-form-item label="所在部门" prop="department">
             <el-input v-model="talentForm.basicInfo.department"></el-input>
           </el-form-item>
         </el-col>
         <el-col :span="12">
-          <el-form-item label="职务" prop="">
+          <el-form-item label="职务" prop="job">
             <el-input v-model="talentForm.basicInfo.job"></el-input>
           </el-form-item>
         </el-col>
         <el-col :span="12">
-          <el-form-item label="职称" prop="">
+          <el-form-item label="职称" prop="professionalTitle">
             <el-input v-model="talentForm.basicInfo.professionalTitle"></el-input>
           </el-form-item>
         </el-col>
         <el-col :span="12">
-          <el-form-item label="学历" prop="">
+          <el-form-item label="学历" prop="academicDegree">
             <el-select v-model="talentForm.basicInfo.academicDegree" placeholder="请选择">
               <el-option
                   v-for="item in academicDegree"
@@ -194,7 +195,7 @@
           </el-form-item>
         </el-col>
         <el-col :span="12">
-          <el-form-item label="学位" prop="">
+          <el-form-item label="学位" prop="diploma">
             <el-select v-model="talentForm.basicInfo.diploma" placeholder="请选择">
               <el-option
                   v-for="item in diploma"
@@ -206,18 +207,24 @@
           </el-form-item>
         </el-col>
         <el-col :span="12">
-          <el-form-item label="专业" prop="">
+          <el-form-item label="专业" prop="subject">
             <el-input v-model="talentForm.basicInfo.subject"></el-input>
           </el-form-item>
         </el-col>
         <el-col :span="12">
-          <el-form-item label="银行独董累计任职年限" prop="">
-            <el-input v-model="talentForm.basicInfo.termLength"></el-input>
+          <el-form-item label="银行独董累计任职年限" prop="termLength" :rules="[
+      { required: true, message: '时间不能为空'},
+      { type: 'number', message: '时间必须为数字值'}
+    ]">
+            <el-input v-model.number="talentForm.basicInfo.termLength"></el-input>
           </el-form-item>
         </el-col>
         <el-col :span="12">
-          <el-form-item label="目前担任独董的银行数量" prop="">
-            <el-input v-model="talentForm.basicInfo.bankNum"></el-input>
+          <el-form-item label="目前担任独董的银行数量" prop="bankNum" :rules="[
+      { required: true, message: '数量不能为空'},
+      { type: 'number', message: '数量必须为数字值'}
+    ]">
+            <el-input v-model.number="talentForm.basicInfo.bankNum"></el-input>
           </el-form-item>
         </el-col>
       </el-row>
@@ -228,12 +235,12 @@
         <div class="headLine"></div>
         <div v-for="(item, index) in talentForm.educationExperience" :key="index">
           <el-col>
-            <el-form-item label="学校名称" prop="">
+            <el-form-item label="学校名称" prop="educationExperience_schoolName">
               <el-input v-model="item.schoolName" class="wholeLine"></el-input>
             </el-form-item>
           </el-col>
           <el-col :span="12">
-            <el-form-item label="学历" prop="">
+            <el-form-item label="学历" prop="educationExperience_degree">
               <el-select v-model="item.degree" placeholder="请选择">
                 <el-option
                     label="1"
@@ -243,25 +250,27 @@
             </el-form-item>
           </el-col>
           <el-col :span="12">
-            <el-form-item label="专业名称" prop="">
+            <el-form-item label="专业名称" prop="educationExperience_subject">
               <el-input v-model="item.subject"></el-input>
             </el-form-item>
           </el-col>
           <el-col :span="12">
-            <el-form-item label="开始时间" prop="">
+            <el-form-item label="开始时间" prop="educationExperience_startTime">
               <el-date-picker
                   v-model="item.startTime"
                   type="date"
+                  value-format="yyyy-MM-dd"
                   placeholder="选择日期">
               </el-date-picker>
             </el-form-item>
           </el-col>
           <!--        <el-col class="line" :span="2">-</el-col>-->
           <el-col :span="12">
-            <el-form-item label="结束时间" prop="">
+            <el-form-item label="结束时间" prop="educationExperience_endTime">
               <el-date-picker
                   v-model="item.endTime"
                   type="date"
+                  value-format="yyyy-MM-dd"
                   placeholder="选择日期">
               </el-date-picker>
             </el-form-item>
@@ -290,35 +299,41 @@
         <div class="headLine"></div>
         <div v-for="(item, index) in talentForm.trackRecord" :key="index">
           <el-col>
-            <el-form-item label="公司名称" prop="" class="wholeLine">
+            <el-form-item label="公司名称" prop="trackRecord_companyName" class="wholeLine">
               <el-input v-model="item.companyName"></el-input>
             </el-form-item>
           </el-col>
           <el-col>
-            <el-form-item label="职位名称" prop="" class="wholeLine">
+            <el-form-item label="职位名称" prop="trackRecord_job" class="wholeLine">
               <el-input v-model="item.job"></el-input>
             </el-form-item>
           </el-col>
           <el-col :span="12">
-            <el-form-item label="开始时间" prop="">
+            <el-form-item label="开始时间" prop="trackRecord_startTime">
               <el-date-picker
                   v-model="item.startTime"
                   type="date"
+                  value-format="yyyy-MM-dd"
                   placeholder="选择日期">
               </el-date-picker>
             </el-form-item>
           </el-col>
           <el-col :span="12">
-            <el-form-item label="结束时间" prop="">
+            <el-form-item label="结束时间" prop="trackRecord_endTime">
               <el-date-picker
                   v-model="item.endTime"
                   type="date"
-                  placeholder="选择日期">
+                  placeholder="选择日期"
+                  value-format="yyyy-MM-dd"
+              :disabled="today">
               </el-date-picker>
             </el-form-item>
           </el-col>
+          <el-col style="text-align: right; padding-right: 2em">
+            <el-checkbox v-model="today" @change="updateTrackRecordEndtime">至今</el-checkbox>
+          </el-col>
           <el-col>
-            <el-form-item label="工作内容" prop="">
+            <el-form-item label="工作内容" prop="trackRecord_jobResponsibility">
               <el-input
                   type="textarea"
                   autosize
@@ -361,6 +376,7 @@
               <el-date-picker
                   v-model="item.getTime"
                   type="date"
+                  value-format="yyyy-MM-dd"
                   placeholder="选择日期">
               </el-date-picker>
             </el-form-item>
@@ -395,7 +411,19 @@
           </el-form-item>
         </el-col>
         <el-col>
-          <el-form-item label="任职机构年度履职评价" prop=""></el-form-item>
+          <el-form-item label="任职机构年度履职评价" prop="" style="width:33.5vw">
+            <el-upload
+                class="upload-demo"
+                action=""
+                :limit="3"
+                :file-list="fileList"
+                >
+              <el-button size="small" class="uploadBtn">
+                <el-icon class="el-icon-upload2"></el-icon>
+                点击上传</el-button>
+              <span slot="tip" class="el-upload__tip">只能上传jpg/png文件，且不超过500kb</span>
+            </el-upload>
+          </el-form-item>
         </el-col>
       </el-row>
 
@@ -424,6 +452,7 @@
             <el-date-picker
                 v-model="talentForm.rewardOrPunishment.time"
                 type="date"
+                value-format="yyyy-MM-dd"
                 placeholder="选择日期">
             </el-date-picker>
           </el-form-item>
@@ -459,8 +488,8 @@
         </div>
       </div>
       <div class="btnGroup">
-        <el-button type="primary" class="submit btn">提交</el-button>
-        <el-button class="save btn">保存</el-button>
+        <el-button type="primary" class="submit btn" @click="submit">提交</el-button>
+        <el-button class="save btn" @click="saveForm">保存</el-button>
         <el-button class="cancel btn">取消</el-button>
       </div>
     </div>
@@ -479,6 +508,20 @@ export default {
     return{
       imageUrl: '',
       talentType: '',
+      //履职评价的文件列表
+      fileList: [
+        {
+          name: '监管机构年度履职评价',
+          url: 'https://www.baidu.com/'
+        },
+        {
+          name: '风险机构年度履职评价',
+          url: 'https://www.baidu.com/'
+        },
+      ],
+      //至今
+      today: false,
+      //主表单
       talentForm:{
         basicInfo:{
           name: '',
@@ -543,6 +586,40 @@ export default {
           reason: '',
         }
       },
+      //表单验证规则
+      rules:{
+        name:[{ required: true, message: '请输入姓名', trigger: 'blur' }],
+        sex: [{ required: true, message: '请选择性别', trigger: 'change' }],
+        birth: [{ type: 'date', required: true, message: '请选择时间', trigger: 'change' }],
+        politicalStatus: [{ required: true, message: '请选择政治面貌', trigger: 'change' }],
+        idCardType: [{ required: true, message: '请选择证件类型', trigger: 'change' }],
+        idCardNum: [{ required: true, message: '请输入证件号码', trigger: 'blur' }],
+        nationality: [{ required: true, message: '请选择国籍', trigger: 'change' }],
+        ethnicGroup: [{ required: true, message: '请选择民族', trigger: 'change' }],
+        nativePlace: [{ required: true, message: '请选择籍贯', trigger: 'change' }],
+        maritalStatus: [{ required: true, message: '请选择婚姻状况', trigger: 'change' }],
+        telephoneNum: [{ required: true, message: '请输入电话号码', trigger: 'blur' }],
+        joinWorkTime: [{ type: 'date', required: true, message: '请选择时间', trigger: 'change' }],
+        currentUnit: [{ required: true, message: '请输入现任单位', trigger: 'blur' }],
+        department: [{ required: true, message: '请输入所在部门', trigger: 'blur' }],
+        job: [{ required: true, message: '请输入职务', trigger: 'blur' }],
+        professionalTitle: [{ required: true, message: '请输入职称', trigger: 'blur' }],
+        academicDegree: [{ required: true, message: '请选择学历', trigger: 'change' }],
+        diploma: [{ required: true, message: '请选择学位', trigger: 'change' }],
+        subject: [{ required: true, message: '请输入专业', trigger: 'blur' }],
+
+        educationExperience_schoolName: [{ required: true, message: '请输入学校名称', trigger: 'blur' }],
+        educationExperience_degree: [{ required: true, message: '请选择学历', trigger: 'change' }],
+        educationExperience_subject: [{ required: true, message: '请输入专业', trigger: 'blur' }],
+        educationExperience_startTime: [{ type: 'date', required: true, message: '请选择时间', trigger: 'change' }],
+        educationExperience_endTime: [{ type: 'date', required: true, message: '请选择时间', trigger: 'change' }],
+
+        trackRecord_companyName: [{ required: true, message: '请输入公司名称', trigger: 'blur' }],
+        trackRecord_job: [{ required: true, message: '请输入职位名称', trigger: 'blur' }],
+        trackRecord_startTime: [{ type: 'date', required: true, message: '请选择时间', trigger: 'change' }],
+        trackRecord_endTime: [{ type: 'date', required: true, message: '请选择时间', trigger: 'change' }],
+        trackRecord_jobResponsibility: [{ required: true, message: '请输入工作内容', trigger: 'blur' }],
+      },
     }
   },
   mounted() {
@@ -573,16 +650,19 @@ export default {
     }
   },
   methods: {
+    //覆盖原生框架的内容
     httpRequestOfImage(param){
       let fileObj = param.file; // 相当于input里取得的files
       let formData = new FormData(); // FormData 对象
       formData.append("file", fileObj); // 文件对象
+      //提交数据给接口，返回链接
       console.log(fileObj);
       this.imageUrl = 'https://www.docker.com/wp-content/uploads/2022/03/vertical-logo-monochromatic.png';
     },
     handleAvatarSuccess(res, file) {
       this.imageUrl = URL.createObjectURL(file.raw);
     },
+    //上传照片之前的判断
     beforeAvatarUpload(file) {
       const isJPG = (file.type === 'image/jpeg' || file.type === 'image/png');
       const isLt2M = file.size / 1024 < 600;
@@ -595,6 +675,7 @@ export default {
       }
       return isJPG && isLt2M;
     },
+    //右侧目录点击高亮
     getLink(e) {
       e.target.className = 'active';
       //根据排他思想，运用姐妹节点
@@ -610,6 +691,7 @@ export default {
         suf = suf.nextElementSibling;
       }
     },
+    //添加教育经历
     addEduExp(){
       this.talentForm.educationExperience.push({
         schoolName: '',
@@ -619,6 +701,7 @@ export default {
         endTime: '',
       })
     },
+    //删除教育经历
     deleteEduExp(index){
       if(this.talentForm.educationExperience.length === 1){
         this.$confirm('教育经历至少有一个')
@@ -626,6 +709,7 @@ export default {
         this.talentForm.educationExperience.splice(index, 1)
       }
     },
+    //增加工作履历
     addJobExp(){
       this.talentForm.trackRecord.push({
         companyName: '',
@@ -635,12 +719,42 @@ export default {
         jobResponsibility: '',
       })
     },
+    //增加“资格证书”
     addCertificate(){
       this.talentForm.certificates.push({
         certificateName: '',
         certificateNumber: '',
         getTime: '',
       })
+    },
+    //提交表单
+    submit(){
+      //实际还需要提交文件部分的内容，但是文件部分暂时不判断合法性
+      this.$refs["form"].validate((valid) => {
+        if (valid) {
+          alert('提交成功!');
+        } else {
+          console.log('error submit!!');
+          return false;
+        }
+      });
+    },
+    //保存表单
+    saveForm(){
+      //实际还需要在提交文件部分的内容
+      //还需要有其他界面，可以查看已保存的内容，方便下次编辑
+      console.log(this.talentForm);
+    },
+    //至今
+    updateTrackRecordEndtime(){
+      if(this.today){
+        let date = new Date();
+        let y = date.getFullYear();
+        let m = date.getMonth() + 1;
+        let d = date.getDate();
+        this.talentForm.trackRecord.endTime = y + '-' + m + '-' + d;
+        console.log(this.talentForm.trackRecord.endTime);
+      }
     }
   }
 }
@@ -832,5 +946,35 @@ form{
   color: #D3002C;
   border-color: #D3002C;
   transition: border-color .3s,color .3s;
+}
+/*履职文件上传*/
+.uploadBtn{
+  background-color: transparent;
+  border-color: #303133;
+  color: #303133;
+  margin-right: 2em;
+}
+.uploadBtn:hover{
+  color: #D3002C;
+  background-color: transparent;
+  border-color: #D3002C;
+}
+/*上传文件*/
+/deep/ .el-upload-list__item.is-success .el-upload-list__item-name{
+  color: #8c939d;
+}
+/deep/ .el-upload-list__item.is-success .el-upload-list__item-name:hover{
+  color: #D3002C;
+}
+/*多选框，至今*/
+/deep/ .el-checkbox__inner:hover{
+  border-color: #D3002C;
+}
+/deep/ .el-checkbox__input.is-checked+.el-checkbox__label{
+  color: #D3002C;
+}
+/deep/ .el-checkbox__input.is-checked .el-checkbox__inner, .el-checkbox__input.is-indeterminate .el-checkbox__inner{
+  background-color: #D3002C;
+  border-color: #D3002C;
 }
 </style>
