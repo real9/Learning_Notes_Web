@@ -66,3 +66,9 @@
 .el-button--text:focus{
     color: #D3002C;
 }
+
+
+/*级联选择器的展开项*/
+.el-cascader-node.in-active-path, .el-cascader-node.is-active, .el-cascader-node.is-selectable.in-checked-path{
+    color: #D3002C;
+}

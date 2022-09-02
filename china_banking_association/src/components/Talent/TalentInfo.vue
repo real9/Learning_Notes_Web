@@ -35,7 +35,7 @@
     </el-row>
 
     <hr/>
-    <el-form ref="form" :model="talentForm" size="small" label-position="top" :inline="true">
+    <el-form ref="form" :model="talentForm" label-position="top" :inline="true">
 
       <el-row ref="basicInformation">
         <h4 id="basicInformation">基本信息</h4>
@@ -121,12 +121,15 @@
         </el-col>
         <el-col :span="12">
           <el-form-item label="籍贯" prop="">
-            <!--            <el-cascader-->
-            <!--                v-model="talentForm.basicInfo.nativePlace"-->
-            <!--                :options="options"-->
-            <!--                @change="handleChange"></el-cascader>-->
+<!--                        <el-cascader-->
+<!--                            v-model="talentForm.basicInfo.nativePlace"-->
+<!--                            :options="nativePlace"-->
+<!--                            @change="handleChange"></el-cascader>-->
             <el-cascader
                 v-model="talentForm.basicInfo.nativePlace"
+                :options="nativePlace"
+                :popper-append-to-body="false"
+                separator=""
             ></el-cascader>
           </el-form-item>
         </el-col>
@@ -142,20 +145,22 @@
             </el-select>
           </el-form-item>
         </el-col>
-        <el-col :span="12">
-          <el-form-item label="联系方式" prop="">
-            <el-input v-model="talentForm.basicInfo.telephoneNum"></el-input>
-          </el-form-item>
-        </el-col>
-        <el-col :span="12">
-          <el-form-item label="参加工作时间" prop="">
-            <el-date-picker
-                v-model="talentForm.basicInfo.joinWorkTime"
-                type="date"
-                placeholder="选择日期">
-            </el-date-picker>
-          </el-form-item>
-        </el-col>
+        <div>
+          <el-col :span="12">
+            <el-form-item label="联系方式" prop="">
+              <el-input v-model="talentForm.basicInfo.telephoneNum"></el-input>
+            </el-form-item>
+          </el-col>
+          <el-col :span="12">
+            <el-form-item label="参加工作时间" prop="">
+              <el-date-picker
+                  v-model="talentForm.basicInfo.joinWorkTime"
+                  type="date"
+                  placeholder="选择日期">
+              </el-date-picker>
+            </el-form-item>
+          </el-col>
+        </div>
         <el-col :span="12">
           <el-form-item label="现任单位" prop="">
             <el-input v-model="talentForm.basicInfo.currentUnit"></el-input>
@@ -221,126 +226,155 @@
       <el-row ref="educationExperience">
         <h4 id="educationExperience">教育经历</h4>
         <div class="headLine"></div>
-        <el-col>
-          <el-form-item label="学校名称" prop="">
-            <el-input v-model="talentForm.educationExperience[0].schoolName" class="wholeLine"></el-input>
-          </el-form-item>
-        </el-col>
-        <el-col :span="12">
-          <el-form-item label="学历" prop="">
-            <el-select v-model="talentForm.educationExperience[0].degree" placeholder="请选择">
-              <el-option
-                  label="1"
-                  value="1">
-              </el-option>
-            </el-select>
-          </el-form-item>
-        </el-col>
-        <el-col :span="12">
-          <el-form-item label="专业名称" prop="">
-            <el-input v-model="talentForm.educationExperience[0].subject"></el-input>
-          </el-form-item>
-        </el-col>
-        <el-col :span="12">
-          <el-form-item label="开始时间" prop="">
-            <el-date-picker
-                v-model="talentForm.educationExperience[0].startTime"
-                type="date"
-                placeholder="选择日期">
-            </el-date-picker>
-          </el-form-item>
-        </el-col>
-        <!--        <el-col class="line" :span="2">-</el-col>-->
-        <el-col :span="12">
-          <el-form-item label="结束时间" prop="">
-            <el-date-picker
-                v-model="talentForm.educationExperience[0].endTime"
-                type="date"
-                placeholder="选择日期">
-            </el-date-picker>
-          </el-form-item>
-        </el-col>
-        <el-col :span="12">
-          <el-form-item label="" prop="">+增加教育经历</el-form-item>
-        </el-col>
-        <el-col :span="12">
-          <el-form-item label="" prop="">垃圾桶</el-form-item>
-        </el-col>
+        <div v-for="(item, index) in talentForm.educationExperience" :key="index">
+          <el-col>
+            <el-form-item label="学校名称" prop="">
+              <el-input v-model="item.schoolName" class="wholeLine"></el-input>
+            </el-form-item>
+          </el-col>
+          <el-col :span="12">
+            <el-form-item label="学历" prop="">
+              <el-select v-model="item.degree" placeholder="请选择">
+                <el-option
+                    label="1"
+                    value="1">
+                </el-option>
+              </el-select>
+            </el-form-item>
+          </el-col>
+          <el-col :span="12">
+            <el-form-item label="专业名称" prop="">
+              <el-input v-model="item.subject"></el-input>
+            </el-form-item>
+          </el-col>
+          <el-col :span="12">
+            <el-form-item label="开始时间" prop="">
+              <el-date-picker
+                  v-model="item.startTime"
+                  type="date"
+                  placeholder="选择日期">
+              </el-date-picker>
+            </el-form-item>
+          </el-col>
+          <!--        <el-col class="line" :span="2">-</el-col>-->
+          <el-col :span="12">
+            <el-form-item label="结束时间" prop="">
+              <el-date-picker
+                  v-model="item.endTime"
+                  type="date"
+                  placeholder="选择日期">
+              </el-date-picker>
+            </el-form-item>
+          </el-col>
+          <el-col :span="12">
+            <el-form-item label="" prop="">
+              <el-button type="text" @click="addEduExp">
+                <el-icon class="el-icon-plus"></el-icon>
+                增加教育经历
+              </el-button>
+            </el-form-item>
+          </el-col>
+          <el-col :span="12">
+            <el-form-item label="" prop="" style="text-align: right">
+              <el-button type="text" @click="deleteEduExp(index)">
+                <el-icon class="el-icon-delete"></el-icon>
+              </el-button>
+            </el-form-item>
+          </el-col>
+        </div>
       </el-row>
 
 
       <el-row ref="jobExperience">
         <h4 id="jobExperience">工作履历</h4>
         <div class="headLine"></div>
-        <el-col>
-          <el-form-item label="公司名称" prop="" class="wholeLine">
-            <el-input v-model="talentForm.trackRecord[0].companyName"></el-input>
-          </el-form-item>
-        </el-col>
-        <el-col>
-          <el-form-item label="职位名称" prop="" class="wholeLine">
-            <el-input v-model="talentForm.trackRecord[0].job"></el-input>
-          </el-form-item>
-        </el-col>
-        <el-col :span="12">
-          <el-form-item label="开始时间" prop="">
-            <el-date-picker
-                v-model="talentForm.trackRecord[0].startTime"
-                type="date"
-                placeholder="选择日期">
-            </el-date-picker>
-          </el-form-item>
-        </el-col>
-        <el-col :span="12">
-          <el-form-item label="结束时间" prop="">
-            <el-date-picker
-                v-model="talentForm.trackRecord[0].endTime"
-                type="date"
-                placeholder="选择日期">
-            </el-date-picker>
-          </el-form-item>
-        </el-col>
-        <el-col>
-          <el-form-item label="工作内容" prop="">
-            <el-input
-                type="textarea"
-                autosize
-                maxlength="1500"
-                show-word-limit
-                placeholder="请输入内容"
-                v-model="talentForm.trackRecord[0].jobResponsibility"
-            >
-            </el-input>
-          </el-form-item>
-        </el-col>
+        <div v-for="(item, index) in talentForm.trackRecord" :key="index">
+          <el-col>
+            <el-form-item label="公司名称" prop="" class="wholeLine">
+              <el-input v-model="item.companyName"></el-input>
+            </el-form-item>
+          </el-col>
+          <el-col>
+            <el-form-item label="职位名称" prop="" class="wholeLine">
+              <el-input v-model="item.job"></el-input>
+            </el-form-item>
+          </el-col>
+          <el-col :span="12">
+            <el-form-item label="开始时间" prop="">
+              <el-date-picker
+                  v-model="item.startTime"
+                  type="date"
+                  placeholder="选择日期">
+              </el-date-picker>
+            </el-form-item>
+          </el-col>
+          <el-col :span="12">
+            <el-form-item label="结束时间" prop="">
+              <el-date-picker
+                  v-model="item.endTime"
+                  type="date"
+                  placeholder="选择日期">
+              </el-date-picker>
+            </el-form-item>
+          </el-col>
+          <el-col>
+            <el-form-item label="工作内容" prop="">
+              <el-input
+                  type="textarea"
+                  autosize
+                  maxlength="1500"
+                  show-word-limit
+                  placeholder="请输入内容"
+                  v-model="item.jobResponsibility"
+              >
+              </el-input>
+            </el-form-item>
+          </el-col>
+          <el-col :span="12">
+            <el-form-item label="" prop="">
+              <el-button type="text" @click="addJobExp">
+                <el-icon class="el-icon-plus"></el-icon>
+                增加工作履历
+              </el-button>
+            </el-form-item>
+          </el-col>
+        </div>
       </el-row>
 
 
       <el-row ref="certification">
         <h4 id="certification">资格证书</h4>
         <div class="headLine"></div>
-        <el-col>
-          <el-form-item label="证书名称" prop="">
-            <el-input v-model="talentForm.certificates[0].certificateName" class="wholeLine"></el-input>
-          </el-form-item>
-        </el-col>
-        <el-col :span="12">
-          <el-form-item label="证书号" prop="">
-            <el-input v-model="talentForm.certificates[0].certificateNumber"></el-input>
-          </el-form-item>
-        </el-col>
-        <el-col :span="12">
-          <el-form-item label="获得时间" prop="">
-            <el-date-picker
-                v-model="talentForm.trackRecord[0].getTime"
-                type="date"
-                placeholder="选择日期">
-            </el-date-picker>
-          </el-form-item>
-        </el-col>
-        <el-col>
-          <el-form-item label="" prop="">按钮</el-form-item>
-        </el-col>
+        <div v-for="(item, index) in talentForm.certificates" :key="index">
+          <el-col>
+            <el-form-item label="证书名称" prop="">
+              <el-input v-model="item.certificateName" class="wholeLine"></el-input>
+            </el-form-item>
+          </el-col>
+          <el-col :span="12">
+            <el-form-item label="证书号" prop="">
+              <el-input v-model="item.certificateNumber"></el-input>
+            </el-form-item>
+          </el-col>
+          <el-col :span="12">
+            <el-form-item label="获得时间" prop="">
+              <el-date-picker
+                  v-model="item.getTime"
+                  type="date"
+                  placeholder="选择日期">
+              </el-date-picker>
+            </el-form-item>
+          </el-col>
+          <el-col :span="12">
+            <el-form-item label="" prop="">
+              <el-button type="text" @click="addCertificate">
+                <el-icon class="el-icon-plus"></el-icon>
+                增加资格证书
+              </el-button>
+            </el-form-item>
+          </el-col>
+        </div>
+
       </el-row>
 
 
@@ -439,7 +473,7 @@ import {mapState} from 'vuex'
 export default {
   name: "TalentInfo",
   computed: {
-    ...mapState(['candidateTypes', 'politicalStatus', 'idType', 'nationality', 'ethnicGroup', 'maritalStatus', 'academicDegree', 'diploma', 'rewardOrPunishment'])
+    ...mapState(['candidateTypes', 'politicalStatus', 'idType', 'nationality', 'ethnicGroup', 'nativePlace', 'maritalStatus', 'academicDegree', 'diploma', 'rewardOrPunishment'])
   },
   data(){
     return{
@@ -575,6 +609,38 @@ export default {
         suf.className = '';
         suf = suf.nextElementSibling;
       }
+    },
+    addEduExp(){
+      this.talentForm.educationExperience.push({
+        schoolName: '',
+        degree: '',
+        subject: '',
+        startTime: '',
+        endTime: '',
+      })
+    },
+    deleteEduExp(index){
+      if(this.talentForm.educationExperience.length === 1){
+        this.$confirm('教育经历至少有一个')
+      }else {
+        this.talentForm.educationExperience.splice(index, 1)
+      }
+    },
+    addJobExp(){
+      this.talentForm.trackRecord.push({
+        companyName: '',
+        job: '',
+        startTime: '',
+        endTime: '',
+        jobResponsibility: '',
+      })
+    },
+    addCertificate(){
+      this.talentForm.certificates.push({
+        certificateName: '',
+        certificateNumber: '',
+        getTime: '',
+      })
     }
   }
 }
@@ -603,11 +669,12 @@ h4{
   margin-top: 0.33em;
 }
 /*表单项*/
-.el-form-item--mini.el-form-item, .el-form-item--small.el-form-item{
+.el-form-item{
   width: 16vw;
 }
-/deep/ .el-input--small .el-input__inner{
+/deep/ .el-input .el-input__inner{
   width: 16vw;
+  height: 5vh;
 }
 /*整行*/
 /deep/ .wholeLine .el-input__inner{
@@ -628,7 +695,7 @@ h4{
 }
 /*输入框获取焦点后边框变色*/
 /deep/.el-input__inner:focus{
-  border-color: #AD002B;
+  border-color: #AD002B!important;
 }
 /*选择框获取焦点时*/
 /deep/ .el-select .el-input.is-focus .el-input__inner{
@@ -638,6 +705,16 @@ h4{
 .el-select-dropdown__item.selected{
   color: #AD002B;
 }
+/*级联选择器*/
+/deep/ .el-cascader .el-input .el-input__inner:focus, .el-cascader .is-focus .el-input__inner{
+  border-color: #AD002B!important;
+}
+.el-cascader .is-focus .el-input__inner{
+  border-color: #AD002B!important;
+}
+/*/deep/ .el-select-small .el-input__inner {*/
+/*  vertical-align: bottom !important;*/
+/*}*/
 /*radio*/
 /deep/ .el-radio__inner:hover {
   border-color: #AD002B;
