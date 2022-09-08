@@ -49,6 +49,7 @@ export default {
 }
 .top_nav .bank_img{
   width: 160px;
+  height: 60px;
 }
 .top_nav .bank_img img{
   height: 60px;
