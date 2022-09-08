@@ -16,7 +16,36 @@ const routes = [
   //   name: 'about',
   //   component: () => import(/* webpackChunkName: "about" */ '../views')
   // }
-
+  {
+    path: '/',
+    component: () => import(/* webpackChunkName: "about" */ '../views/Data'),
+    children: [
+      {
+        path: '/EvaluationResults',
+        component: () => import(/* webpackChunkName: "about" */ '../components/EvaluationResults'),
+      },
+      {
+        path: '/EvaluationHistory',
+        component: () => import(/* webpackChunkName: "about" */ '../components/EvaluationHistory'),
+      },
+      {
+        path: '/OriginalIndex',
+        component: () => import(/* webpackChunkName: "about" */ '../components/OriginalIndex'),
+      },
+      {
+        path: '/QuantitativeIndex',
+        component: () => import(/* webpackChunkName: "about" */ '../components/QuantitativeIndex'),
+      },
+      {
+        path: '/EvaluationModel',
+        component: () => import(/* webpackChunkName: "about" */ '../components/EvaluationModel'),
+      },
+      {
+        path: '/EvaluationSubject',
+        component: () => import(/* webpackChunkName: "about" */ '../components/EvaluationSubject'),
+      },
+    ]
+  },
 ]
 
 const router = new VueRouter({
