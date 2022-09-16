@@ -18,7 +18,8 @@
     </el-menu>
   </el-col>
   <el-col :span="21">
-    <router-view></router-view>
+    <router-view v-if="loginFlag"></router-view>
+    <el-button v-else @click="getToken">点击登录</el-button>
   </el-col>
 </el-row>
 </template>
@@ -64,12 +65,25 @@ export default {
             },
           ],
         },
-      ]
+      ],
+      loginFlag: false,
     }
   },
   created(){
     // console.log(this.$route.path);
   },
+  methods: {
+    getToken() {
+      this.$store.dispatch('evaluationResults/getToken',)
+          .then((res) => {
+            console.log(res);
+            this.loginFlag = true;
+          })
+          .catch((error) => {
+            console.dir(error)
+          })
+    }
+  }
 }
 </script>
 

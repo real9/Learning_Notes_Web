@@ -5,18 +5,46 @@
 <script>
 export default {
   name: "RadarChart",
-  props:{},
   data(){
     return{
       dimensions: ['管理', '市场', '融资', '研发', '其他加分项', '其他扣分项'],
       score: [11, 20, 28, 17, 25, 30],
+      radarData: {
+        maxValue: [],
+        quantValue: [],
+      },
+      tempData: {}
     }
   },
   mounted() {
     this.initRadarChart();
   },
   methods:{
-    initRadarChart(){
+    async initRadarChart(){
+      await this.$store.dispatch('evaluationResults/getScoreDetail', {
+        companyId: "91330421MA2CYP1X1R",
+        modelId: "hg1000015720211210",
+        updateTime: "20220729"
+      })
+          .then((res) => {
+            let maxSum, quantSum;
+            this.tempData = res.data.data;
+            console.log(this.tempData);
+            for(let i = 0; i < this.tempData.length; i ++){
+              maxSum = 0;
+              quantSum = 0;
+              for(let j = 0; j < this.tempData[i].scoreDetailList.length; j ++){
+                maxSum += parseInt(this.tempData[i].scoreDetailList[j].quantMaxValue);
+                quantSum += parseInt(this.tempData[i].scoreDetailList[j].quantValue)
+              }
+              this.radarData.maxValue.push(maxSum);
+              this.radarData.quantValue.push(quantSum);
+            }
+            console.log(typeof this.radarData.maxValue[0], typeof this.radarData.quantValue[0])
+          })
+          .catch((error) => {
+            console.dir(error)
+          })
       let myChart = this.$echarts.init(document.getElementById('radarChart'), null, {
         width:450,
         height:400
@@ -26,19 +54,19 @@ export default {
         radar: {
           // shape: 'circle',
           indicator: [
-            {name: '管理', max: 13},
-            {name: '市场', max: 20},
-            {name: '融资', max: 44},
-            {name: '研发', max: 23},
-            {name: '其他加分项', max: 50},
-            {name: '其他扣分项', max: 50}
+            {name: '管理', max: that.radarData.maxValue[0]},
+            {name: '市场', max: that.radarData.maxValue[1]},
+            {name: '融资', max: that.radarData.maxValue[2]},
+            {name: '研发', max: that.radarData.maxValue[3]},
+            {name: '其他加分项', max: that.radarData.maxValue[4]},
+            {name: '其他扣分项', max: that.radarData.maxValue[5]}
           ],
           axisName: {
             color: '#000',
             fontSize: 14,
             formatter: function (value,indicator){
               let index = that.dimensions.indexOf(indicator.name)
-              return value + '\n' + that.score[index] + '/' + indicator.max;
+              return value + '\n' + that.radarData.quantValue[index] + '/' + indicator.max;
             }
           },
           axisLine: {
@@ -56,7 +84,7 @@ export default {
           type: 'radar',
           data: [
             {
-              value : this.score,
+              value : that.radarData.quantValue,
             },
           ],
           lineStyle:{

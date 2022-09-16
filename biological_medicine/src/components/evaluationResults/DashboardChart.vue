@@ -7,7 +7,10 @@
 export default {
   name: "DashboardChart",
   props:{
-
+    score: {
+      type: Number,
+      default: 0,
+    }
   },
   mounted() {
     this.initDashboardChart();
@@ -108,7 +111,7 @@ export default {
             },
             data: [
               {
-                value: 80
+                value: this.score
               }
             ],
             color:{
