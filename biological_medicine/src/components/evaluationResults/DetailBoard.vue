@@ -18,7 +18,7 @@
     </el-descriptions-item>
 
     <el-descriptions-item label="得分/满分">
-      <el-progress :percentage="60" :format="format" :stroke-width="10"
+      <el-progress :percentage="percentage" :format="format" :stroke-width="10"
                    :color="danger ? customColors_danger : customColors" :class="danger ? 'danger' : ''"></el-progress>
     </el-descriptions-item>
   </el-descriptions>
@@ -28,6 +28,11 @@
 <script>
 export default {
   name: "DetailBoard",
+  computed:{
+    percentage: function (){
+      return (this.evaluation.quantValue / this.evaluation.quantMaxValue).toFixed(2) * 100;
+    }
+  },
   data(){
     return{
       labelStyle:{
