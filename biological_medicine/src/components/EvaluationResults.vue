@@ -35,7 +35,7 @@
   </el-row>
   <el-row>
     <el-col :span="6">
-      <el-card class="charts">
+      <el-card class="charts" style="height: 481px">
         <div slot="header" class="chartHead">
           <el-icon class="el-icon-odometer icon"></el-icon>
           <span>评估分数</span>
@@ -83,47 +83,55 @@
           <el-button type="text" class="btn"><i class="el-icon-download"></i></el-button>
         </div>
         <div>
-          <el-row>
-            <el-col><div class="dimension">评估维度一：管理</div></el-col>
-            <el-col :span="12">
-              <detail-board></detail-board>
+          <el-row :gutter="20">
+            <el-col>
+              <div class="dimension">评估维度一：管理</div>
             </el-col>
-            <el-col :span="12"></el-col>
+            <el-col class="content">
+              <el-col :span="12" v-for="(item,index) in tempData[0].scoreDetailList" :key="index" class="contentBlock">
+                <detail-board :evaluation="item"></detail-board>
+              </el-col>
+            </el-col>
           </el-row>
-          <el-row>
+          <el-row :gutter="20">
             <el-col><div class="dimension">评估维度二：市场</div></el-col>
-            <el-col :span="12">
-              <detail-board></detail-board>
+            <el-col class="content">
+              <el-col :span="12" v-for="(item,index) in tempData[1].scoreDetailList" :key="index" class="contentBlock">
+                <detail-board :evaluation="item"></detail-board>
+              </el-col>
             </el-col>
-            <el-col :span="12"></el-col>
           </el-row>
-          <el-row>
+          <el-row :gutter="20">
             <el-col><div class="dimension">评估维度三：融资</div></el-col>
-            <el-col :span="12">
-              <detail-board></detail-board>
+            <el-col class="content">
+              <el-col :span="12" v-for="(item,index) in tempData[2].scoreDetailList" :key="index" class="contentBlock">
+                <detail-board :evaluation="item"></detail-board>
+              </el-col>
             </el-col>
-            <el-col :span="12"></el-col>
           </el-row>
-          <el-row>
+          <el-row :gutter="20">
             <el-col><div class="dimension">评估维度四：研发</div></el-col>
-            <el-col :span="12">
-              <detail-board></detail-board>
+            <el-col class="content">
+              <el-col :span="12" v-for="(item,index) in tempData[3].scoreDetailList" :key="index" class="contentBlock">
+                <detail-board :evaluation="item"></detail-board>
+              </el-col>
             </el-col>
-            <el-col :span="12"></el-col>
           </el-row>
-          <el-row>
+          <el-row :gutter="20">
             <el-col><div class="dimension">评估维度五：其他加分项</div></el-col>
-            <el-col :span="12">
-              <detail-board mode="plus"></detail-board>
+            <el-col class="content">
+              <el-col :span="12" v-for="(item,index) in tempData[4].scoreDetailList" :key="index" class="contentBlock">
+                <detail-board mode="plus" :evaluation="item"></detail-board>
+              </el-col>
             </el-col>
-            <el-col :span="12"></el-col>
           </el-row>
-          <el-row>
+          <el-row :gutter="20">
             <el-col><div class="dimension danger">评估维度六：其他扣分项</div></el-col>
-            <el-col :span="12">
-              <detail-board danger mode="minus"></detail-board>
+            <el-col class="content">
+              <el-col :span="12" v-for="(item,index) in tempData[5].scoreDetailList" :key="index" class="contentBlock">
+                <detail-board danger mode="minus" :evaluation="item"></detail-board>
+              </el-col>
             </el-col>
-            <el-col :span="12"></el-col>
           </el-row>
         </div>
       </el-card>
@@ -157,11 +165,19 @@ export default {
         url: '',
         score: 0,
       },
+      tempData:{},
+      evaluation:{
+        quantFeatureName: '',
+        mapDesc: '',
+        quantMaxValue: 100,
+        quantValue: 0
+      }
     }
   },
   created() {
     this.getCompanyInfo();
-    // this.getCompanyScore();
+    this.getCompanyScore();
+    this.getScoreDetail();
   },
   methods: {
     //评估主体
@@ -178,12 +194,26 @@ export default {
     getCompanyScore() {
       this.$store.dispatch('evaluationResults/getCompanyScore', {companyId: "91330421MA2CYP1X1R"})
           .then((res) => {
-            console.log(res)
+            console.log('history',res)
           })
           .catch((error) => {
             console.dir(error)
           })
     },
+    getScoreDetail(){
+      this.$store.dispatch('evaluationResults/getScoreDetail', {
+        companyId: "91330421MA2CYP1X1R",
+        modelId: "hg1000015720211210",
+        updateTime: "20220729"
+      })
+          .then((res) => {
+            this.tempData = res.data.data;
+            console.log(this.tempData);
+          })
+          .catch((error) => {
+            console.dir(error)
+          })
+    }
   },
 }
 </script>
@@ -271,6 +301,14 @@ export default {
 }
 .resultsBoard .detail .el-row:not(:first-child) .dimension{
   margin-top: 16px;
+}
+.resultsBoard .detail .content{
+  display: flex;
+  align-items: stretch;
+  flex-wrap: wrap;
+}
+.resultsBoard .detail .content .contentBlock{
+  margin-bottom: 20px
 }
 .resultsBoard .detail .danger{
   color: rgb(255,103,84)!important;

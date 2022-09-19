@@ -40,7 +40,6 @@ export default {
               this.radarData.maxValue.push(maxSum);
               this.radarData.quantValue.push(quantSum);
             }
-            console.log(typeof this.radarData.maxValue[0], typeof this.radarData.quantValue[0])
           })
           .catch((error) => {
             console.dir(error)

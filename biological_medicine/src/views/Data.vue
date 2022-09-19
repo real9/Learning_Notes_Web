@@ -19,7 +19,7 @@
   </el-col>
   <el-col :span="21">
     <router-view v-if="loginFlag"></router-view>
-    <el-button v-else @click="getToken">点击登录</el-button>
+<!--    <el-button v-else @click="getToken">点击登录</el-button>-->
   </el-col>
 </el-row>
 </template>
@@ -66,7 +66,7 @@ export default {
           ],
         },
       ],
-      loginFlag: false,
+      loginFlag: true,
     }
   },
   created(){

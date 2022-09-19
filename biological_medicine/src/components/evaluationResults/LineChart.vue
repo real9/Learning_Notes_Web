@@ -5,7 +5,16 @@
 <script>
 export default {
   name: "LineChart",
-  props:{},
+  props:{
+    dateCategory:{
+      type: Array,
+      default: () => {return []}
+    },
+    historyData:{
+      type: Array,
+      default: () => {return []}
+    }
+  },
   mounted() {
     this.initLineChart();
   },
@@ -15,6 +24,7 @@ export default {
         width:450,
         height:400
       });
+      // let that = this;
       let option = {
         xAxis: {
           type: 'category',

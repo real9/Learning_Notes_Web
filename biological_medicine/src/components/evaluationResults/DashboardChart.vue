@@ -9,7 +9,7 @@ export default {
   props:{
     score: {
       type: Number,
-      default: 0,
+      default: 20,
     }
   },
   mounted() {
@@ -111,7 +111,7 @@ export default {
             },
             data: [
               {
-                value: this.score
+                value: 20
               }
             ],
             color:{
