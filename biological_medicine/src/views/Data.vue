@@ -1,14 +1,14 @@
 <template>
 <el-row class="leftMenu">
   <el-col :span="3">
-    <el-menu class="el-menu-vertical-demo" router :default-active="$route.path">
+    <el-menu class="el-menu-vertical-demo" router :default-active="$route.path" active-text-color="#fff">
       <template v-for="(item,index) in menus">
         <el-menu-item v-if="item.subMenu.length === 0" :key="index" :index="item.path">
-          <i :class="item.icon"></i>{{ item.title }}
+          <i :class="item.icon" style="color: rgb(121,212,254)"></i>{{ item.title }}
         </el-menu-item>
         <el-submenu v-else :key="index" :index="item.path">
           <template slot="title">
-            <i :class="item.icon"></i>
+            <i :class="item.icon" style="color: rgb(121,212,254)"></i>
             {{ item.title }}</template>
           <el-menu-item v-for="(i,idx) in item.subMenu" :key="idx" :index="i.path">
             {{ i.title }}
@@ -19,7 +19,7 @@
   </el-col>
   <el-col :span="21">
     <router-view v-if="loginFlag"></router-view>
-<!--    <el-button v-else @click="getToken">点击登录</el-button>-->
+    <el-button v-else @click="getToken">点击登录</el-button>
   </el-col>
 </el-row>
 </template>
@@ -66,7 +66,7 @@ export default {
           ],
         },
       ],
-      loginFlag: true,
+      loginFlag: false,
     }
   },
   created(){
@@ -97,5 +97,13 @@ export default {
 }
 /deep/ .el-submenu .el-menu{
   background-color: rgb(244,252,255);
+}
+.el-menu-item.is-active{
+  background-color: #00a0ff;
+  color: white;
+}
+.el-menu-item:focus, .el-menu-item:hover, /deep/.el-submenu__title:hover{
+  background-color: #00a0ff;
+  color: white;
 }
 </style>

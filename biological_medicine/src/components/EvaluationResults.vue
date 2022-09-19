@@ -1,11 +1,12 @@
 <template>
-<div class="resultsBoard">
+<div class="resultsBoard" id="resultsBoard">
   <el-row>
     <el-col>
       <el-card class="companyInfo">
         <div slot="header" class="clearfix">
           <span>{{ companyInfo.companyName }}</span>
           <el-tag class="tag">{{ companyInfo.tag }}</el-tag>
+          <el-button type="primary" style="float: right" @click="getPdf('#resultsBoard')">导出下载</el-button>
         </div>
         <el-row :gutter="20">
           <el-col :span="12">
@@ -35,7 +36,7 @@
   </el-row>
   <el-row>
     <el-col :span="6">
-      <el-card class="charts" style="height: 481px">
+      <el-card class="charts">
         <div slot="header" class="chartHead">
           <el-icon class="el-icon-odometer icon"></el-icon>
           <span>评估分数</span>
@@ -75,12 +76,12 @@
   </el-row>
   <el-row>
     <el-col>
-      <el-card class="detail">
+      <el-card class="detail" id="detailCard">
         <div slot="header" class="detailHead">
           <el-icon class="el-icon-zoom-out icon"></el-icon>
           <span>评估结果明细</span>
-          <el-button type="text" class="btn"><i class="el-icon-refresh"></i></el-button>
-          <el-button type="text" class="btn"><i class="el-icon-download"></i></el-button>
+          <el-button type="text" class="btn" @click="getScoreDetail"><i class="el-icon-refresh"></i></el-button>
+          <el-button type="text" class="btn" @click="getPdf('#detailCard')"><i class="el-icon-download"></i></el-button>
         </div>
         <div>
           <el-row :gutter="20">
