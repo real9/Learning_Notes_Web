@@ -35,43 +35,45 @@
     </el-col>
   </el-row>
   <el-row>
-    <el-col :span="6">
-      <el-card class="charts">
-        <div slot="header" class="chartHead">
-          <el-icon class="el-icon-odometer icon"></el-icon>
-          <span>评估分数</span>
-        </div>
-        <div>
-          <dashboard-chart :score="companyInfo.score"></dashboard-chart>
-        </div>
-        <div class="rank">
-          <span>已评价企业排名：</span>
-          <span class="rankNum">{{15}}</span>
-          <span>/100</span>
-        </div>
-      </el-card>
-    </el-col>
-    <el-col :span="9">
-      <el-card class="charts">
-        <div slot="header" class="chartHead">
-          <el-icon class="el-icon-data-board icon"></el-icon>
-          <span>评价概览</span>
-        </div>
-        <div>
-          <radar-chart></radar-chart>
-        </div>
-      </el-card>
-    </el-col>
-    <el-col :span="9">
-      <el-card class="charts">
-        <div slot="header" class="chartHead">
-          <el-icon class="el-icon-data-analysis icon"></el-icon>
-          <span>企业历史评分</span>
-        </div>
-        <div>
-          <line-chart></line-chart>
-        </div>
-      </el-card>
+    <el-col class="chartsInline">
+      <el-col :span="6">
+        <el-card class="charts">
+          <div slot="header" class="chartHead">
+            <el-icon class="el-icon-odometer icon"></el-icon>
+            <span>评估分数</span>
+          </div>
+          <div>
+            <dashboard-chart :score="companyInfo.score"></dashboard-chart>
+          </div>
+          <div class="rank">
+            <span>已评价企业排名：</span>
+            <span class="rankNum">{{15}}</span>
+            <span>/100</span>
+          </div>
+        </el-card>
+      </el-col>
+      <el-col :span="9">
+        <el-card class="charts">
+          <div slot="header" class="chartHead">
+            <el-icon class="el-icon-data-board icon"></el-icon>
+            <span>评价概览</span>
+          </div>
+          <div>
+            <radar-chart></radar-chart>
+          </div>
+        </el-card>
+      </el-col>
+      <el-col :span="9">
+        <el-card class="charts">
+          <div slot="header" class="chartHead">
+            <el-icon class="el-icon-data-analysis icon"></el-icon>
+            <span>企业历史评分</span>
+          </div>
+          <div>
+            <line-chart></line-chart>
+          </div>
+        </el-card>
+      </el-col>
     </el-col>
   </el-row>
   <el-row>
@@ -259,12 +261,13 @@ export default {
 .resultsBoard .companyInfo .info .item{
   line-height: 20px;
 }
-.resultsBoard .charts{
+.resultsBoard .chartsInline .charts{
   margin-top: 20px;
   margin-right: 20px;
+  height: 100%;
 }
 /*注意层级关系，直接对charts使用last-child是无效的*/
-.resultsBoard .el-row .el-col:last-child .charts{
+.resultsBoard .el-row .chartsInline .el-col:last-child .charts{
   margin-right: 0;
 }
 .resultsBoard .charts .chartHead, .resultsBoard .detail .detailHead{
@@ -313,5 +316,11 @@ export default {
 }
 .resultsBoard .detail .danger{
   color: rgb(255,103,84)!important;
+}
+.resultsBoard .chartsInline{
+  display: flex;
+  align-items: stretch;
+  flex-wrap: wrap;
+  margin-bottom: 60px;
 }
 </style>

@@ -38,6 +38,9 @@ export default {
           data: [150, 230, 224, 218, 135, 147, 260],
           itemStyle:{
             color:'#409EFF',
+          },
+          label:{
+            show: true,
           }
         }
       };
