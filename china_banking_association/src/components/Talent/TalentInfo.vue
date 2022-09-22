@@ -1,6 +1,6 @@
 <template>
 <div>
-  <el-col :span="18" class="main">
+  <el-col :md="18" class="main" :sm="24" :xs="24">
     <el-row ref="top">
       <el-col class="uploadBox">
         <el-upload
@@ -41,12 +41,12 @@
         <h4 id="basicInformation">基本信息</h4>
         <div class="headLine"></div>
         <el-row>
-          <el-col :span="12">
+          <el-col :md="12" :sm="24" :xs="24">
             <el-form-item label="姓名" prop="name">
               <el-input v-model="talentForm.basicInfo.name"></el-input>
             </el-form-item>
           </el-col>
-          <el-col :span="12">
+          <el-col :md="12" :sm="24" :xs="24">
             <el-form-item label="性别" prop="sex">
               <el-radio-group v-model="talentForm.basicInfo.sex">
                 <el-radio label="male">先生</el-radio>
@@ -56,7 +56,7 @@
           </el-col>
         </el-row>
 
-        <el-col :span="12">
+        <el-col :md="12" :sm="24" :xs="24">
           <el-form-item label="出生日期" prop="birth" style="display: inline; white-space:nowrap">
             <el-date-picker
                 v-model="talentForm.basicInfo.birth"
@@ -65,7 +65,7 @@
             </el-date-picker>
           </el-form-item>
         </el-col>
-        <el-col :span="12">
+        <el-col :md="12" :sm="24" :xs="24">
           <el-form-item label="政治面貌" prop="politicalStatus" style="display: inline; white-space:nowrap">
             <el-select v-model="talentForm.basicInfo.politicalStatus" placeholder="请选择">
               <el-option
@@ -78,7 +78,7 @@
           </el-form-item>
         </el-col>
 
-        <el-col :span="12">
+        <el-col :md="12" :sm="24" :xs="24">
           <el-form-item label="证件类型" prop="idCardType">
             <el-select v-model="talentForm.basicInfo.idCardType" placeholder="请选择">
               <el-option
@@ -90,12 +90,12 @@
             </el-select>
           </el-form-item>
         </el-col>
-        <el-col :span="12">
+        <el-col :md="12" :sm="24" :xs="24">
           <el-form-item label="证件号码" prop="idCardNum">
             <el-input v-model="talentForm.basicInfo.idCardNum"></el-input>
           </el-form-item>
         </el-col>
-        <el-col :span="12">
+        <el-col :md="12" :sm="24" :xs="24">
           <el-form-item label="国籍" prop="nationality">
             <el-select v-model="talentForm.basicInfo.nationality" placeholder="请选择">
               <el-option
@@ -107,7 +107,7 @@
             </el-select>
           </el-form-item>
         </el-col>
-        <el-col :span="12">
+        <el-col :md="12" :sm="24" :xs="24">
           <el-form-item label="民族" prop="ethnicGroup">
             <el-select v-model="talentForm.basicInfo.ethnicGroup" placeholder="请选择">
               <el-option
@@ -119,7 +119,7 @@
             </el-select>
           </el-form-item>
         </el-col>
-        <el-col :span="12">
+        <el-col :md="12" :sm="24" :xs="24">
           <el-form-item label="籍贯" prop="nativePlace">
 <!--                        <el-cascader-->
 <!--                            v-model="talentForm.basicInfo.nativePlace"-->
@@ -133,7 +133,7 @@
             ></el-cascader>
           </el-form-item>
         </el-col>
-        <el-col :span="12">
+        <el-col :md="12" :sm="24" :xs="24">
           <el-form-item label="婚姻状况" prop="maritalStatus">
             <el-select v-model="talentForm.basicInfo.maritalStatus" placeholder="请选择">
               <el-option
@@ -146,12 +146,12 @@
           </el-form-item>
         </el-col>
         <div>
-          <el-col :span="12">
+          <el-col :md="12" :sm="24" :xs="24">
             <el-form-item label="联系方式" prop="telephoneNum">
               <el-input v-model="talentForm.basicInfo.telephoneNum"></el-input>
             </el-form-item>
           </el-col>
-          <el-col :span="12">
+          <el-col :md="12" :sm="24" :xs="24">
             <el-form-item label="参加工作时间" prop="joinWorkTime">
               <el-date-picker
                   v-model="talentForm.basicInfo.joinWorkTime"
@@ -162,27 +162,27 @@
             </el-form-item>
           </el-col>
         </div>
-        <el-col :span="12">
+        <el-col :md="12" :sm="24" :xs="24">
           <el-form-item label="现任单位" prop="currentUnit">
             <el-input v-model="talentForm.basicInfo.currentUnit"></el-input>
           </el-form-item>
         </el-col>
-        <el-col :span="12">
+        <el-col :md="12" :sm="24" :xs="24">
           <el-form-item label="所在部门" prop="department">
             <el-input v-model="talentForm.basicInfo.department"></el-input>
           </el-form-item>
         </el-col>
-        <el-col :span="12">
+        <el-col :md="12" :sm="24" :xs="24">
           <el-form-item label="职务" prop="job">
             <el-input v-model="talentForm.basicInfo.job"></el-input>
           </el-form-item>
         </el-col>
-        <el-col :span="12">
+        <el-col :md="12" :sm="24" :xs="24">
           <el-form-item label="职称" prop="professionalTitle">
             <el-input v-model="talentForm.basicInfo.professionalTitle"></el-input>
           </el-form-item>
         </el-col>
-        <el-col :span="12">
+        <el-col :md="12" :sm="24" :xs="24">
           <el-form-item label="学历" prop="academicDegree">
             <el-select v-model="talentForm.basicInfo.academicDegree" placeholder="请选择">
               <el-option
@@ -194,7 +194,7 @@
             </el-select>
           </el-form-item>
         </el-col>
-        <el-col :span="12">
+        <el-col :md="12" :sm="24" :xs="24">
           <el-form-item label="学位" prop="diploma">
             <el-select v-model="talentForm.basicInfo.diploma" placeholder="请选择">
               <el-option
@@ -206,12 +206,12 @@
             </el-select>
           </el-form-item>
         </el-col>
-        <el-col :span="12">
+        <el-col :md="12" :sm="24" :xs="24">
           <el-form-item label="专业" prop="subject">
             <el-input v-model="talentForm.basicInfo.subject"></el-input>
           </el-form-item>
         </el-col>
-        <el-col :span="12">
+        <el-col :md="12" :sm="24" :xs="24">
           <el-form-item label="银行独董累计任职年限" prop="termLength" :rules="[
       { required: true, message: '时间不能为空'},
       { type: 'number', message: '时间必须为数字值'}
@@ -219,7 +219,7 @@
             <el-input v-model.number="talentForm.basicInfo.termLength"></el-input>
           </el-form-item>
         </el-col>
-        <el-col :span="12">
+        <el-col :md="12" :sm="24" :xs="24">
           <el-form-item label="目前担任独董的银行数量" prop="bankNum" :rules="[
       { required: true, message: '数量不能为空'},
       { type: 'number', message: '数量必须为数字值'}
@@ -239,7 +239,7 @@
               <el-input v-model="item.schoolName" class="wholeLine"></el-input>
             </el-form-item>
           </el-col>
-          <el-col :span="12">
+          <el-col :md="12" :sm="24" :xs="24">
             <el-form-item label="学历" prop="educationExperience_degree">
               <el-select v-model="item.degree" placeholder="请选择">
                 <el-option
@@ -249,12 +249,12 @@
               </el-select>
             </el-form-item>
           </el-col>
-          <el-col :span="12">
+          <el-col :md="12" :sm="24" :xs="24">
             <el-form-item label="专业名称" prop="educationExperience_subject">
               <el-input v-model="item.subject"></el-input>
             </el-form-item>
           </el-col>
-          <el-col :span="12">
+          <el-col :md="12" :sm="24" :xs="24">
             <el-form-item label="开始时间" prop="educationExperience_startTime">
               <el-date-picker
                   v-model="item.startTime"
@@ -265,7 +265,7 @@
             </el-form-item>
           </el-col>
           <!--        <el-col class="line" :span="2">-</el-col>-->
-          <el-col :span="12">
+          <el-col :md="12" :sm="24" :xs="24">
             <el-form-item label="结束时间" prop="educationExperience_endTime">
               <el-date-picker
                   v-model="item.endTime"
@@ -275,7 +275,7 @@
               </el-date-picker>
             </el-form-item>
           </el-col>
-          <el-col :span="12">
+          <el-col :md="12" :sm="24" :xs="24">
             <el-form-item label="" prop="">
               <el-button type="text" @click="addEduExp">
                 <el-icon class="el-icon-plus"></el-icon>
@@ -283,8 +283,8 @@
               </el-button>
             </el-form-item>
           </el-col>
-          <el-col :span="12">
-            <el-form-item label="" prop="" style="text-align: right">
+          <el-col :md="12" :sm="24" :xs="24" class="deleteBtn">
+            <el-form-item label="" prop="">
               <el-button type="text" @click="deleteEduExp(index)">
                 <el-icon class="el-icon-delete"></el-icon>
               </el-button>
@@ -308,7 +308,7 @@
               <el-input v-model="item.job"></el-input>
             </el-form-item>
           </el-col>
-          <el-col :span="12">
+          <el-col :md="12" :sm="24" :xs="24">
             <el-form-item label="开始时间" prop="trackRecord_startTime">
               <el-date-picker
                   v-model="item.startTime"
@@ -318,7 +318,7 @@
               </el-date-picker>
             </el-form-item>
           </el-col>
-          <el-col :span="12">
+          <el-col :md="12" :sm="24" :xs="24">
             <el-form-item label="结束时间" prop="trackRecord_endTime">
               <el-date-picker
                   v-model="item.endTime"
@@ -329,7 +329,7 @@
               </el-date-picker>
             </el-form-item>
           </el-col>
-          <el-col style="text-align: right; padding-right: 2em">
+          <el-col class="untilNowBtn">
             <el-checkbox v-model="today" @change="updateTrackRecordEndtime">至今</el-checkbox>
           </el-col>
           <el-col>
@@ -345,7 +345,7 @@
               </el-input>
             </el-form-item>
           </el-col>
-          <el-col :span="12">
+          <el-col :md="12" :sm="24" :xs="24">
             <el-form-item label="" prop="">
               <el-button type="text" @click="addJobExp">
                 <el-icon class="el-icon-plus"></el-icon>
@@ -366,12 +366,12 @@
               <el-input v-model="item.certificateName" class="wholeLine"></el-input>
             </el-form-item>
           </el-col>
-          <el-col :span="12">
+          <el-col :md="12" :sm="24" :xs="24">
             <el-form-item label="证书号" prop="">
               <el-input v-model="item.certificateNumber"></el-input>
             </el-form-item>
           </el-col>
-          <el-col :span="12">
+          <el-col :md="12" :sm="24" :xs="24">
             <el-form-item label="获得时间" prop="">
               <el-date-picker
                   v-model="item.getTime"
@@ -381,7 +381,7 @@
               </el-date-picker>
             </el-form-item>
           </el-col>
-          <el-col :span="12">
+          <el-col :md="12" :sm="24" :xs="24">
             <el-form-item label="" prop="">
               <el-button type="text" @click="addCertificate">
                 <el-icon class="el-icon-plus"></el-icon>
@@ -411,7 +411,7 @@
           </el-form-item>
         </el-col>
         <el-col>
-          <el-form-item label="任职机构年度履职评价" prop="" style="width:33.5vw">
+          <el-form-item label="任职机构年度履职评价" prop="" >
             <el-upload
                 class="upload-demo"
                 action=""
@@ -430,7 +430,7 @@
       <el-row ref="rewardOrPunishmentInformation">
         <h4 id="rewardOrPunishmentInformation">奖惩信息</h4>
         <div class="headLine"></div>
-        <el-col :span="12">
+        <el-col :md="12" :sm="24" :xs="24">
           <el-form-item label="奖惩类型" prop="">
             <el-select v-model="talentForm.rewardOrPunishment.type" placeholder="请选择">
               <el-option
@@ -442,7 +442,7 @@
             </el-select>
           </el-form-item>
         </el-col>
-        <el-col :span="12">
+        <el-col :md="12" :sm="24" :xs="24">
           <el-form-item label="奖惩名称" prop="">
             <el-input v-model="talentForm.rewardOrPunishment.name"></el-input>
           </el-form-item>
@@ -475,7 +475,7 @@
     </el-form>
 
   </el-col>
-  <el-col :span="4">
+  <el-col :md="4" id="rightBar">
     <div class="rightBar">
       <div class="board">
         <div class="rightNavBar" ref="rightNavBar">
@@ -761,12 +761,91 @@ export default {
 </script>
 
 <style scoped>
-.main{
-  background-color: white;
-  margin-left: 1em;
-  margin-right: 1em;
-  padding: 2em;
+/*小设备*/
+@media all and (max-width: 992px) {
+  #rightBar{
+    display: none;
+  }
+  .main{
+    margin: unset;
+    background-color: white;
+    padding: 2em;
+  }
+  /*表单项*/
+  .el-form-item{
+    width: 60vw;
+  }
+  /deep/ .el-input .el-input__inner{
+    width: 60vw;
+    height: 36px;
+  }
+  /*整行*/
+  /deep/ .wholeLine .el-input__inner{
+    width: 60vw;
+  }
+/*  至今按钮的位置*/
+  .untilNowBtn{
+    text-align: left;
+    /*padding-right: 2em*/
+  }
+  /*文本域*/
+  /deep/ .el-textarea__inner{
+    width: 60vw!important;
+  }
+  /*删除按钮*/
+  .deleteBtn{
+    text-align: left;
+  }
+  /*文本域*/
+  /deep/ .el-textarea .el-input__count{
+    background: none;
+    position: absolute;
+    bottom: 0;
+    right: 0;
+  }
 }
+@media all and (min-width: 992px){
+  .main{
+    background-color: white;
+    margin-left: 1em;
+    margin-right: 1em;
+    padding: 2em;
+  }
+  /*表单项*/
+  .el-form-item{
+    width: 16vw;
+  }
+  /deep/ .el-input .el-input__inner{
+    width: 16vw;
+    height: 36px;
+  }
+  /*整行*/
+  /deep/ .wholeLine .el-input__inner{
+    width: 33.5vw;
+  }
+/*  至今按钮的位置*/
+  .untilNowBtn{
+    text-align: right;
+    padding-right: 2em;
+  }
+  /*文本域*/
+  /deep/ .el-textarea__inner{
+    width: 33.5vw!important;
+  }
+  /*删除按钮*/
+  .deleteBtn{
+    text-align: right;
+    padding-right: 2em;
+  }
+  /*文本域*/
+  /deep/ .el-textarea .el-input__count{
+    background: none;
+    position: absolute;
+    bottom: 0;
+    right: -17vw;
+  }
+}
+/*----------------------------其他无关屏幕大小的元素----------------------------*/
 hr{
   border: none;
   border-bottom: 1px solid #e6e6e6;
@@ -782,30 +861,15 @@ h4{
   margin-bottom: 1.33em;
   margin-top: 0.33em;
 }
-/*表单项*/
-.el-form-item{
-  width: 16vw;
-}
-/deep/ .el-input .el-input__inner{
-  width: 16vw;
-  height: 5vh;
-}
-/*整行*/
-/deep/ .wholeLine .el-input__inner{
-  width: 33.5vw;
-}
 /*文本域*/
-/deep/ .el-textarea .el-input__count{
-  background: none;
-  position: absolute;
-  bottom: 0;
-  right: -17vw;
-}
+/*/deep/ .el-textarea .el-input__count{*/
+/*  background: none;*/
+/*  position: absolute;*/
+/*  bottom: 0;*/
+/*  right: -17vw;*/
+/*}*/
 /deep/ .el-textarea__inner:focus{
   border-color: #AD002B;
-}
-/deep/ .el-textarea__inner{
-  width: 33.5vw!important;
 }
 /*输入框获取焦点后边框变色*/
 /deep/.el-input__inner:focus{

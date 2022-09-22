@@ -1,11 +1,11 @@
 <template>
 <div>
   <el-row class="top_nav">
-    <el-col :span="6" class="web_title">
+    <el-col :md="6" class="web_title" :xs="18" :sm="18">
       <p >中 国 银 行 业 协 会</p>
       <p class="english">CHINA BANK ASSOCIATION</p>
     </el-col>
-    <el-col :span="14">
+    <el-col :md="14" class="pc_menu">
       <el-menu :default-active="activeIndex" class="el-menu-demo" mode="horizontal" @select="handleSelect"
                active-text-color="white" text-color="white" background-color="#AD002B" :router="true">
         <el-menu-item index="1">首页</el-menu-item>
@@ -22,7 +22,7 @@
         </el-submenu>
       </el-menu>
     </el-col>
-    <el-col :span="4" class="user">
+    <el-col :md="4" class="user pc_user">
       <el-row >
         <el-col :span="4" :offset="6">
           <i class="el-icon-chat-dot-square info_icon"></i>
@@ -41,6 +41,9 @@
           </el-dropdown>
         </el-col>
       </el-row>
+    </el-col>
+    <el-col class="mobile_more" :xs="6" :sm="6">
+      <el-button type="text"><i class="el-icon-more"></i></el-button>
     </el-col>
   </el-row>
 </div>
@@ -63,9 +66,35 @@ export default {
 </script>
 
 <style scoped>
+@media all and (max-width: 992px){
+  .pc_menu{
+    display: none;
+  }
+  .pc_user{
+    display: none;
+  }
+  .mobile_more{
+    height: inherit;
+    text-align: right;
+    padding-right: 1em;
+  }
+  .mobile_more .el-button--text{
+    color: white;
+    height: inherit;
+  }
+}
+@media all and (min-width: 992px){
+  .mobile_more{
+    display: none;
+  }
+}
 .top_nav{
   background-color: #AD002B;
   height: 60px;
+  position: fixed;
+  top: 0;
+  z-index: 99;
+  width: 100%;
 }
 .top_nav p{
   color: white;

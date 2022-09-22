@@ -24,8 +24,14 @@ export default {
   color: #2c3e50;
   font-size: 14px;
 }
+
+@media screen and (min-width: 992px) {
+  .view{
+    margin-right: 10vw;
+    margin-left: 10vw;
+  }
+}
 .view{
-  margin-right: 10vw;
-  margin-left: 10vw;
+  margin-top: 60px;
 }
 </style>

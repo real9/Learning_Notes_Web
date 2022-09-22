@@ -7,7 +7,7 @@
         <el-breadcrumb-item>{{currentPage}}</el-breadcrumb-item>
       </el-breadcrumb>
     </el-col>
-    <el-col :span="4">
+    <el-col :md="4" id="left">
       <div class="left">
         <div class="leftMenu">
           <div :class="{'menuItem': true, 'active': activeClass}" @click="goToPage('人才信息')">人才信息</div>
@@ -15,7 +15,7 @@
         </div>
       </div>
     </el-col>
-    <el-col :span="20">
+    <el-col :md="20" :sm="24" :xs="24">
     <router-view></router-view>
   </el-col>
   </el-row>
@@ -52,6 +52,15 @@ export default {
 </script>
 
 <style scoped>
+/*小屏幕*/
+@media all and (max-width: 992px){
+  .el-breadcrumb{
+    display: none;
+  }
+  #left{
+    display: none;
+  }
+}
 .el-breadcrumb {
   margin-top: 10px;
   margin-bottom: 10px;
