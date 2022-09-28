@@ -371,11 +371,19 @@ export default new Vuex.Store({
         index: "2",
         label: "惩罚"
       },
-    ]
+    ],
+    isMobileMoreFlag: false,
+    loading: false,
   },
   getters: {
   },
   mutations: {
+    updateMobileFlag(state){
+      state.isMobileMoreFlag = !state.isMobileMoreFlag;
+    },
+    updateLoading(state){
+      state.loading = !state.loading;
+    }
   },
   actions: {
   },

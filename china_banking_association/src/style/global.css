@@ -72,3 +72,12 @@
 .el-cascader-node.in-active-path, .el-cascader-node.is-active, .el-cascader-node.is-selectable.in-checked-path{
     color: #D3002C;
 }
+
+/*加载文字*/
+.el-loading-spinner .el-loading-text{
+    color: #AD002B;
+}
+/*加载图标*/
+.el-loading-spinner .path{
+    stroke: #AD002B;
+}

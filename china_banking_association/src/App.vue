@@ -11,7 +11,7 @@ export default {
   name:'app',
   components: {
     topNav,
-  }
+  },
 }
 </script>
 
@@ -30,6 +30,9 @@ export default {
     margin-right: 10vw;
     margin-left: 10vw;
   }
+}
+@media all and (max-width: 992px){
+
 }
 .view{
   margin-top: 60px;

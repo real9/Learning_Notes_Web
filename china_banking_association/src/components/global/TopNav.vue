@@ -43,23 +43,36 @@
       </el-row>
     </el-col>
     <el-col class="mobile_more" :xs="6" :sm="6">
-      <el-button type="text"><i class="el-icon-more"></i></el-button>
+      <el-button type="text" @click="getMobileContent"><i class="el-icon-more"></i></el-button>
     </el-col>
   </el-row>
+  <mobile-content v-if="isMobileMoreFlag" class="mobile_menu-user" v-loading="loading" element-loading-text="加载中"></mobile-content>
 </div>
 </template>
 
 <script>
+import mobileContent from '../mobile/MoreContent'
+import {mapState} from 'vuex'
 export default {
   name: "TopNav",
   data() {
     return {
-      activeIndex: '2'
+      activeIndex: '2',
     }
+  },
+  computed: {
+    ...mapState(['isMobileMoreFlag','loading'])
+  },
+  components: {
+    mobileContent
   },
   methods: {
     handleSelect(key){
       console.log(key);
+    },
+    getMobileContent(){
+      // this.isMobileMoreFlag = !this.isMobileMoreFlag;
+      this.$store.commit('updateMobileFlag');
     }
   }
 }
@@ -77,10 +90,33 @@ export default {
     height: inherit;
     text-align: right;
     padding-right: 1em;
+    position: relative;
   }
   .mobile_more .el-button--text{
     color: white;
     height: inherit;
+  }
+  .mobile_menu-user{
+    /*不能用绝对定位，不然在滑动窗口时，该页面不会直接显示*/
+    position: fixed;
+    width: 100%;
+    border-bottom: #d9d9d9 solid 1px;
+    z-index: 99;
+    background-color: white;
+    padding-top: 40px;
+    animation: fadeInAnimation ease 1s;
+    animation-iteration-count: 1;
+    animation-fill-mode: forwards;
+  }
+  @keyframes fadeInAnimation {
+    0% {
+      top: 0px;
+      height: 40%;
+    }
+    100% {
+      top: 60px;
+      height: 100%;
+    }
   }
 }
 @media all and (min-width: 992px){
