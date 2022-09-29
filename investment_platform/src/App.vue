@@ -1,8 +1,19 @@
 <template>
   <div id="app">
-
+    <top-nav></top-nav>
+    <router-view></router-view>
   </div>
 </template>
+
+<script>
+import topNav from './components/globals/TopNav'
+
+export default {
+  components: {
+    topNav,
+  }
+}
+</script>
 
 <style>
 #app {
