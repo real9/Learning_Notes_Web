@@ -1,37 +1,38 @@
 <template>
 <el-row>
   <el-col class="second_nav">
-    <el-menu class="el-menu-demo" mode="horizontal" default-active="1">
+    <el-menu class="el-menu-demo" mode="horizontal" :default-active="menuItems[0].index" router>
       <el-menu-item v-for="item in menuItems" :key="item.index" :index="item.index">
         {{item.title}}
       </el-menu-item>
     </el-menu>
   </el-col>
   <el-col>
-    <keep-alive>
-      <component :is="componentName"></component>
-    </keep-alive>
+<!--    <keep-alive>-->
+<!--      <component :is="componentName"></component>-->
+<!--    </keep-alive>-->
+    <router-view class="second_view"></router-view>
   </el-col>
 </el-row>
 </template>
 
 <script>
-import FundProduct from '../components/fundResearch/FundProduct'
+// import fundProduct from '../components/fundResearch/FundProduct'
 export default {
   name: "FundResearch",
-  components: {
-    FundProduct,
-  },
+  // components: {
+  //   fundProduct,
+  // },
   data(){
     return{
       menuItems: [
         {
           title: '基金产品',
-          index: '1',
+          index: '/fundResearch',
         },
         {
           title: '基金经理',
-          index: '2',
+          index: '/fundResearch/fundManager',
         },
         {
           title: '基金公司',
@@ -54,13 +55,21 @@ export default {
           index: '7',
         },
       ],
-      componentName: 'FundProduct',
+      // componentName: 'FundProduct',
     }
+  },
+  created() {
+    // console.log(this.$route.matched[0].path);
   }
 }
 </script>
 
 <style scoped>
+.second_nav{
+  position: fixed;
+  top: 60px;
+  z-index: 99;
+}
 .second_nav .el-menu--horizontal{
   display: flex;
   justify-content: center;
@@ -76,5 +85,8 @@ export default {
 .el-menu--horizontal>.el-menu-item:not(.is-disabled):hover,
 .el-menu-item.is-active{
   border-bottom: 2px solid #409EFF;
+}
+.second_view{
+  top: 120px;
 }
 </style>

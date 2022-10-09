@@ -7,8 +7,9 @@
     <p>见知智投平台</p>
   </el-col>
   <el-col :span="14" style="margin-left: 1rem">
-      <el-menu class="el-menu-demo" mode="horizontal" :default-active="$route.path" router>
-      <el-menu-item v-for="item in menuItems" :key="item.path" :index="item.path">
+<!--      <el-menu class="el-menu-demo" mode="horizontal" :default-active="$route.matched[0].path" router>-->
+        <el-menu class="el-menu-demo" mode="horizontal" default-active="/basicData" router>
+        <el-menu-item v-for="item in menuItems" :key="item.path" :index="item.path">
         <el-icon :class="item.icon"></el-icon>
         {{item.name}}
       </el-menu-item>
@@ -41,17 +42,17 @@ export default {
     return{
       menuItems:[
         {
-          path: '1',
+          path: '/basicData',
           icon: 'el-icon-data-analysis',
           name: '基础数据',
         },
         {
-          path: '2',
+          path: '/opinionOutput',
           icon: 'el-icon-s-opportunity',
           name: '观点输出',
         },
         {
-          path: '3',
+          path: '/financialProducts',
           icon: 'el-icon-data-board',
           name: '理财产品',
         },
@@ -61,22 +62,27 @@ export default {
           name: '基金研究',
         },
         {
-          path: '5',
+          path: '/assetAllocation',
           icon: 'el-icon-data-line',
           name: '资产配置',
         },
         {
-          path: '6',
+          path: '/riskControlCenter',
           icon: 'el-icon-service',
           name: '风控中心',
         },
         {
-          path: '7',
+          path: '/userManagement',
           icon: 'el-icon-user',
           name: '用户管理',
         },
       ]
     }
+  },
+  created() {
+    this.$nextTick(() => {
+      console.log('999',this.$route);
+    })
   }
 }
 </script>
@@ -86,6 +92,10 @@ export default {
   height: 60px;
   background-color: rgb(0,21,41);
   color: white;
+  position: fixed;
+  top: 0;
+  z-index: 99;
+  width: 100%;
 }
 .top_nav .bank_img{
   height: 60px;

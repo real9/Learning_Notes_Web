@@ -3,7 +3,8 @@
   <el-col :span="20" :offset="2" class="updateTime">数据更新时间：2021-11-22</el-col>
   <el-col :span="20" :offset="2" class="filterGroup">
     <span>基金分类：</span>
-    <el-button v-for="item in buttons" :key="item.index" size="mini" :autofocus="item.index === 'all'">{{item.title}}</el-button>
+<!--    <el-button v-for="item in buttons" :key="item.index" size="mini" :autofocus="item.index === 'all'">{{item.title}}</el-button>-->
+    <el-button v-for="item in buttons" :key="item.index" size="mini" >{{item.title}}</el-button>
     <el-input
         placeholder="请输入搜索内容"
         suffix-icon="el-icon-search"
@@ -11,33 +12,23 @@
         size="mini">
     </el-input>
   </el-col>
-  <el-col :span="20" :offset="2" class="tableBoard">
-    <el-table :data="tableData" stripe style="width: 100%">
-      <el-table-column prop="" label="" type="selection" fixed></el-table-column>
-      <el-table-column prop="" label="基金代码" sortable fixed></el-table-column>
-      <el-table-column prop="" label="登记编号" sortable></el-table-column>
-      <el-table-column prop="" label="综合评级" sortable></el-table-column>
-      <el-table-column prop="" label="资产类型" sortable></el-table-column>
-      <el-table-column prop="" label="基金经理" sortable></el-table-column>
-      <el-table-column prop="" label="成立日期" sortable></el-table-column>
-      <el-table-column prop="" label="基金公司" sortable></el-table-column>
-      <el-table-column prop="" label="风险等级" sortable></el-table-column>
-      <el-table-column prop="" label="基金标签" sortable></el-table-column>
-      <el-table-column prop="" label="日跌涨幅" sortable></el-table-column>
-      <el-table-column prop="" label="近一周" sortable></el-table-column>
-      <el-table-column prop="" label="近一月" sortable></el-table-column>
-      <el-table-column prop="" label="近半年" sortable></el-table-column>
-      <el-table-column prop="" label="近一年" sortable></el-table-column>
-      <el-table-column prop="" label="近三年" sortable></el-table-column>
-    </el-table>
-  </el-col>
-  <el-col :span="2">1</el-col>
+  <keep-alive>
+    <component :is="this.$store.state.componentName"></component>
+  </keep-alive>
 </el-row>
 </template>
 
 <script>
+import fundTable from './fundProduct/FundTable'
+import fundChart from './fundProduct/FundChart'
 export default {
   name: "FundProduct",
+  components:{
+    fundTable,
+    fundChart
+  },
+  computed:{
+  },
   data(){
     return{
       buttons: [
@@ -84,77 +75,11 @@ export default {
       ],
       input: '',
       // autoFocus: 'all',
-      tableData: [
-        {
-          code: '',
-          id: '',
-          rank: '',
-          type: '',
-          manager: '',
-          date: '',
-          company: '',
-          risk: '',
-          tag: '',
-          range: '',
-          week: '',
-          month: '',
-          sixMonths: '',
-          year: '',
-          threeYear: '',
-        },
-        {
-          code: '',
-          id: '',
-          rank: '',
-          type: '',
-          manager: '',
-          date: '',
-          company: '',
-          risk: '',
-          tag: '',
-          range: '',
-          week: '',
-          month: '',
-          sixMonths: '',
-          year: '',
-          threeYear: '',
-        },
-        {
-          code: '',
-          id: '',
-          rank: '',
-          type: '',
-          manager: '',
-          date: '',
-          company: '',
-          risk: '',
-          tag: '',
-          range: '',
-          week: '',
-          month: '',
-          sixMonths: '',
-          year: '',
-          threeYear: '',
-        },
-        {
-          code: '',
-          id: '',
-          rank: '',
-          type: '',
-          manager: '',
-          date: '',
-          company: '',
-          risk: '',
-          tag: '',
-          range: '',
-          week: '',
-          month: '',
-          sixMonths: '',
-          year: '',
-          threeYear: '',
-        },
-      ]
+      // componentName: 'fundTable',
     }
+  },
+  created() {
+    console.log(this.$route);
   }
 }
 </script>
@@ -179,9 +104,9 @@ export default {
   width: 10%;
   margin-left: 10px;
 }
-.fund_product .tableBoard{
-  background-color: white;
-  margin-top: 5px;
-  padding: 1rem 3rem;
-}
+/*.fund_product .tableBoard{*/
+/*  background-color: white;*/
+/*  margin-top: 5px;*/
+/*  padding: 1rem 3rem;*/
+/*}*/
 </style>
