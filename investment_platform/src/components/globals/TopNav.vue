@@ -8,10 +8,10 @@
   </el-col>
   <el-col :span="14" style="margin-left: 1rem">
 <!--      <el-menu class="el-menu-demo" mode="horizontal" :default-active="$route.matched[0].path" router>-->
-        <el-menu class="el-menu-demo" mode="horizontal" default-active="/basicData" router>
-        <el-menu-item v-for="item in menuItems" :key="item.path" :index="item.path">
+    <el-menu class="el-menu-demo" mode="horizontal" :default-active="getTopNavPath" router>
+      <el-menu-item v-for="item in menuItems" :key="item.path" :index="item.path">
         <el-icon :class="item.icon"></el-icon>
-        {{item.name}}
+        {{ item.name }}
       </el-menu-item>
     </el-menu>
   </el-col>
@@ -80,10 +80,18 @@ export default {
     }
   },
   created() {
-    this.$nextTick(() => {
-      console.log('999',this.$route);
-    })
-  }
+  },
+  computed: {
+    getTopNavPath(){
+      if(this.$route.path.slice(0,13) === '/fundResearch'){
+        return '/fundResearch';
+      }else {
+        return this.$route.path;
+      }
+    }
+  },
+  methods:{
+  },
 }
 </script>
 

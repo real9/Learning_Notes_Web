@@ -1,7 +1,7 @@
 <template>
 <el-row>
   <el-col class="second_nav">
-    <el-menu class="el-menu-demo" mode="horizontal" :default-active="menuItems[0].index" router>
+    <el-menu class="el-menu-demo" mode="horizontal" :default-active="secondNavPath" router >
       <el-menu-item v-for="item in menuItems" :key="item.index" :index="item.index">
         {{item.title}}
       </el-menu-item>
@@ -36,7 +36,7 @@ export default {
         },
         {
           title: '基金公司',
-          index: '3',
+          index: '/fundResearch/fundCompany',
         },
         {
           title: '我的基金池',
@@ -58,9 +58,20 @@ export default {
       // componentName: 'FundProduct',
     }
   },
+  computed: {
+    secondNavPath(){
+      if(this.$route.path.slice(13) === ''){
+        return '/fundResearch';
+      }else {
+        return this.$route.path
+      }
+    },
+  },
   created() {
     // console.log(this.$route.matched[0].path);
-  }
+  },
+  methods:{
+  },
 }
 </script>
 

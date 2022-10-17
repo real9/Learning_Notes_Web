@@ -6,6 +6,7 @@ Vue.use(Vuex)
 export default new Vuex.Store({
   state: {
     componentName: 'fundTable',
+    // topNavPath: '/basicData',
   },
   getters: {
   },
@@ -15,7 +16,7 @@ export default new Vuex.Store({
     },
     goBack(state){
       state.componentName = 'fundTable';
-    }
+    },
   },
   actions: {
   },

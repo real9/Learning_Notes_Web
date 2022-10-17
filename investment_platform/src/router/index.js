@@ -46,6 +46,11 @@ const routes = [
         path: 'fundManager',
         name: 'fundManager',
         component: ()=> import(/* webpackChunkName: "about" */ '../components/fundResearch/FundManager'),
+      },
+      {
+        path: 'fundCompany',
+        name: 'fundCompany',
+        component: ()=> import(/* webpackChunkName: "about" */ '../components/fundResearch/FundCompany'),
       }
     ]
   },
