@@ -461,13 +461,15 @@ export default {
         width: 500,
         height: 400
       })
-      this.$echarts.registerMap('hangzhou', cityData, {})
+      // this.$echarts.registerMap('hangzhou', cityData, {})
+      this.$echarts.registerMap(this.cityCode, cityData, {})
       let option = {
         backgroundColor: 'transparent',
         //地图部分
         geo: {
           componentType: 'geo',
-          map: 'hangzhou',
+          // map: 'hangzhou',
+          map: this.cityCode,
           zoom: 1.2,
           label: {
             show: true,

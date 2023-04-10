@@ -2,13 +2,24 @@
 <el-row class="fund_company">
   <el-col :span="20" :offset="2" class="updateTime">数据更新时间：2021-11-22</el-col>
   <el-col :span="20" :offset="2" class="btnGroups">
-    <el-button v-for="item in buttons" :key="item.index" type="text">{{item.title}}</el-button>
+    <el-button v-for="item in buttonsTemp[0]" :key="item.title" type="text" @click="goFund(item.title)">{{item.title}}</el-button>
+  </el-col>
+  <el-col :span="20" :offset="2" v-if="row > 1">
+    <el-collapse-transition>
+      <el-row v-show="!overflowFlag">
+        <el-col class="btnGroups" v-for="btn in buttonsTemp.slice(1)" :key="buttonsTemp.indexOf(btn)">
+          <el-button v-for="item in btn" :key="item.title" type="text">{{ item.title }}</el-button>
+        </el-col>
+      </el-row>
+    </el-collapse-transition>
   </el-col>
   <el-col :span="20" :offset="2">
-    <el-button>111</el-button>
+    <el-button class="overflowBtn" size="mini" @click="getOverflow" ref="overflow1">
+      <i class="el-icon-arrow-down"></i>展开全部
+    </el-button>
   </el-col>
   <el-col :span="20" :offset="2" class="companyName">
-    <span class="title">广发基金</span>
+    <span class="title">{{companyName}}</span>
     <span>基金公司评级</span>
     <el-rate
         v-model="rank"
@@ -127,8 +138,8 @@
       </el-collapse-item>
     </el-collapse>
   </el-col>
-  <el-button class="backBtn" size="mini"><i class="el-icon-d-arrow-left"></i></el-button>
-  <el-button class="forwardBtn" size="mini"><i class="el-icon-d-arrow-right"></i></el-button>
+  <el-button class="backBtn" size="mini" @click="goBackFund"><i class="el-icon-d-arrow-left"></i></el-button>
+  <el-button class="forwardBtn" size="mini" @click="goNextFund"><i class="el-icon-d-arrow-right"></i></el-button>
 </el-row>
 </template>
 
@@ -209,6 +220,8 @@ export default {
           index: '16',
         },
       ],
+      buttonsTemp: [],
+      companyName: '广发基金',
       rank: 5,
       panels: [
         {
@@ -391,8 +404,81 @@ export default {
           std: '银行一年期定期存款税后利率+0.5百分比',
         },
       ],
+      overflowFlag: true,
+      row: 0,
     }
-  }
+  },
+  created() {
+    this.handleButtonsInRow();
+  },
+  mounted() {
+    window.onresize= () => {
+      this.handleButtonsInRow();
+    }
+  },
+  methods: {
+    handleButtonsInRow(){
+      let col = document.documentElement.clientWidth * 0.75 / 80;
+      this.row = Math.ceil(this.buttons.length / col);
+      this.buttonsTemp = [];
+      for(let i = 0; i < this.row - 1; i ++){
+        this.buttonsTemp.push([]);
+      }
+      console.log(this.row)
+      for(let i = 0; i < this.row - 1; i ++){
+        for(let j = 0; j < col; j ++){
+          this.buttonsTemp[i].push(this.buttons[i*col + j])
+        }
+      }
+      this.buttonsTemp.push(this.buttons.slice(col * (this.row-1)));
+      console.log(this.buttonsTemp);
+    },
+    goFund(title){
+      this.companyName = title;
+    },
+    getOverflow(){
+      if(this.overflowFlag){
+        this.$refs.overflow1.$el.className = "el-button overflowBtn el-button--default el-button--mini active";
+        this.$refs.overflow1.$el.children[0].childNodes[1].data = '收回全部'
+      }else{
+        this.$refs.overflow1.$el.className = "el-button overflowBtn el-button--default el-button--mini";
+        this.$refs.overflow1.$el.children[0].childNodes[1].data = '展开全部'
+      }
+      this.overflowFlag = !this.overflowFlag;
+    },
+    goBackFund(){
+      let cur = 0;
+      this.buttons.forEach((value, index) => {
+        if(value.title === this.companyName){
+          cur = index - 1;
+        }
+      })
+      if(cur < this.buttons.length && cur >= 0){
+        this.companyName = this.buttons[cur].title;
+      }else{
+        this.$message({
+          message: '已经是第一条',
+          type: 'warning'
+        });
+      }
+    },
+    goNextFund(){
+      let cur = 0;
+      this.buttons.forEach((value, index) => {
+        if(value.title === this.companyName){
+          cur = index + 1;
+        }
+      })
+      if(cur < this.buttons.length && cur >= 0){
+        this.companyName = this.buttons[cur].title;
+      }else{
+        this.$message({
+          message: '已经是最后一条',
+          type: 'warning'
+        });
+      }
+    },
+  },
 }
 </script>
 
@@ -507,5 +593,18 @@ export default {
   right: 1rem;
   font-size: 1.5rem;
   box-shadow: 0 2px 12px 0 rgb(0 0 0 / 10%);
+}
+/*展开按钮*/
+.fund_company .overflowBtn{
+  border: none;
+  background-color: #DCDFE6;
+  box-shadow: 0 2px 12px 0 rgb(0 0 0 / 10%);
+}
+.fund_company .overflowBtn .el-icon-arrow-down{
+  transition: transform .3s;
+  margin-right: 1rem;
+}
+.fund_company .overflowBtn.active .el-icon-arrow-down{
+  transform: rotate(180deg);
 }
 </style>
