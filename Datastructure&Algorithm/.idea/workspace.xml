@@ -1,8 +1,38 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
   <component name="ChangeListManager">
-    <list default="true" id="299e0749-8337-48ca-ae48-a901b964a4fb" name="Default Changelist" comment="击鼓传花">
-      <change afterPath="$PROJECT_DIR$/代码随想录/数组/704二分查找.js" afterDir="false" />
+    <list default="true" id="fbccb997-5e21-45a4-aeff-1309dd3a47f6" name="Default Changelist" comment="链表">
+      <change afterPath="$PROJECT_DIR$/../bank_excutives/.eslintrc.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../bank_excutives/src/assets/china.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../bank_excutives/src/assets/china.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../bank_excutives/src/components/GeoChart.vue" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../logPlatformBackend/pom.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../logPlatformBackend/src/main/java/com/example/demo/DemoApplication.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../logPlatformBackend/src/main/resources/application.properties" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../logPlatformBackend/src/test/java/com/example/demo/DemoApplicationTests.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../log_detection_platform/src/components/Chart/BarChart.vue" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../log_detection_platform/src/components/Chart/LineChart.vue" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../log_detection_platform/src/components/Chart/PieChart.vue" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../log_detection_platform/src/components/Chart/RadarChart.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/输入输出.js" beforeDir="false" afterPath="$PROJECT_DIR$/输入输出.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../bank_excutives/src/json/candidates.js" beforeDir="false" afterPath="$PROJECT_DIR$/../bank_excutives/src/json/candidates.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../bank_excutives/src/store/modules/Candidates.js" beforeDir="false" afterPath="$PROJECT_DIR$/../bank_excutives/src/store/modules/Candidates.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../bank_excutives/src/views/Query/Candidates.vue" beforeDir="false" afterPath="$PROJECT_DIR$/../bank_excutives/src/views/Query/Candidates.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../china_banking_association/china_banking_association.zip" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../china_banking_association/china_banking_association_pc_mobile.zip" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../creditstucturemodel/src/views/StatisticsAnalysis.vue" beforeDir="false" afterPath="$PROJECT_DIR$/../creditstucturemodel/src/views/StatisticsAnalysis.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../investment_platform/src/components/fundResearch/FundCompany.vue" beforeDir="false" afterPath="$PROJECT_DIR$/../investment_platform/src/components/fundResearch/FundCompany.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../investment_platform/src/components/fundResearch/FundManager.vue" beforeDir="false" afterPath="$PROJECT_DIR$/../investment_platform/src/components/fundResearch/FundManager.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../log_detection_platform/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/../log_detection_platform/package-lock.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../log_detection_platform/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/../log_detection_platform/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../log_detection_platform/src/components/Data/LogDetection.vue" beforeDir="false" afterPath="$PROJECT_DIR$/../log_detection_platform/src/components/Data/LogDetection.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../log_detection_platform/src/components/Data/LogParsing.vue" beforeDir="false" afterPath="$PROJECT_DIR$/../log_detection_platform/src/components/Data/LogParsing.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../log_detection_platform/src/components/Data/ModelTraining.vue" beforeDir="false" afterPath="$PROJECT_DIR$/../log_detection_platform/src/components/Data/ModelTraining.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../log_detection_platform/src/main.js" beforeDir="false" afterPath="$PROJECT_DIR$/../log_detection_platform/src/main.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../log_detection_platform/src/views/Data.vue" beforeDir="false" afterPath="$PROJECT_DIR$/../log_detection_platform/src/views/Data.vue" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -19,7 +49,15 @@
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/.." />
   </component>
-  <component name="ProjectId" id="2CCJ64N3gDL5oKSOLBG95ou4UUE" />
+  <component name="GitSEFilterConfiguration">
+    <file-type-list>
+      <filtered-out-file-type name="LOCAL_BRANCH" />
+      <filtered-out-file-type name="REMOTE_BRANCH" />
+      <filtered-out-file-type name="TAG" />
+      <filtered-out-file-type name="COMMIT_BY_MESSAGE" />
+    </file-type-list>
+  </component>
+  <component name="ProjectId" id="2DNmgl0myR0oLcqpXMTXgQsJSn6" />
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
@@ -30,51 +68,86 @@
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="javascript.nodejs.core.library.configured.version" value="16.15.0" />
+    <property name="javascript.nodejs.core.library.typings.version" value="16.11.56" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="settings.editor.selected.configurable" value="preferences.pluginManager" />
     <property name="vue.rearranger.settings.migration" value="true" />
   </component>
-  <component name="RunManager" selected="Node.js.704二分查找.js">
-    <configuration name="704二分查找.js" type="NodeJSConfigurationType" temporary="true" nameIsGenerated="true" path-to-js-file="$PROJECT_DIR$/代码随想录/数组/704二分查找.js" working-dir="$PROJECT_DIR$/代码随想录/数组">
+  <component name="RunManager" selected="Node.js.美团2.js">
+    <configuration name="美团2.js" type="NodeJSConfigurationType" temporary="true" nameIsGenerated="true" path-to-js-file="$PROJECT_DIR$/美团2.js" working-dir="$PROJECT_DIR$">
       <method v="2" />
     </configuration>
-    <configuration name="queue.mjs" type="NodeJSConfigurationType" temporary="true" nameIsGenerated="true" path-to-js-file="$PROJECT_DIR$/Queue/queue.mjs" working-dir="$PROJECT_DIR$/Queue">
+    <configuration name="SortedLinkedList.mjs" type="NodeJSConfigurationType" temporary="true" nameIsGenerated="true" path-to-js-file="$PROJECT_DIR$/LinkedList/SortedLinkedList.mjs" working-dir="$PROJECT_DIR$/LinkedList">
+      <method v="2" />
+    </configuration>
+    <configuration name="doubleLinkedList.mjs" type="NodeJSConfigurationType" temporary="true" nameIsGenerated="true" path-to-js-file="$PROJECT_DIR$/LinkedList/doubleLinkedList.mjs" working-dir="$PROJECT_DIR$/LinkedList">
+      <method v="2" />
+    </configuration>
+    <configuration name="set.mjs" type="NodeJSConfigurationType" temporary="true" nameIsGenerated="true" path-to-js-file="$PROJECT_DIR$/Set/set.mjs" working-dir="$PROJECT_DIR$/Set">
+      <method v="2" />
+    </configuration>
+    <configuration name="stackedLinkedList.mjs" type="NodeJSConfigurationType" temporary="true" nameIsGenerated="true" path-to-js-file="$PROJECT_DIR$/LinkedList/stackedLinkedList.mjs" working-dir="$PROJECT_DIR$/LinkedList">
       <method v="2" />
     </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="Node.js.704二分查找.js" />
-        <item itemvalue="Node.js.queue.mjs" />
+        <item itemvalue="Node.js.美团2.js" />
+        <item itemvalue="Node.js.set.mjs" />
+        <item itemvalue="Node.js.doubleLinkedList.mjs" />
+        <item itemvalue="Node.js.stackedLinkedList.mjs" />
+        <item itemvalue="Node.js.SortedLinkedList.mjs" />
       </list>
     </recent_temporary>
   </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
-      <changelist id="299e0749-8337-48ca-ae48-a901b964a4fb" name="Default Changelist" comment="" />
-      <created>1658300455608</created>
+      <changelist id="fbccb997-5e21-45a4-aeff-1309dd3a47f6" name="Default Changelist" comment="" />
+      <created>1660548030921</created>
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
-      <updated>1658300455608</updated>
-      <workItem from="1658300456874" duration="4469000" />
-      <workItem from="1658377372265" duration="85000" />
-      <workItem from="1658377461178" duration="62000" />
-      <workItem from="1658993764654" duration="127000" />
-      <workItem from="1660383932220" duration="801000" />
+      <updated>1660548030921</updated>
+      <workItem from="1660548032686" duration="484000" />
+      <workItem from="1660548541499" duration="1261000" />
+      <workItem from="1661075240600" duration="2053000" />
+      <workItem from="1661249611408" duration="615000" />
+      <workItem from="1661870598380" duration="3508000" />
+      <workItem from="1661915162154" duration="6211000" />
+      <workItem from="1661998381627" duration="7047000" />
+      <workItem from="1662084732578" duration="1794000" />
+      <workItem from="1662170052775" duration="4428000" />
+      <workItem from="1662281506219" duration="601000" />
+      <workItem from="1662360462511" duration="606000" />
+      <workItem from="1662452905606" duration="654000" />
+      <workItem from="1662907292979" duration="7000" />
+      <workItem from="1662907312154" duration="3850000" />
+      <workItem from="1662945395294" duration="18285000" />
+      <workItem from="1663210840048" duration="1255000" />
+      <workItem from="1663221165789" duration="688000" />
+      <workItem from="1663379288067" duration="2450000" />
+      <workItem from="1664011734956" duration="641000" />
+      <workItem from="1665311275436" duration="2187000" />
+      <workItem from="1665545824860" duration="14000" />
+      <workItem from="1670661841532" duration="12000" />
+      <workItem from="1670661865545" duration="663000" />
+      <workItem from="1672803479095" duration="8000" />
+      <workItem from="1672803502136" duration="327000" />
+      <workItem from="1680251420846" duration="1252000" />
     </task>
-    <task id="LOCAL-00001" summary="栈，队列初始化">
-      <created>1658300586362</created>
+    <task id="LOCAL-00001" summary="8.30更新">
+      <created>1661872482160</created>
       <option name="number" value="00001" />
       <option name="presentableId" value="LOCAL-00001" />
       <option name="project" value="LOCAL" />
-      <updated>1658300586362</updated>
+      <updated>1661872482160</updated>
     </task>
-    <task id="LOCAL-00002" summary="击鼓传花">
-      <created>1658993850952</created>
+    <task id="LOCAL-00002" summary="链表">
+      <created>1662962896017</created>
       <option name="number" value="00002" />
       <option name="presentableId" value="LOCAL-00002" />
       <option name="project" value="LOCAL" />
-      <updated>1658993850952</updated>
+      <updated>1662962896017</updated>
     </task>
     <option name="localTasksCounter" value="3" />
     <servers />
@@ -95,8 +168,19 @@
     <option name="oldMeFiltersMigrated" value="true" />
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="栈，队列初始化" />
-    <MESSAGE value="击鼓传花" />
-    <option name="LAST_COMMIT_MESSAGE" value="击鼓传花" />
+    <MESSAGE value="8.30更新" />
+    <MESSAGE value="链表" />
+    <option name="LAST_COMMIT_MESSAGE" value="链表" />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" type="javascript">
+          <url>file://$PROJECT_DIR$/代码随想录/字符串/151颠倒字符串中的单词.js</url>
+          <line>2</line>
+          <option name="timeStamp" value="2" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
   </component>
 </project>
