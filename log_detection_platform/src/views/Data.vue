@@ -11,7 +11,7 @@
     </el-menu>
   </el-col>
   <el-col :span="21">
-    <router-view class="page"></router-view>
+    <router-view></router-view>
   </el-col>
 </el-row>
 </template>
@@ -41,7 +41,5 @@ export default {
 </script>
 
 <style scoped>
-.page{
-  padding: 10px;
-}
+
 </style>
