@@ -262,7 +262,22 @@ const actions = {
                     reject(error)
                 })
         })
-    }
+    },
+    // getMapData(){
+    //     return new Promise((resolve, reject) => {
+    //         axios({
+    //             // url: 'http://localhost:3000/mapData',
+    //             url: 'https://cdn.jsdelivr.net/npm/echarts/map/js/china.js?_v_=1597075010563',
+    //             method: 'get'
+    //         })
+    //             .then((res) => {
+    //                 resolve(res)
+    //             })
+    //             .catch((error) => {
+    //                 reject(error)
+    //             })
+    //     })
+    // }
 }
 
 export default {

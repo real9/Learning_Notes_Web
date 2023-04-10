@@ -212,6 +212,9 @@
           </el-scrollbar>
         </div>
       </el-col>
+      <el-col>
+        <geo-chart :mode-type="activeQueryModeIndex" :geo-data="geoData" v-show="activeQueryModeIndex === 'belongingRegion'"></geo-chart>
+      </el-col>
     </el-row>
     <el-dialog
         title="打印提示"
@@ -228,14 +231,17 @@
 
 <script>
 import BarChart from '../../components/BarChart';
+import GeoChart from "@/components/GeoChart";
 
 export default {
   name: "QualifiedCandidates",
   components: {
     BarChart,
+    GeoChart,
   },
   data() {
     return{
+      geoData: [],
       //dialog可见
       dialogVisible: false,
       //合格人选类别
@@ -353,6 +359,7 @@ export default {
     //  chart数据
       chartData: [[],[]],
       chartHeight: '500px',
+      chartWidth: '1600px',
       secondIndex: 0
     }
   },
@@ -505,6 +512,31 @@ export default {
               this.chartData[0].push(this.chartQueryModeTableData[i].item);
               this.chartData[1].push(this.chartQueryModeTableData[i].num);
             }
+            if(this.activeQueryModeIndex === 'belongingRegion'){
+              const cities = ['北京市', '天津市', '河北省', '山西省', '内蒙古自治区', '宁夏回族自治区', '青海省', '陕西省', '甘肃省', '新疆维吾尔自治区', '辽宁省', '吉林省', '黑龙江省',
+                '山东省', '江苏省', '上海市', '浙江省', '安徽省', '福建省', '江西省', '河南省', '湖南省', '湖北省', '四川省', '贵州省', '云南省', '重庆市', '西藏自治区',
+                '广东省', '广西壮族自治区', '海南省', '香港', '澳门', '台湾省']; // 34
+              let cityTemp = [];
+              this.geoData = [];
+                  res.forEach(value => {
+                    this.geoData.push({
+                      name: value.item,
+                      value: parseInt(value.num),
+                    })
+                    cityTemp.push(value.item)
+                  })
+              //人数为0的省分
+              for(let i = 0; i < 34; i ++){
+                if(cityTemp.indexOf(cities[i]) === -1){
+                  this.geoData.push({
+                    name: cities[i],
+                    value: 0,
+                  })
+                }
+              }
+              console.log('000',this.geoData);
+            }
+            //处理条形统计图的高度，不同数据量有区别
             this.chartHeight = this.chartData[0].length * 50 > 600 ? this.chartData[0].length * 50 + 'px' : '600px';
           })
     },
