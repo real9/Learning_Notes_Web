@@ -1,5 +1,5 @@
 <template>
-<div>radar</div>
+  <div>radar</div>
 </template>
 
 <script>
