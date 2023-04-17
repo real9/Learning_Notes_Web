@@ -5,11 +5,11 @@
         <el-col :span="12">
           <el-col style="text-align: left;margin-bottom: 10px">
             <label style="margin-right: 10px">数据集选择</label>
-            <el-select></el-select>
+<!--            <el-select></el-select>-->
           </el-col>
           <el-col style="text-align: left;margin-bottom: 10px">
             <label style="margin-right: 10px">模型选择</label>
-            <el-select></el-select>
+<!--            <el-select></el-select>-->
           </el-col>
           <el-col :span="2"><span style="line-height: 40px">训练集</span></el-col>
           <el-col :span="12">
