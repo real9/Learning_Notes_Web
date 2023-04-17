@@ -5,10 +5,21 @@
 <script>
 export default {
   name: "PieChart",
-  props: {},
+  // props: {
+  //   trainDatasetNum: {
+  //     type: Number,
+  //     default: 40,
+  //   },
+  //   testDatasetNum: {
+  //     type: Number,
+  //     default: 60
+  //   },
+  // },
   data() {
     return {
       myChart: {},
+      trainDatasetNum: 40,
+      testDatasetNum: 60,
     }
   },
   mounted() {
@@ -16,6 +27,14 @@ export default {
     //   this.initPieChart();
     // }, 1000);
     this.initPieChart();
+  },
+  watch: {
+    trainDatasetNum() {
+      let option = this.myChart.getOption();
+      option.series[0].data[0].value = this.trainDatasetNum;
+      option.series[0].data[1].value = this.testDatasetNum;
+      this.myChart.setOption(option);
+    }
   },
   methods: {
     initPieChart() {
@@ -25,9 +44,10 @@ export default {
         height: 300
       });
       let option;
+      let that = this;
       option = {
         title: {
-          text: '数据划分',
+          text: '数据集划分',
           // subtext: 'Fake Data',
           left: 'center'
         },
@@ -40,15 +60,12 @@ export default {
         },
         series: [
           {
-            name: 'Access From',
+            name: '数据集中日志数量',
             type: 'pie',
             radius: '50%',
             data: [
-              { value: 1048, name: 'Search Engine' },
-              { value: 735, name: 'Direct' },
-              // { value: 580, name: 'Email' },
-              // { value: 484, name: 'Union Ads' },
-              // { value: 300, name: 'Video Ads' }
+              { value: that.trainDatasetNum, name: '训练集' },
+              { value: that.testDatasetNum, name: '测试集' },
             ],
             emphasis: {
               itemStyle: {
