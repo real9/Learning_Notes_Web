@@ -3,27 +3,43 @@
     <el-col :span="24">
       <el-row>
         <el-col :span="12">
-          <el-col>
-            <el-select v-model="value" placeholder="请导入测试集">
+          <el-col :span="10">
+            <el-select v-model="datasetSelector" placeholder="请导入测试集">
               <el-option
                   v-for="item in options"
-                  :key="item.value"
+                  :key="item.label"
                   :label="item.label"
-                  :value="item.value">
+                  :value="item.label">
               </el-option>
             </el-select>
-            <el-button style="margin-left: 1rem" type="primary">导入模型</el-button>
+          </el-col>
+          <el-col :span="10">
+            <el-select v-model="modelSelector" placeholder="请选择模型">
+              <el-option
+                  v-for="item in modelList"
+                  :key="item.label"
+                  :label="item.label"
+                  :value="item.label">
+              </el-option>
+            </el-select>
+          </el-col>
+          <el-col :span="4">
+            <el-button @click="addModelAndDataset">添加</el-button>
           </el-col>
           <el-col style="margin-top: 1rem">
-            <el-table :header-cell-style="headerClass">
-              <el-table-column label="模型名称"></el-table-column>
-              <el-table-column label="训练集"></el-table-column>
-              <el-table-column label="操作"></el-table-column>
+            <el-table :header-cell-style="headerClass" :data="tableData">
+              <el-table-column label="模型名称" prop="model" align="center"></el-table-column>
+              <el-table-column label="训练集" prop="dataset" align="center"></el-table-column>
+              <el-table-column label="操作" align="center">
+                <template slot-scope="scope">
+                  <el-button type="text" @click="getTestDatasetResult(scope.row.model, scope.row.dataset)">开始测试</el-button>
+                </template>
+              </el-table-column>
             </el-table>
           </el-col>
         </el-col>
         <el-col :span="12">
-          <radar-chart></radar-chart>
+          <radar-chart ref="radar"></radar-chart>
         </el-col>
       </el-row>
     </el-col>
@@ -46,22 +62,18 @@ export default {
   data() {
     return {
       options: [{
-        value: '选项1',
-        label: '黄金糕'
+        label: 'BGL'
       }, {
-        value: '选项2',
-        label: '双皮奶'
-      }, {
-        value: '选项3',
-        label: '蚵仔煎'
-      }, {
-        value: '选项4',
-        label: '龙须面'
-      }, {
-        value: '选项5',
-        label: '北京烤鸭'
+        label: 'HDFS'
       }],
-      value: ''
+      datasetSelector: '',
+      modelSelector: '',
+      modelList: [
+        {label: 'VLog'},
+        {label: 'deepLog'},
+        {label: 'LogGAN'},
+      ],
+      tableData: [],
     }
   },
   methods: {
@@ -69,6 +81,24 @@ export default {
     headerClass() {
       return 'background: #EBEEF5; text-align: center'
     },
+    addModelAndDataset() {
+      this.tableData.push({
+        model: this.modelSelector,
+        dataset: this.datasetSelector
+      })
+    },
+    getTestDatasetResult(model, dataset){
+      console.log(model, dataset);
+      let option = this.$refs.radar.myChart.getOption();
+      option.series[0].data.push({
+        value: [
+          Math.floor(Math.random() * 10 + 85),
+          Math.floor(Math.random() * 10 + 85),
+          Math.floor(Math.random() * 10 + 85)],
+        name: model
+      })
+      this.$refs.radar.myChart.setOption(option);
+    }
   }
 }
 </script>

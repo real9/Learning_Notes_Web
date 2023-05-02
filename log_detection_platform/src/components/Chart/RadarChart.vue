@@ -30,7 +30,7 @@ export default {
           right: '40%'
         },
         legend: {
-          data: ['Allocated Budget', 'Actual Spending'],
+          // data: ['Allocated Budget', 'Actual Spending'],
           right: 0,
           orient: 'vertical'
         },
@@ -47,17 +47,17 @@ export default {
         },
         series: [
           {
-            name: 'Budget vs spending',
+            // name: 'Budget vs spending',
             type: 'radar',
             data: [
-              {
-                value: [90, 80, 70],
-                name: 'Allocated Budget'
-              },
-              {
-                value: [87, 87, 89],
-                name: 'Actual Spending'
-              }
+              // {
+              //   value: [90, 80, 70],
+              //   name: 'Allocated Budget'
+              // },
+              // {
+              //   value: [87, 87, 89],
+              //   name: 'Actual Spending'
+              // }
             ]
           }
         ]

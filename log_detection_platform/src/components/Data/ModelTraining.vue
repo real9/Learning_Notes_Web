@@ -96,7 +96,7 @@ export default {
       }],
       modelList: [
         {label: 'VLog'},
-        {label: 'LogClass'},
+        {label: 'deepLog'},
         {label: 'LogGAN'},
       ],
       percentBar: 40,
