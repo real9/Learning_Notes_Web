@@ -1,8 +1,8 @@
 <template>
   <div class="container-fluid">
-    <div class="row">
+    <div class="row d-flex flex-shrink-1">
       <div class="col-6">
-        <div class="card shadow-lg">
+        <div class="card shadow-lg h-100">
           <div class="card-header">
             <div class="row">
               <div class="col-6">
@@ -76,7 +76,9 @@
           <div class="card-header pb-1">
             <h5 class="mb-0">数据集占比展示</h5>
           </div>
-          <div class="card-body pt-0"></div>
+          <div class="card-body py-0">
+            <PieChart ref="pie" :train-dataset-num="percentBar" :test-dataset-num="100 - percentBar"></PieChart>
+          </div>
         </div>
       </div>
     </div>
@@ -104,17 +106,28 @@
       </div>
     </div>
   </div>
+  <el-dialog :title="title" v-model="visibility" width="750px" style="border-radius: 1rem">
+    <el-table :header-cell-style="headerClass" class="table" :data="dialogData">
+      <el-table-column label="时间戳" prop="timeStamp" align="center"></el-table-column>
+      <el-table-column label="状态" prop="state" align="center"></el-table-column>
+      <el-table-column label="等级" prop="level" align="center"></el-table-column>
+      <el-table-column label="内容" prop="content"></el-table-column>
+      <el-table-column label="事件模板" prop="event_template"></el-table-column>
+    </el-table>
+  </el-dialog>
 </template>
 
 <script>
 import ArgonButton from "../../../components/ArgonButton";
 import ArgonRadio from "../../../components/ArgonRadio";
+import PieChart from "../chats/PieChart.vue";
 
 export default {
   name: "ModelTraining",
   components: {
     ArgonButton,
     ArgonRadio,
+    PieChart,
   },
   data() {
     return {
@@ -131,7 +144,21 @@ export default {
         'text-align': 'center',
       },
       tableData: [],
+    //  弹窗
+      title: '',
+      visibility: false,
+      dialogData: [],
     }
+  },
+  mounted() {
+    let that = this;
+    this.$refs.pie.myChart.on('click', function (p){
+      // console.log(p.name);
+      that.title = p.name;
+      that.visibility = true;
+      // console.log(p.name);
+      // console.log(this.visibility);
+    })
   },
   methods: {
     getParsedLog(val) {
