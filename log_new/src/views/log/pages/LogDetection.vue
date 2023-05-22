@@ -60,7 +60,7 @@
         </div>
         <div class="col-12 mt-2 h-100">
           <div class="card shadow-lg">
-            <div class="card-header">
+            <div class="card-header pb-1">
               <h5 class="mb-0">测试对比表格</h5>
             </div>
             <div class="card-body pt-0">
@@ -80,7 +80,7 @@
       </div>
       <div class="col-4 h-100">
         <div class="card shadow-lg">
-          <div class="card-header">
+          <div class="card-header pb-0">
             <h5 class="mb-0">维度对比</h5>
           </div>
           <div class="card-body py-0">
@@ -92,7 +92,7 @@
     <div class="row mt-3">
       <div class="col-12">
         <div class="card shadow-lg">
-          <div class="card-header">
+          <div class="card-header pb-0">
             <h5 class="mb-0">日志异常检测 (变分自编码机)</h5>
           </div>
           <div class="card-body py-0">

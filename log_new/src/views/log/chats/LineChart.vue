@@ -19,7 +19,7 @@ export default {
     initLineChart() {
       this.myChart = echarts.init(document.getElementById('lineChart'), null, {
         // width: 1200,
-        height: 300
+        height: 180
       });
       let option;
       // option = {
@@ -95,11 +95,19 @@ export default {
             animation: false
           }
         },
+        grid: {
+          left: '0',    // 左边距
+          right: '0',   // 右边距
+          bottom: '15%',  // 底边距
+          top: '15%',     // 顶边距
+          containLabel: true  // 包含坐标轴标签在内
+        },
         xAxis: {
           type: 'time',
           splitLine: {
             show: false
-          }
+          },
+          name: '时间',
         },
         yAxis: {
           type: 'value',
@@ -108,29 +116,46 @@ export default {
             show: false
           },
           max: 1,
+          splitNumber: 2,
         },
-        visualMap: {
-          show: false,
-          // dimension: 0,
-          pieces: [
-            {
-              lt: 0.2,
-              gte: 0,
-              color: 'red'
-            },
-            {
-              gt: 0.2,
-              lte: 1,
-              color: 'green'
-            },
-          ]
-        },
+        // visualMap: {
+        //   show: false,
+        //   // dimension: 0,
+        //   pieces: [
+        //     {
+        //       lt: 0.2,
+        //       gte: 0,
+        //       color: 'red'
+        //     },
+        //     {
+        //       gt: 0.2,
+        //       lte: 1,
+        //       color: 'green'
+        //     },
+        //   ]
+        // },
         series: [
           {
             name: '预测结果',
             type: 'line',
             showSymbol: false,
-            data: data
+            data: data,
+            itemStyle: {
+              color: {
+                type: 'linear',
+                x: 0,          // 渐变起始点 x 坐标
+                y: 0,          // 渐变起始点 y 坐标
+                x2: 0,         // 渐变结束点 x 坐标
+                y2: 1,         // 渐变结束点 y 坐标
+                colorStops: [{ // 渐变颜色位置
+                  offset: 0,   // 渐变起始位置（百分比）
+                  color: '#0d6efd' // 起始颜色
+                }, {
+                  offset: 1,   // 渐变结束位置（百分比）
+                  color: '#dc3545' // 结束颜色
+                }]
+              }
+            },
           }
         ]
       };
