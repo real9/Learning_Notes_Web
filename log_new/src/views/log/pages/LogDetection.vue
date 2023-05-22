@@ -1,8 +1,8 @@
 <template>
   <div class="container-fluid">
-    <div class="row">
-      <div class="col-8">
-        <div class="col-12">
+    <div class="row d-flex flex-shrink-1">
+      <div class="col-8 h-100">
+        <div class="col-12 h-100">
           <div class="card shadow-lg">
             <div class="card-header">
               <h5 class="mb-0">添加模型和数据集</h5>
@@ -58,7 +58,7 @@
             </div>
           </div>
         </div>
-        <div class="col-12 mt-2">
+        <div class="col-12 mt-2 h-100">
           <div class="card shadow-lg">
             <div class="card-header">
               <h5 class="mb-0">测试对比表格</h5>
@@ -78,12 +78,14 @@
           </div>
         </div>
       </div>
-      <div class="col-4">
+      <div class="col-4 h-100">
         <div class="card shadow-lg">
           <div class="card-header">
             <h5 class="mb-0">维度对比</h5>
           </div>
-          <div class="card-body pt-0"></div>
+          <div class="card-body py-0">
+            <RadarChart></RadarChart>
+          </div>
         </div>
       </div>
     </div>
@@ -103,9 +105,11 @@
 <script>
 import ArgonRadio from "../../../components/ArgonRadio";
 import ArgonButton from "../../../components/ArgonButton";
+import RadarChart from "../chats/RadarChart.vue"
 export default {
   name: "LogDetection",
   components: {
+    RadarChart,
     ArgonRadio,
     ArgonButton,
   },
