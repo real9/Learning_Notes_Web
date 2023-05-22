@@ -95,7 +95,9 @@
           <div class="card-header">
             <h5 class="mb-0">日志异常检测 (变分自编码机)</h5>
           </div>
-          <div class="card-body pt-0"></div>
+          <div class="card-body py-0">
+            <LineChart></LineChart>
+          </div>
         </div>
       </div>
     </div>
@@ -106,12 +108,14 @@
 import ArgonRadio from "../../../components/ArgonRadio";
 import ArgonButton from "../../../components/ArgonButton";
 import RadarChart from "../chats/RadarChart.vue"
+import LineChart from "../chats/LineChart"
 export default {
   name: "LogDetection",
   components: {
     RadarChart,
     ArgonRadio,
     ArgonButton,
+    LineChart,
   },
   data() {
     return {
