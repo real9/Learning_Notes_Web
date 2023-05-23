@@ -24,6 +24,7 @@ import VueSweetalert2 from "vue-sweetalert2";
 import ArgonDashboard from "./argon-dashboard";
 import ElementPlus from 'element-plus'
 import 'element-plus/dist/index.css'
+import './plugins/axios'
 
 const appInstance = createApp(App);
 appInstance.use(store);

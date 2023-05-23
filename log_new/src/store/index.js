@@ -1,5 +1,6 @@
 import { createStore } from "vuex";
 import bootstrap from "bootstrap/dist/js/bootstrap.min.js";
+import LogParsing from "@/store/modules/LogParsing";
 
 export default createStore({
   state: {
@@ -65,4 +66,8 @@ export default createStore({
     },
   },
   getters: {},
+  modules: {
+    LogParsing,
+  },
 });
+
