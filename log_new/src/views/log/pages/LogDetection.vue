@@ -4,10 +4,10 @@
       <div class="col-8 h-100">
         <div class="col-12 h-100">
           <div class="card shadow-lg">
-            <div class="card-header">
+            <div class="card-header pb-1">
               <h5 class="mb-0">添加模型和数据集</h5>
             </div>
-            <div class="card-body pt-0">
+            <div class="card-body pt-0 pb-2">
               <div class="row">
                 <div class="col-auto">选择测试集</div>
                 <div class="col-auto me-4">
@@ -64,13 +64,14 @@
               <h5 class="mb-0">测试对比表格</h5>
             </div>
             <div class="card-body pt-0">
-              <el-table :data="tableData" :header-cell-style="headerClass" style="width: 100%">
+              <el-table :data="tableData" :header-cell-style="headerClass" height="166" style="width: 100%">
                 <el-table-column label="模型名称" prop="model" align="center"></el-table-column>
                 <el-table-column label="训练集" prop="dataset" align="center"></el-table-column>
                 <el-table-column label="操作" align="center">
                   <template #default="scope">
                     <el-button link type="primary"
-                               @click="getTestDatasetResult(scope.row.model, scope.row.dataset)">开始测试</el-button>
+                               @click="getTestDatasetResult(scope.row.model, scope.row.dataset)">开始测试
+                    </el-button>
                   </template>
                 </el-table-column>
               </el-table>
@@ -129,6 +130,7 @@ export default {
       headerClass: {
         'background': '#f5f7fa',
         'text-align': 'center',
+        'position': 'sticky', 'top': '0', 'z-index': '1'
       },
       tableData: [],
     }
