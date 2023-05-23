@@ -1,7 +1,7 @@
 package com.mogic.design.web.controller;
 
 import cn.hutool.json.JSONObject;
-import com.mogic.design.service.ParsedLogBglService;
+import com.mogic.design.service.ParsedLogHdfsService;
 import com.mogic.design.web.utils.InterfaceLog;
 import com.mogic.design.web.utils.ResponseUtil;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,14 +11,14 @@ import org.springframework.web.bind.annotation.*;
 
 @CrossOrigin
 @Controller
-public class ParsedLogBglController extends BaseController{
+public class ParsedLogHdfsController {
     @Autowired
-    private ParsedLogBglService parsedLogBglService;
+    private ParsedLogHdfsService parsedLogHdfsService;
 
-    @InterfaceLog(method = "getParsedLogBgl", module = "parsedBgl")
+    @InterfaceLog(method = "getParsedLogHdfs", module = "parsedHdfs")
     @ResponseBody
-    @RequestMapping(value = "/getParsedLogBgl", method = RequestMethod.GET)
-    public ResponseEntity<JSONObject> getParsedLogBgl() {
-        return ResponseUtil.successReturn(parsedLogBglService.getParsedLogBgl());
+    @RequestMapping(value = "/getParsedLogHdfs", method = RequestMethod.GET)
+    public ResponseEntity<JSONObject> getParsedLogHdfs() {
+        return ResponseUtil.successReturn(parsedLogHdfsService.getParsedLogHdfs());
     }
 }

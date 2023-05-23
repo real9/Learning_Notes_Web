@@ -1,4 +1,5 @@
 package com.mogic.design.web.dataobject;
+
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
@@ -10,11 +11,12 @@ import org.hibernate.annotations.DynamicUpdate;
 @Setter
 @Getter
 @Entity
-@Table(name = "bgl_parsed")
-public class ParsedLogBGLDO {
+@Table(name = "hdfs_parsed")
+public class ParsedLogHDFSDO {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "template", nullable = false)
     private String template;
 
 }
+

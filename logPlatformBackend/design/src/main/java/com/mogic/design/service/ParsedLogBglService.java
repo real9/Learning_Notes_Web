@@ -12,7 +12,7 @@ public class ParsedLogBglService {
     @Autowired
     private ParsedLogBglDORepository parsedLogBglDORepository;
 
-    public List<ParsedLogBGLDO> getParsedLogBgl(Integer id){
-        return parsedLogBglDORepository.findByIdLessThan(id);
+    public List<ParsedLogBGLDO> getParsedLogBgl(){
+        return parsedLogBglDORepository.findAll();
     }
 }
