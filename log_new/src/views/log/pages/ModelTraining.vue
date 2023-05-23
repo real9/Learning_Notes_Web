@@ -85,11 +85,11 @@
     <div class="row mt-3">
       <div class="col-12">
         <div class="card shadow-lg">
-          <div class="card-header">
+          <div class="card-header pb-2">
             <h5 class="mb-0">训练结果</h5>
           </div>
           <div class="card-body pt-0">
-            <el-table style="width: 100%" :header-cell-style="headerClass" :data="tableData">
+            <el-table style="width: 100%" :header-cell-style="headerClass" :data="tableData" height="251">
               <el-table-column label="数据集选择" prop="dataSet" align="center"></el-table-column>
               <el-table-column label="模型选择" prop="model" align="center"></el-table-column>
               <el-table-column label="训练日志占比" prop="logPercent" align="center"></el-table-column>
