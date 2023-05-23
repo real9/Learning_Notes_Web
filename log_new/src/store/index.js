@@ -4,7 +4,7 @@ import LogParsing from "@/store/modules/LogParsing";
 
 export default createStore({
   state: {
-    hideConfigButton: false,
+    hideConfigButton: true,
     isPinned: true,
     showConfig: false,
     isRTL: false,
