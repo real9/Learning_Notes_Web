@@ -28,14 +28,14 @@
           >{{ currentDirectory }}</a
         >
       </li>
-      <li
-        :class="`text-sm breadcrumb-item active ${
-          isNavFixed ? 'text-dark' : 'text-white'
-        }`"
-        aria-current="page"
-      >
-        {{ currentPage }}
-      </li>
+<!--      <li-->
+<!--        :class="`text-sm breadcrumb-item active ${-->
+<!--          isNavFixed ? 'text-dark' : 'text-white'-->
+<!--        }`"-->
+<!--        aria-current="page"-->
+<!--      >-->
+<!--        {{ currentPage }}-->
+<!--      </li>-->
     </ol>
     <h6
       :class="`mb-0 font-weight-bolder ${
