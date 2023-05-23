@@ -89,6 +89,13 @@ export default {
           log: '- 1118796270 2005.06.14 R13-M0-NA-C:J14-U01 2005-06-14-17.44.30.794559 R13-M0-NA-C:J14-U01 RAS KERNEL INFO 1546250 L3 EDRAM error(s) (dcr 0x0157) detected and corrected',
         },
       ]
+      this.$store.dispatch('LogParsing/getBglLogs',)
+          .then((res) => {
+            console.log(res);
+          })
+          .catch((err) => {
+            console.log(err);
+          })
     },
     getParsedLog() {
       this.parsedLog = [
