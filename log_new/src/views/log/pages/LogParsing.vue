@@ -77,7 +77,7 @@
           </div>
           <div class="card-body pt-0">
             <div class="row">
-              <div class="col-12 mb-1" v-for="item in output" :key="item.id">
+              <div class="col-12 mb-1 show-custom" v-for="item in output" :key="item.id">
                 <span class="h5 fst-italic" :class="item.id < 4 ? 'text-danger' : ''">TOP {{item.id}}. </span>
                 <span class="fw-bold">{{item.content}}</span>
               </div>
@@ -124,27 +124,56 @@ export default {
           })
     },
     getParsedLog() {
-      this.$store.dispatch(`LogParsing/get${this.logType}Parsed`,)
-          .then(res => {
-            console.log(res);
-            this.parsedLog = res.data.data;
-          })
-          .catch((err) => {
-            console.log(err);
-          })
-      this.$store.dispatch(`LogParsing/get${this.logType}Output`,)
-          .then(res => {
-            console.log(res);
-            this.output = res.data.data;
-          })
-          .catch(err => {
-            console.log(err);
-          })
+      let timerInterval;
+      this.$swal({
+        title: "解析中",
+        html: "将在<b></b>ms后关闭",
+        timer: 3000,
+        timerProgressBar: true,
+        didOpen: () => {
+          this.$swal.showLoading();
+          const b = this.$swal.getHtmlContainer().querySelector("b");
+          timerInterval = setInterval(() => {
+            b.textContent = this.$swal.getTimerLeft();
+          }, 100);
+        },
+        willClose: () => {
+          clearInterval(timerInterval);
+          this.$store.dispatch(`LogParsing/get${this.logType}Parsed`,)
+              .then(res => {
+                console.log(res);
+                this.parsedLog = res.data.data;
+              })
+              .catch((err) => {
+                console.log(err);
+              })
+          this.$store.dispatch(`LogParsing/get${this.logType}Output`,)
+              .then(res => {
+                console.log(res);
+                this.output = res.data.data;
+              })
+              .catch(err => {
+                console.log(err);
+              })
+        },
+      });
     }
   }
 }
 </script>
 
 <style scoped>
-
+@keyframes fadeInAnimation {
+  0% {
+    opacity: 0; /*设置不透明度*/
+  }
+  100% {
+    opacity: 1;
+  }
+}
+.show-custom {
+  animation: fadeInAnimation ease 3s;
+  animation-iteration-count: 1; /*设置动画播放次数*/
+  animation-fill-mode: forwards; /*设置样式以在动画不播放时应用元素。forward是设置动画结束后，使用元素的结束属性值*/
+}
 </style>
